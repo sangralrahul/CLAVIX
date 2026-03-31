@@ -364,7 +364,7 @@ const About = () => {
               A quiet force in Indian healthcare technology.
             </h3>
             <p className="text-lg text-muted-foreground mb-6 font-light leading-relaxed">
-              Founded in Delhi, Clavix Technologies was built on a singular premise: Indian doctors deserve world-class software and infrastructure. We don't chase trends; we solve systemic inefficiencies in medical procurement and clinical decision-making.
+              Founded in India and for India, Clavix Technologies was built on a singular premise: Indian doctors deserve world-class software and infrastructure. We don't chase trends; we solve systemic inefficiencies in medical procurement and clinical decision-making.
             </p>
             <p className="text-lg text-muted-foreground font-light leading-relaxed">
               We operate with understated authority and precise engineering. Our products speak for themselves in the hands of the medical professionals who rely on them daily.

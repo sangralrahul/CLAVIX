@@ -78,9 +78,6 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         >
-          <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-xs font-medium tracking-widest uppercase mb-6 text-muted-foreground">
-            Clavix Technologies
-          </span>
         </motion.div>
         
         <motion.h1 

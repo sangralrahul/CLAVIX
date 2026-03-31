@@ -34,8 +34,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         <div className="flex items-center gap-1 cursor-pointer" onClick={() => scrollTo("hero")} data-testid="nav-logo">
-          <span className="text-xl font-bold tracking-widest text-white">CLA</span>
-          <span className="text-xl font-bold tracking-widest text-primary italic">VIX</span>
+          <span className="text-xl font-bold tracking-[0.18em] text-white" style={{ fontFamily: "'Playfair Display', serif" }}>CLAVIX</span>
         </div>
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
@@ -266,7 +265,7 @@ const About = () => {
               A quiet force in Indian healthcare technology.
             </h3>
             <p className="text-lg text-muted-foreground mb-6 font-light leading-relaxed">
-              Founded in Jammu, J&K, Clavix Technologies was built on a singular premise: Indian doctors deserve world-class software and infrastructure. We don't chase trends; we solve systemic inefficiencies in medical procurement and clinical decision-making.
+              Founded in Delhi, Clavix Technologies was built on a singular premise: Indian doctors deserve world-class software and infrastructure. We don't chase trends; we solve systemic inefficiencies in medical procurement and clinical decision-making.
             </p>
             <p className="text-lg text-muted-foreground font-light leading-relaxed">
               We operate with understated authority and precise engineering. Our products speak for themselves in the hands of the medical professionals who rely on them daily.
@@ -281,7 +280,7 @@ const About = () => {
             className="grid grid-cols-2 gap-4"
           >
             {[
-              { label: "Founded", value: "2024", desc: "Jammu, J&K" },
+              { label: "Founded", value: "2024", desc: "Delhi, India" },
               { label: "Ventures", value: "02", desc: "Live Products" },
               { label: "Focus", value: "India", desc: "First Market" },
               { label: "Audience", value: "B2B/B2C", desc: "Medical Sector" }
@@ -485,7 +484,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-widest mb-1">Headquarters</div>
-                  <div className="text-white">Jammu, J&K, India</div>
+                  <div className="text-white">Delhi, India</div>
                 </div>
               </div>
             </div>
@@ -557,8 +556,7 @@ const Footer = () => {
       <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex flex-col items-center md:items-start gap-2">
           <div className="flex items-center gap-1">
-            <span className="text-lg font-bold tracking-widest text-white">CLA</span>
-            <span className="text-lg font-bold tracking-widest text-primary italic">VIX</span>
+            <span className="text-lg font-bold tracking-[0.18em] text-white" style={{ fontFamily: "'Playfair Display', serif" }}>CLAVIX</span>
           </div>
           <p className="text-xs text-gray-500">© {new Date().getFullYear()} Clavix Technologies Private Limited.</p>
         </div>

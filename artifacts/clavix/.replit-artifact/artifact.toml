@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Clavix Technologies"
+version = "1.0.0"
+id = "artifacts/clavix"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18677
+
+[services.development]
+run = "pnpm --filter @workspace/clavix run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/clavix", "run", "build" ]
+publicDir = "artifacts/clavix/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18677"
+BASE_PATH = "/"

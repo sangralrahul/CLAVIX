@@ -1,0 +1,131 @@
+Build a complete professional landing page website for CLAVIX TECHNOLOGIES PVT LTD — the parent company of Aethex and CADUS AI. This is a separate website from Aethex. Here is the exact design and content:
+
+---
+
+DESIGN STYLE: Minimal Luxury Dark
+- Background: #010103 (near black)
+- Accent color: #1D4ED8 (deep blue)
+- Fonts: Space Grotesk (headings/logo), Cormorant Garamond (display/hero text), Outfit (body)
+- Import all from Google Fonts
+- Thin 1px blue accent line at very top of page (#1D4ED8)
+- Subtle large orb: 600px circle, #1D4ED806, centered behind hero
+- Subtle grid texture on background: linear-gradient lines at #060c1a, 40px spacing
+
+---
+
+NAVBAR:
+- Left: CLAVIX logo — "CLA" white + "VIX" in italic blue (#1D4ED8), Space Grotesk, 14px, letter-spacing 0.2em
+- Center: Nav links — VENTURES, ABOUT, INVESTORS, CAREERS (10px, color #1a2a4a, letter-spacing 0.06em)
+- Right: "Contact" button — transparent bg, border 1px solid #1D4ED840, color #1D4ED8, border-radius 6px
+- Navbar padding: 22px 48px
+- Bottom border: 1px solid #080c18
+
+---
+
+HERO SECTION:
+- Centered layout, full viewport height
+- Kicker line: horizontal line (24px, #1D4ED8) — text "HEALTHCARE TECHNOLOGY COMPANY — INDIA" (9px, #1D4ED8, letter-spacing 0.2em) — horizontal line
+- Main title: Cormorant Garamond, 58px, font-weight 300, white, line-height 1.0, max-width 580px, centered:
+  "Powering the next
+  generation of Indian
+  healthcare"
+  Word "Indian" in italic blue (#1D4ED8)
+- Subtitle: 12px, color #1a2a4a, line-height 1.7, max-width 420px, centered:
+  "Clavix Technologies builds and scales healthcare technology companies that make world-class medical tools, AI, and knowledge accessible to every doctor in India."
+- Two buttons side by side centered:
+  * "Our Ventures" — background #1D4ED8, white text, border-radius 8px, 12px 28px padding, font-weight 600
+  * "Investor Relations" — transparent, color #1a3060, border 1px solid #0d1a30, border-radius 8px
+- Below buttons: two company cards side by side:
+  * Card 1: background #050810, border 1px solid #0a1020, border-radius 12px, padding 12px 20px
+    - Company name: "AETHEX" in #00C2A8, font-weight 700, 13px
+    - Subtitle: "Medical Marketplace" in #1a2a4a, 9px uppercase
+  * Card 2: same style
+    - Company name: "CADUS AI" in #1D4ED8
+    - Subtitle: "Clinical AI Assistant"
+
+---
+
+VENTURES SECTION (/ventures or same page section):
+- Section heading: "Our Ventures" — Cormorant Garamond, 40px, white
+- Two large venture cards side by side:
+
+Card 1 — AETHEX:
+- Top accent: 3px teal (#00C2A8) left border
+- Badge: "Live" in teal
+- Logo text: AETHEX in #00C2A8, large, bold
+- Description: "India's medical marketplace for doctors and students. Surgical instruments, diagnostics, scrubs, stethoscopes, BP machines, portable devices, and NEET-PG study materials — all in one place."
+- Features list: Medical Shop, Study Hub, GST Invoice, Fast Delivery
+- Visit button: border teal, text teal → links to aethex.in
+
+Card 2 — CADUS AI:
+- Top accent: 3px blue (#1D4ED8) left border
+- Badge: "Live" in blue
+- Logo text: CADUS AI in #1D4ED8, large, bold
+- Description: "AI-powered clinical assistant for doctors and medical students. Diagnosis, DDx generation, lab interpretation, drug interactions, voice input, image analysis, and PDF export."
+- Features list: 3 Model Tiers (Minor/Medius/Magnus), Clinical DDx, Lab Interpreter, Image Analysis
+- Visit button: border blue, text blue → links to aethex.in/ai-assistant
+
+---
+
+ABOUT SECTION:
+- Heading: "About Clavix Technologies"
+- Content:
+  "Clavix Technologies Private Limited is an Indian healthcare technology company founded with a singular mission — to modernize how India's doctors work, learn, and access medical tools.
+  We build focused, high-quality technology products that solve real problems for the Indian medical community. Our portfolio includes Aethex, India's medical marketplace, and CADUS AI, an AI clinical assistant used by doctors for diagnosis and research."
+- Three stat cards: "2 Ventures", "India First", "Est. 2024"
+- Mission quote (Cormorant Garamond italic): "To make world-class medical tools and intelligence accessible to every doctor in India."
+
+---
+
+INVESTORS SECTION:
+- Heading: "Investor Relations"
+- Subtext: "Clavix Technologies is seeking seed investment to scale Aethex and CADUS AI across India."
+- Two info cards:
+  * Raise: ₹2 Crore Seed Round
+  * Valuation: ₹20 Crore Pre-Money
+- Brief points:
+  * Dual revenue streams: marketplace commissions + AI subscriptions
+  * Target market: 1.2M+ registered doctors in India
+  * DPIIT Startup India recognition (in progress)
+- CTA button: "Request Investor Deck" — opens mailto:investor@clavix.in
+
+---
+
+CAREERS SECTION:
+- Heading: "Join Clavix"
+- Subtext: "We are building the future of Indian healthcare. Join us."
+- 3 open role cards:
+  * Full Stack Developer (Remote)
+  * AI/ML Engineer (Remote)
+  * Medical Content Writer (Remote)
+- Each card: role name, type badge (Remote), Apply button
+
+---
+
+CONTACT SECTION:
+- Heading: "Get in Touch"
+- Email: hello@clavix.in
+- Location: Jammu, J&K, India
+- Simple contact form: Name, Email, Message, Send button
+
+---
+
+FOOTER:
+- Left: CLAVIX logo + "Clavix Technologies Private Limited"
+- Center: "A Velyrion Technologies Company" (small, muted)
+- Right: links — Privacy Policy, Terms, Contact
+- Bottom bar: "© 2024 Clavix Technologies Pvt. Ltd. All rights reserved. | CIN: [placeholder]"
+- Company pills: AETHEX (teal) | CADUS AI (blue)
+
+---
+
+TECHNICAL:
+- Single page with smooth scroll sections
+- Mobile fully responsive
+- All dark theme — no white backgrounds anywhere
+- Smooth hover transitions on all buttons and cards
+- SEO meta tags: title "Clavix Technologies — Healthcare Technology Company India", description, OG tags
+- Google Analytics placeholder
+- Deploy as separate Replit project
+
+Confirm when done.

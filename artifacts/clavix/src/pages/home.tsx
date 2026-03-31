@@ -379,7 +379,7 @@ const About = () => {
             className="grid grid-cols-2 gap-4"
           >
             {[
-              { label: "Founded", value: "2024", desc: "Delhi, India" },
+              { label: "Founded", value: "2026", desc: "Delhi, India" },
               { label: "Ventures", value: "03", desc: "2 Live + 1 Coming Soon" },
               { label: "Focus", value: "India", desc: "First Market" },
               { label: "Audience", value: "B2B/B2C", desc: "Medical Sector" }

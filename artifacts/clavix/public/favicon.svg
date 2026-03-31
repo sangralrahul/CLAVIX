@@ -1,19 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Dark background -->
   <rect width="64" height="64" rx="14" fill="#010103"/>
-  <rect width="64" height="64" rx="14" fill="url(#grad)" opacity="0.5"/>
-  <text
-    x="32"
-    y="46"
-    text-anchor="middle"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-size="38"
-    font-weight="700"
-    fill="#ffffff"
-  >C</text>
-  <rect x="19" y="52" width="26" height="2" rx="1" fill="#1D4ED8"/>
+  <!-- Subtle blue glow -->
+  <rect width="64" height="64" rx="14" fill="url(#g)" opacity="0.35"/>
+  <!-- C letter: arc from top-right to bottom-right going counter-clockwise (through left side) -->
+  <!-- Center (32,30), radius 18, gap ±45° from right -->
+  <path
+    d="M 44.7,17.3 A 18,18 0 1,0 44.7,42.7"
+    stroke="white"
+    stroke-width="7"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <!-- Blue accent underline -->
+  <rect x="18" y="54" width="28" height="2.5" rx="1.25" fill="#1D4ED8"/>
   <defs>
-    <linearGradient id="grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.25"/>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.4"/>
       <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0"/>
     </linearGradient>
   </defs>

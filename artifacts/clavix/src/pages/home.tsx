@@ -660,9 +660,7 @@ const Footer = () => {
           <p className="text-xs text-gray-500">© {new Date().getFullYear()} Clavix Technologies Private Limited.</p>
         </div>
         
-        <div className="text-xs font-medium uppercase tracking-widest text-gray-600">
-          A Velyrion Technologies Company
-        </div>
+
       </div>
     </footer>
   );

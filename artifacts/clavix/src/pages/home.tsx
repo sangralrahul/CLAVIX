@@ -507,7 +507,7 @@ const Careers = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="text-muted-foreground max-w-sm">We are a small, elite team building serious tools. If you care deeply about your craft, we want to hear from you.</p>
+            <p className="text-muted-foreground max-w-sm">We are a small, elite team building serious tools. If you care deeply about your craft, we want to hear from you. To apply for any role, email your updated resume to <a href="mailto:email@aethex.in" className="text-primary hover:underline">email@aethex.in</a></p>
           </motion.div>
         </div>
 
@@ -535,7 +535,7 @@ const Careers = () => {
                 className="mt-4 sm:mt-0 text-white hover:bg-white/10 rounded-full group/btn"
                 data-testid={`career-apply-${i}`}
               >
-                <a href={`mailto:careers@clavix.in?subject=Application for ${role.title}`}>
+                <a href={`mailto:email@aethex.in?subject=Application for ${role.title} — Resume Attached`}>
                   Apply Now <ChevronRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
                 </a>
               </Button>
@@ -571,7 +571,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-widest mb-1">Email</div>
-                  <a href="mailto:hello@clavix.in" className="text-white hover:text-primary transition-colors">hello@clavix.in</a>
+                  <a href="mailto:email@aethex.in" className="text-white hover:text-primary transition-colors">email@aethex.in</a>
                 </div>
               </div>
               <div className="flex items-center gap-4 text-muted-foreground">
@@ -600,7 +600,7 @@ const Contact = () => {
                 const name = fd.get('name');
                 const email = fd.get('email');
                 const message = fd.get('message');
-                window.location.href = `mailto:hello@clavix.in?subject=Inquiry from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name} (${email})`;
+                window.location.href = `mailto:email@aethex.in?subject=Inquiry from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name} (${email})`;
               }}
               className="space-y-6"
             >

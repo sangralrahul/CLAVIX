@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronRight, Mail, MapPin, Building2, CheckCircle2, ChevronDown, Stethoscope, BrainCircuit, ExternalLink } from "lucide-react";
+import { ArrowRight, ChevronRight, Mail, MapPin, Building2, CheckCircle2, ChevronDown, Stethoscope, BrainCircuit, ExternalLink, Database, Cpu, ShieldCheck, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -244,6 +244,105 @@ const Ventures = () => {
             </a>
           </motion.div>
         </div>
+
+        {/* Aethex OS — Coming Soon */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          className="mt-12 lg:mt-20 group relative rounded-2xl overflow-hidden border border-white/5 hover:border-violet-500/30 transition-all duration-700"
+          data-testid="card-aethex-os"
+        >
+          {/* Background glow */}
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-900/20 via-transparent to-indigo-900/10 pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-violet-600/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-violet-600/18 transition-all duration-700" />
+
+          <div className="relative p-8 md:p-12 lg:p-16 grid md:grid-cols-2 gap-12 items-center">
+            {/* Left: Identity */}
+            <div>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 rounded-xl bg-violet-500/15 border border-violet-500/20 flex items-center justify-center">
+                  <Database className="w-6 h-6 text-violet-400" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-2xl font-serif text-white tracking-wide">AETHEX OS</h3>
+                    <span className="px-3 py-1 rounded-full bg-violet-500/10 text-xs text-violet-300 border border-violet-500/25 uppercase tracking-wider animate-pulse">
+                      Coming Soon
+                    </span>
+                  </div>
+                  <p className="text-sm text-violet-300/70 mt-1 tracking-wide uppercase">Hospital Intelligence Platform</p>
+                </div>
+              </div>
+
+              <h4 className="text-xl md:text-2xl font-medium text-white mb-5 leading-snug">
+                The operating layer for the modern Indian hospital.
+              </h4>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Aethex OS is an AI-native hospital management system designed from the ground up for the Indian healthcare infrastructure. It unifies patient records, clinical workflows, pharmacy inventory, diagnostic pipelines, and administrative intelligence into a single, continuously-learning platform — giving every hospital the operational clarity of a world-class institution.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Built as a silent engine beneath the hospital's existing systems, Aethex OS surfaces insights where and when they matter most — at the point of care, at the billing desk, and in the boardroom.
+              </p>
+            </div>
+
+            {/* Right: Pillars */}
+            <div className="space-y-5">
+              {[
+                {
+                  icon: Cpu,
+                  title: "AI-Powered Clinical Engine",
+                  desc: "Real-time diagnostic support, auto-coding, and treatment pathway suggestions embedded directly into clinical workflows."
+                },
+                {
+                  icon: Database,
+                  title: "Unified Hospital Data Layer",
+                  desc: "A single source of truth for patient records, billing, pharmacy, diagnostics, and staff — fully interoperable and audit-ready."
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Compliance & Security",
+                  desc: "Built for ABDM interoperability and DISHA compliance. Encrypted at rest and in transit, with role-based access across every department."
+                },
+                {
+                  icon: BarChart3,
+                  title: "Operational Intelligence",
+                  desc: "Live dashboards for bed occupancy, revenue cycles, supply chain, and clinical KPIs — turning hospital data into actionable decisions."
+                }
+              ].map(({ icon: Icon, title, desc }, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
+                  className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-violet-500/20 transition-colors duration-300"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Icon className="w-4 h-4 text-violet-400" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-white mb-1">{title}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+
+              <div className="pt-2">
+                <p className="text-xs text-violet-400/60 tracking-wider uppercase">Notify me when it launches</p>
+                <a
+                  href="mailto:hello@clavix.in?subject=Aethex OS Early Access"
+                  className="inline-flex items-center gap-2 mt-3 text-sm font-medium text-violet-300 hover:text-violet-100 transition-colors group/os"
+                  data-testid="link-aethex-os-notify"
+                >
+                  Request Early Access
+                  <ArrowRight className="w-4 h-4 group-hover/os:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -281,7 +380,7 @@ const About = () => {
           >
             {[
               { label: "Founded", value: "2024", desc: "Delhi, India" },
-              { label: "Ventures", value: "02", desc: "Live Products" },
+              { label: "Ventures", value: "03", desc: "2 Live + 1 Coming Soon" },
               { label: "Focus", value: "India", desc: "First Market" },
               { label: "Audience", value: "B2B/B2C", desc: "Medical Sector" }
             ].map((stat, i) => (

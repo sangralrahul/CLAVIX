@@ -597,10 +597,12 @@ const Contact = () => {
               onSubmit={(e) => {
                 e.preventDefault();
                 const fd = new FormData(e.currentTarget);
-                const name = fd.get('name');
-                const email = fd.get('email');
-                const message = fd.get('message');
-                window.location.href = `mailto:email@aethex.in?subject=Inquiry from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name} (${email})`;
+                const name = fd.get('name') as string;
+                const email = fd.get('email') as string;
+                const message = fd.get('message') as string;
+                const subject = encodeURIComponent(`Inquiry from ${name}`);
+                const body = encodeURIComponent(`${message}\r\n\r\nFrom: ${name} (${email})`);
+                window.open(`mailto:email@aethex.in?subject=${subject}&body=${body}`, '_blank');
               }}
               className="space-y-6"
             >

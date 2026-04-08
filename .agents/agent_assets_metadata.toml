@@ -1,0 +1,61 @@
+uploads = []
+
+[[generated]]
+id = "oxSI6TQac2AVq4vv47rHk"
+uri = "file://artifacts/mockup-sandbox/public/images/bold-hero.png"
+type = "image"
+title = "Abstract medical technology in black and white"
+
+[[generated]]
+id = "qibB_s6mgFXr0vNvWwc8M"
+uri = "file://artifacts/mockup-sandbox/public/images/bold-portrait.png"
+type = "image"
+title = "Doctor portrait high contrast"
+
+[[generated]]
+id = "bx2V0zYtcOCt_OTRpDfYc"
+uri = "file://artifacts/mockup-sandbox/public/images/bold-abstract.png"
+type = "image"
+title = "Abstract cell structure blue accent"
+
+[[generated]]
+id = "1aT9BAnZLt_WwdijMPYDc"
+uri = "file://artifacts/mockup-sandbox/public/images/hero-navy.png"
+type = "image"
+title = "Premium healthcare VC background"
+
+[[generated]]
+id = "Gh_wPzmUJfg_DI-P2LyKY"
+uri = "file://artifacts/mockup-sandbox/public/images/team-navy.png"
+type = "image"
+title = "Professional business meeting"
+
+[[generated]]
+id = "bpE8H0kQk6Bre1XslpzkF"
+uri = "file://artifacts/mockup-sandbox/public/images/warm-hero.png"
+type = "image"
+title = "Warm healthcare illustration"
+
+[[outputs]]
+id = "THl6Z-mwTlKSjuKPDfBvL"
+uri = "file://artifacts/mockup-sandbox/public/images/hero-lab.jpg"
+type = "image"
+title = "modern clean medical laboratory equipment hospital tech"
+
+[[outputs]]
+id = "xkeYR2veWkomSy-NvWTYR"
+uri = "file://artifacts/mockup-sandbox/public/images/venture-1.jpg"
+type = "image"
+title = "microscope in modern lab healthcare research"
+
+[[outputs]]
+id = "ZhWZaSIGXLvuNq7mDcNiC"
+uri = "file://artifacts/mockup-sandbox/public/images/venture-2.jpg"
+type = "image"
+title = "doctor using tablet software modern hospital"
+
+[[outputs]]
+id = "yf8Q5lVFVlKSgx5mZs371"
+uri = "file://artifacts/mockup-sandbox/public/images/venture-3.jpg"
+type = "image"
+title = "patient consultation modern clinic mental health therapy"

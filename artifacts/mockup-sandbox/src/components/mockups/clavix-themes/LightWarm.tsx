@@ -1,173 +1,178 @@
 import React from "react";
-import { ArrowRight, Activity, Heart, Shield, Users, Stethoscope } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function LightWarm() {
   return (
-    <div className="min-h-screen bg-[#fdfaf6] text-[#1c2b2b] font-sans selection:bg-[#14b8a6] selection:text-white">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-[#fdfaf6]/90 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center gap-2 cursor-pointer">
-              <div className="w-10 h-10 rounded-xl bg-[#0d9488] flex items-center justify-center text-white font-bold text-xl">
-                C
-              </div>
-              <span className="font-bold text-2xl tracking-tight text-[#1c2b2b]">Clavix</span>
-            </div>
-            
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#about" className="text-[#1c2b2b]/70 hover:text-[#0d9488] transition-colors font-medium">About Us</a>
-              <a href="#portfolio" className="text-[#1c2b2b]/70 hover:text-[#0d9488] transition-colors font-medium">Portfolio</a>
-              <a href="#impact" className="text-[#1c2b2b]/70 hover:text-[#0d9488] transition-colors font-medium">Impact</a>
-              <a href="#news" className="text-[#1c2b2b]/70 hover:text-[#0d9488] transition-colors font-medium">News</a>
-              <button className="bg-[#0d9488] hover:bg-[#14b8a6] text-white px-6 py-2.5 rounded-full font-semibold transition-all shadow-sm hover:shadow-md active:scale-95">
-                Partner With Us
-              </button>
-            </div>
-          </div>
+    <div className="min-h-screen bg-[#fefdf8] text-[#1a1612] font-['Inter'] selection:bg-[#0d9488] selection:text-white">
+      {/* 1. NAV */}
+      <nav className="sticky top-0 z-50 bg-[#fefdf8]/95 backdrop-blur-md px-6 lg:px-12 py-5 flex items-center justify-between">
+        <div className="text-2xl font-['DM_Serif_Display'] tracking-wide">CLAVIX</div>
+        <div className="hidden md:flex items-center gap-10 text-sm font-medium text-[#7a6f61]">
+          <a href="#" className="hover:text-[#1a1612] transition-colors">Ventures</a>
+          <a href="#" className="hover:text-[#1a1612] transition-colors">About</a>
+          <a href="#" className="hover:text-[#1a1612] transition-colors">Investors</a>
+          <a href="#" className="hover:text-[#1a1612] transition-colors">Careers</a>
         </div>
+        <button className="bg-[#0d9488] text-white px-7 py-3 rounded-full text-sm font-medium hover:bg-[#0d9488]/90 transition-all hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
+          Get in Touch
+        </button>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-32 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#84cc16]/10 text-[#65a30d] font-semibold mb-6">
-                <Heart size={16} />
-                <span>Human-Centered Healthcare</span>
-              </div>
-              <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] text-[#1c2b2b]">
-                Powering the <span className="text-[#0d9488]">next generation</span> of Indian healthcare.
-              </h1>
-              <p className="text-xl text-[#1c2b2b]/70 mb-10 leading-relaxed max-w-lg">
-                We invest in visionary founders building empathetic, accessible, and innovative healthcare solutions for a billion lives.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-[#0d9488] hover:bg-[#14b8a6] text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-[#0d9488]/20 hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2">
-                  Our Portfolio <ArrowRight size={20} />
-                </button>
-                <button className="bg-white hover:bg-[#fdfaf6] text-[#1c2b2b] border-2 border-[#e5e5e5] px-8 py-4 rounded-full font-bold text-lg transition-all hover:border-[#0d9488]/30 flex items-center justify-center">
-                  Learn More
-                </button>
-              </div>
-            </div>
-            
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#84cc16]/20 to-[#0d9488]/20 rounded-[3rem] blur-3xl -z-10"></div>
-              <img 
-                src="/__mockup/images/warm-hero.png" 
-                alt="Friendly healthcare professionals" 
-                className="w-full rounded-[2.5rem] shadow-2xl border-4 border-white/50 object-cover"
-              />
-              
-              {/* Floating badges */}
-              <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-[#f5f5f5] flex items-center gap-4 animate-bounce" style={{ animationDuration: '3s' }}>
-                <div className="w-12 h-12 rounded-full bg-[#84cc16]/10 flex items-center justify-center text-[#65a30d]">
-                  <Activity size={24} />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-[#1c2b2b]">50+ Startups</p>
-                  <p className="text-xs text-[#1c2b2b]/60">Funded & Growing</p>
-                </div>
-              </div>
-            </div>
+      {/* 2. HERO */}
+      <section className="px-6 lg:px-12 py-20 lg:py-32 max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+        <div className="flex-1 space-y-8 lg:w-[55%]">
+          <div className="inline-flex items-center gap-2 bg-[#ccfbf1] text-[#0d9488] px-4 py-1.5 rounded-full text-xs font-medium uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0d9488] animate-pulse"></span>
+            Transforming Indian Healthcare
+          </div>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-[5rem] font-['DM_Serif_Display'] leading-[1.05] text-[#1a1612] tracking-tight">
+            Powering the <br /> next generation of <br />
+            <span className="italic text-[#0d9488] pr-2">Indian healthcare.</span>
+          </h1>
+          <p className="text-xl text-[#7a6f61] max-w-xl leading-relaxed font-['DM_Sans']">
+            To make world-class medical tools and intelligence accessible to every doctor in India.
+          </p>
+          <div className="flex flex-wrap items-center gap-8 pt-4">
+            <button className="bg-[#0d9488] text-white px-8 py-4 rounded-full font-medium hover:bg-[#0d9488]/90 transition-all hover:shadow-xl hover:shadow-[#0d9488]/20 hover:-translate-y-1 active:translate-y-0 text-lg">
+              Explore Ventures
+            </button>
+            <a href="#" className="font-medium text-[#1a1612] underline decoration-2 decoration-[#e8dfc8] underline-offset-8 hover:decoration-[#0d9488] transition-colors text-lg">
+              Investor Relations
+            </a>
+          </div>
+        </div>
+        <div className="flex-1 w-full lg:w-[45%]">
+          <div className="relative rounded-[4rem] rounded-tr-[10rem] rounded-bl-[8rem] overflow-hidden aspect-[4/5] shadow-2xl shadow-[#1a1612]/10 group">
+            <img 
+              src="/__mockup/images/warm-hero-doc.png" 
+              alt="Indian village doctor consulting patient" 
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-[4rem] rounded-tr-[10rem] rounded-bl-[8rem]"></div>
           </div>
         </div>
       </section>
 
-      {/* Values/Features Section */}
-      <section className="py-24 bg-white rounded-[3rem] mx-4 sm:mx-8 lg:mx-12 shadow-sm mb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl font-bold mb-6">Investing with Empathy</h2>
-            <p className="text-lg text-[#1c2b2b]/70">
-              We believe the best healthcare solutions put people first. Our investment philosophy centers on approachability, accessibility, and genuine care.
-            </p>
+      {/* 3. IMPACT NUMBERS */}
+      <section className="bg-[#f5f0e6] py-20 border-y border-[#e8dfc8]">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 divide-x-0 md:divide-x divide-[#e8dfc8]">
+          <div className="text-center md:text-left md:px-8">
+            <div className="text-5xl md:text-6xl font-['DM_Serif_Display'] text-[#0d9488] mb-3">₹420<span className="text-3xl">Cr+</span></div>
+            <div className="text-xs font-medium uppercase tracking-widest text-[#7a6f61] leading-relaxed">Deployed across 12 ventures</div>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Users className="text-[#0d9488]" size={32} />,
-                title: "Patient-First Innovation",
-                desc: "Backing technologies that improve the patient experience, making care more intuitive and less intimidating.",
-                color: "bg-[#0d9488]/10"
-              },
-              {
-                icon: <Shield className="text-[#84cc16]" size={32} />,
-                title: "Accessible Care",
-                desc: "Democratizing healthcare access across India through scalable, affordable solutions.",
-                color: "bg-[#84cc16]/10"
-              },
-              {
-                icon: <Stethoscope className="text-orange-500" size={32} />,
-                title: "Empowering Providers",
-                desc: "Tools that help doctors and nurses focus on what matters most: human connection and healing.",
-                color: "bg-orange-500/10"
-              }
-            ].map((feature, i) => (
-              <div key={i} className="p-8 rounded-[2rem] bg-[#fdfaf6] border border-[#f0ede6] hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                <div className={`w-16 h-16 rounded-2xl ${feature.color} flex items-center justify-center mb-6`}>
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                <p className="text-[#1c2b2b]/70 leading-relaxed">{feature.desc}</p>
-              </div>
-            ))}
+          <div className="text-center md:text-left md:px-8">
+            <div className="text-5xl md:text-6xl font-['DM_Serif_Display'] text-[#0d9488] mb-3">2.4M<span className="text-3xl">+</span></div>
+            <div className="text-xs font-medium uppercase tracking-widest text-[#7a6f61] leading-relaxed">Doctors reached across India</div>
+          </div>
+          <div className="text-center md:text-left md:px-8">
+            <div className="text-5xl md:text-6xl font-['DM_Serif_Display'] text-[#0d9488] mb-3">38</div>
+            <div className="text-xs font-medium uppercase tracking-widest text-[#7a6f61] leading-relaxed">Hospitals onboarded in 2024</div>
+          </div>
+          <div className="text-center md:text-left md:px-8">
+            <div className="text-5xl md:text-6xl font-['DM_Serif_Display'] text-[#0d9488] mb-3">6</div>
+            <div className="text-xs font-medium uppercase tracking-widest text-[#7a6f61] leading-relaxed">Successful exits</div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[#eff5ef] pt-20 pb-10 rounded-t-[3rem]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-            <div className="col-span-2">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#0d9488] flex items-center justify-center text-white font-bold text-xl">
-                  C
-                </div>
-                <span className="font-bold text-2xl tracking-tight text-[#1c2b2b]">Clavix</span>
-              </div>
-              <p className="text-[#1c2b2b]/70 max-w-sm mb-6">
-                Powering the next generation of Indian healthcare through empathetic, human-centered investments.
-              </p>
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm cursor-pointer hover:bg-[#0d9488] hover:text-white transition-colors">
-                  <Activity size={18} />
-                </div>
-                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm cursor-pointer hover:bg-[#0d9488] hover:text-white transition-colors">
-                  <Heart size={18} />
-                </div>
-              </div>
+      {/* 4. VENTURES */}
+      <section className="py-32 max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl lg:text-6xl font-['DM_Serif_Display'] text-[#1a1612]">What We Build</h2>
+        </div>
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+          {[
+            { name: "ClavixAI", desc: "AI-powered clinical decision support for rural doctors", accent: "#0d9488" },
+            { name: "MedPulse", desc: "Real-time patient vitals monitoring platform", accent: "#84cc16" },
+            { name: "SurgicaLink", desc: "Remote surgical training & mentoring network", accent: "#0d9488" },
+            { name: "DiagnoScan", desc: "Portable diagnostic imaging for tier-2/3 cities", accent: "#84cc16" }
+          ].map((venture, i) => (
+            <div key={i} className="group bg-[#f5f0e6] rounded-[2rem] p-10 lg:p-12 shadow-sm hover:shadow-xl transition-all duration-500 border border-[#e8dfc8] relative overflow-hidden hover:-translate-y-2">
+              <div className="absolute top-0 left-0 w-full h-2 transition-all duration-500 group-hover:h-3" style={{ backgroundColor: venture.accent }}></div>
+              <h3 className="text-4xl font-['DM_Serif_Display'] text-[#1a1612] mb-4 mt-2 group-hover:text-[#0d9488] transition-colors">{venture.name}</h3>
+              <p className="text-[#7a6f61] mb-10 text-xl font-['DM_Sans'] leading-relaxed max-w-sm">{venture.desc}</p>
+              <a href="#" className="inline-flex items-center gap-2 text-[#0d9488] font-medium hover:gap-4 transition-all text-lg">
+                Learn more <ArrowRight className="w-5 h-5" />
+              </a>
             </div>
-            
-            <div>
-              <h4 className="font-bold text-lg mb-6">Company</h4>
-              <ul className="space-y-4 text-[#1c2b2b]/70">
-                <li><a href="#" className="hover:text-[#0d9488] transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-[#0d9488] transition-colors">Portfolio</a></li>
-                <li><a href="#" className="hover:text-[#0d9488] transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-[#0d9488] transition-colors">Contact</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-bold text-lg mb-6">Legal</h4>
-              <ul className="space-y-4 text-[#1c2b2b]/70">
-                <li><a href="#" className="hover:text-[#0d9488] transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-[#0d9488] transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-[#0d9488] transition-colors">Disclosures</a></li>
-              </ul>
-            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. STORY SECTION */}
+      <section className="bg-[#f5f0e6] py-32 border-y border-[#e8dfc8]">
+        <div className="max-w-[1000px] mx-auto px-6 lg:px-12 text-center">
+          <div className="text-xs font-medium uppercase tracking-widest text-[#7a6f61] mb-10">Why We Exist</div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-['DM_Serif_Display'] italic text-[#1a1612] leading-[1.2] mb-20">
+            "We believe that geography should never dictate the quality of care a patient receives. Technology is the bridge."
+          </h2>
+          <div className="rounded-[3rem] overflow-hidden aspect-[21/9] shadow-2xl relative group">
+            <img 
+              src="/__mockup/images/warm-camp.png" 
+              alt="Community healthcare camp" 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-[3rem]"></div>
           </div>
-          
-          <div className="pt-8 border-t border-[#1c2b2b]/10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-[#1c2b2b]/50 text-sm">© 2025 Clavix Technologies. All rights reserved.</p>
-            <p className="text-[#1c2b2b]/50 text-sm flex items-center gap-1">
-              Made with <Heart size={14} className="text-[#0d9488]" /> for Indian Healthcare
-            </p>
+        </div>
+      </section>
+
+      {/* 6. TEAM */}
+      <section className="py-32 max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl lg:text-6xl font-['DM_Serif_Display'] text-[#1a1612]">Leadership</h2>
+        </div>
+        <div className="grid md:grid-cols-3 gap-16 lg:gap-20">
+          {[
+            { name: "Arjun Mehta", role: "Founder & CEO" },
+            { name: "Priya Kapoor", role: "Chief Investment Officer" },
+            { name: "Rahul Sangal", role: "Head of Ventures" }
+          ].map((member, i) => (
+            <div key={i} className="text-center group">
+              <div className="w-48 h-48 mx-auto rounded-full p-2 ring-2 ring-[#e8dfc8] group-hover:ring-[#0d9488] transition-all duration-500 mb-8 bg-[#fefdf8]">
+                <div className="w-full h-full rounded-full bg-[#f5f0e6] overflow-hidden relative group-hover:scale-105 transition-transform duration-500">
+                   <div className="absolute inset-0 flex items-center justify-center text-5xl font-['DM_Serif_Display'] text-[#7a6f61] group-hover:text-[#0d9488] transition-colors">
+                     {member.name.charAt(0)}
+                   </div>
+                </div>
+              </div>
+              <h3 className="text-3xl font-['DM_Serif_Display'] text-[#1a1612] mb-3">{member.name}</h3>
+              <p className="text-[#7a6f61] font-medium text-sm uppercase tracking-widest">{member.role}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 7. NEWSLETTER/CTA */}
+      <section className="bg-[#0d9488] py-32 text-center px-6 lg:px-12">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-5xl md:text-6xl font-['DM_Serif_Display'] text-white mb-8">Join our mission</h2>
+          <p className="text-[#ccfbf1] text-xl md:text-2xl mb-12 font-['DM_Sans']">Subscribe to our newsletter for insights on Indian healthcare innovation.</p>
+          <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+            <input 
+              type="email" 
+              placeholder="Email address" 
+              className="flex-1 bg-white/10 border border-white/20 rounded-full px-8 py-5 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 text-lg transition-all"
+            />
+            <button className="bg-[#fefdf8] text-[#0d9488] px-10 py-5 rounded-full font-bold hover:bg-white transition-colors text-lg shadow-lg">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* 8. FOOTER */}
+      <footer className="bg-[#1a1612] text-white py-20 px-6 lg:px-12">
+        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+          <div className="text-4xl font-['DM_Serif_Display'] text-[#fefdf8] tracking-wider">CLAVIX</div>
+          <div className="flex flex-wrap justify-center gap-10 text-[#7a6f61] text-sm font-medium uppercase tracking-widest">
+            <a href="#" className="hover:text-white transition-colors">Ventures</a>
+            <a href="#" className="hover:text-white transition-colors">About</a>
+            <a href="#" className="hover:text-white transition-colors">Investors</a>
+            <a href="#" className="hover:text-white transition-colors">Careers</a>
+          </div>
+          <div className="text-[#7a6f61] text-xl italic font-['DM_Serif_Display']">
+            "For India's 1.4 billion."
           </div>
         </div>
       </footer>

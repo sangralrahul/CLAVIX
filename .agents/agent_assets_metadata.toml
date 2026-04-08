@@ -36,6 +36,96 @@ uri = "file://artifacts/mockup-sandbox/public/images/warm-hero.png"
 type = "image"
 title = "Warm healthcare illustration"
 
+[[generated]]
+id = "sSdbHQZtFdQdeRWb8IkHh"
+uri = "file://artifacts/mockup-sandbox/public/images/warm-hero-doc.png"
+type = "image"
+title = "Indian village doctor with tablet"
+
+[[generated]]
+id = "acm_6xBkCLppxe1L99i0R"
+uri = "file://artifacts/mockup-sandbox/public/images/warm-camp.png"
+type = "image"
+title = "Joyful rural healthcare camp"
+
+[[generated]]
+id = "tmdrQSfb_lu445Zyi-ST-"
+uri = "file://artifacts/mockup-sandbox/public/images/doctor-hero.png"
+type = "image"
+title = "Doctor using digital tablet"
+
+[[generated]]
+id = "uh54LPz4obygLXmr8OD1e"
+uri = "file://artifacts/mockup-sandbox/public/images/medical-team.png"
+type = "image"
+title = "Diverse medical team hospital"
+
+[[generated]]
+id = "TaU8_WJ_UEsbnWgZ3a4lF"
+uri = "file://artifacts/mockup-sandbox/public/images/arjun-mehta.png"
+type = "image"
+title = "Arjun Mehta CEO headshot"
+
+[[generated]]
+id = "hLDkiIdoFCDg6M3pyOV91"
+uri = "file://artifacts/mockup-sandbox/public/images/priya-kapoor.png"
+type = "image"
+title = "Priya Kapoor CIO headshot"
+
+[[generated]]
+id = "dCrlehKO3loAj8j5OYZSm"
+uri = "file://artifacts/mockup-sandbox/public/images/rahul-sangal.png"
+type = "image"
+title = "Rahul Sangal Head headshot"
+
+[[generated]]
+id = "2xw6Qpe9HO-cwKy8JpKMn"
+uri = "file://artifacts/mockup-sandbox/public/images/clavix-navy-hero.png"
+type = "image"
+title = "Hero hospital night view"
+
+[[generated]]
+id = "kAuGhpAtGluelgRdBokb1"
+uri = "file://artifacts/mockup-sandbox/public/images/clavix-navy-team-1.png"
+type = "image"
+title = "Team member Arjun"
+
+[[generated]]
+id = "In5mGRjo_LfvD9ZQ-DS6m"
+uri = "file://artifacts/mockup-sandbox/public/images/clavix-navy-team-2.png"
+type = "image"
+title = "Team member Priya"
+
+[[generated]]
+id = "Uthmlei8V7_6-ImrphlO9"
+uri = "file://artifacts/mockup-sandbox/public/images/clavix-navy-team-3.png"
+type = "image"
+title = "Team member Rahul"
+
+[[generated]]
+id = "-rQpjpiOnTvyHRVQutLfT"
+uri = "file://artifacts/mockup-sandbox/public/images/bold-hero-tech.png"
+type = "image"
+title = "Futuristic surgical technology in B&W"
+
+[[generated]]
+id = "vz_GOyEdRZcIYJd4pT2aV"
+uri = "file://artifacts/mockup-sandbox/public/images/bold-team-1.png"
+type = "image"
+title = "B&W professional headshot man"
+
+[[generated]]
+id = "Hh7BfevpQlAJXSJJ_h2Vl"
+uri = "file://artifacts/mockup-sandbox/public/images/bold-team-2.png"
+type = "image"
+title = "B&W professional headshot woman"
+
+[[generated]]
+id = "VZLPuOO74z31aQtQvxvSW"
+uri = "file://artifacts/mockup-sandbox/public/images/bold-team-3.png"
+type = "image"
+title = "B&W professional headshot man"
+
 [[outputs]]
 id = "THl6Z-mwTlKSjuKPDfBvL"
 uri = "file://artifacts/mockup-sandbox/public/images/hero-lab.jpg"

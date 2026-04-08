@@ -1,239 +1,208 @@
 import React from "react";
-import { ArrowRight, ArrowUpRight, Plus } from "lucide-react";
 
 export function BoldTypographic() {
   return (
-    <div className="min-h-[100dvh] bg-white text-black font-sans selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen bg-black text-white selection:bg-[#e63946] selection:text-white overflow-hidden font-['Inter']">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
         
-        .font-display {
-          font-family: 'Fraunces', serif;
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
-        .font-sans {
-          font-family: 'Space Grotesk', sans-serif;
-        }
-        
-        /* Hide scrollbar for clean look */
-        ::-webkit-scrollbar {
-          width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-          background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-          background: #000;
+        .animate-marquee {
+          animation: marquee 20s linear infinite;
         }
       `}</style>
-
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-black text-white z-50 px-6 py-5 flex items-center justify-between uppercase tracking-widest text-xs font-bold">
-        <div className="flex items-center gap-8">
-          <span className="text-xl tracking-tighter normal-case font-display italic">Clavix</span>
-          <span className="hidden md:inline-block border-l border-neutral-800 pl-8 text-neutral-400">Ventures</span>
+      
+      {/* NAV */}
+      <nav className="border-b border-white/10 px-6 py-6 flex items-center justify-between sticky top-0 bg-black z-50">
+        <div>
+          <div className="font-['Bebas_Neue'] text-4xl tracking-wider leading-none">CLAVIX</div>
+          <div className="h-[2px] w-full bg-[#e63946] mt-1"></div>
         </div>
-        <ul className="hidden md:flex items-center gap-12">
-          <li><a href="#thesis" className="hover:text-blue-500 transition-colors">Thesis</a></li>
-          <li><a href="#portfolio" className="hover:text-blue-500 transition-colors">Portfolio</a></li>
-          <li><a href="#team" className="hover:text-blue-500 transition-colors">Team</a></li>
-        </ul>
-        <button className="bg-white text-black px-6 py-3 hover:bg-blue-600 hover:text-white transition-colors flex items-center gap-2">
-          <span>PITCH US</span>
-          <ArrowUpRight size={14} />
+        <div className="hidden md:flex gap-12 font-bold uppercase tracking-[0.3em] text-xs text-white">
+          <a href="#" className="hover:text-[#e63946] transition-colors">Ventures</a>
+          <a href="#" className="hover:text-[#e63946] transition-colors">About</a>
+          <a href="#" className="hover:text-[#e63946] transition-colors">Investors</a>
+          <a href="#" className="hover:text-[#e63946] transition-colors">Careers</a>
+        </div>
+        <button className="bg-[#e63946] text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-colors rounded-none">
+          Get in Touch
         </button>
       </nav>
 
-      <main className="pt-24">
-        {/* Hero Section */}
-        <section className="min-h-[90vh] flex flex-col justify-between px-6 pb-12 pt-20 border-b-2 border-black">
-          <div className="max-w-7xl mx-auto w-full">
-            <h1 className="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase mb-8">
-              Powering <br />
-              <span className="font-display font-light italic text-blue-600 normal-case tracking-normal">the next</span> <br />
-              Generation
-            </h1>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-24 border-t-2 border-black pt-8">
-              <div className="col-span-1">
-                <p className="text-sm font-bold uppercase tracking-widest mb-4">01 // The Mission</p>
-                <p className="text-xl leading-relaxed">
-                  We back the audacious founders building the infrastructure of Indian healthcare.
-                </p>
-              </div>
-              <div className="col-span-2">
-                <div className="aspect-[21/9] w-full bg-neutral-100 relative overflow-hidden group">
-                  <img 
-                    src="/__mockup/images/bold-hero.png" 
-                    alt="Abstract medical tech" 
-                    className="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 transition-transform duration-1000"
-                  />
-                  <div className="absolute inset-0 bg-blue-600 mix-blend-multiply opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Marquee Divider */}
-        <div className="border-b-2 border-black overflow-hidden py-4 bg-blue-600 text-white flex whitespace-nowrap">
-          <div className="animate-[marquee_20s_linear_infinite] flex items-center text-3xl font-black uppercase tracking-widest">
-            <span>HEALTHCARE INFRASTRUCTURE</span>
-            <span className="mx-8 font-display italic font-light text-black">+++</span>
-            <span>DIGITAL THERAPEUTICS</span>
-            <span className="mx-8 font-display italic font-light text-black">+++</span>
-            <span>MEDTECH INNOVATION</span>
-            <span className="mx-8 font-display italic font-light text-black">+++</span>
-            <span>HEALTHCARE INFRASTRUCTURE</span>
-            <span className="mx-8 font-display italic font-light text-black">+++</span>
-            <span>DIGITAL THERAPEUTICS</span>
-            <span className="mx-8 font-display italic font-light text-black">+++</span>
+      {/* HERO */}
+      <section className="pt-24 pb-16 px-6 max-w-7xl mx-auto">
+        <div className="flex flex-col mb-12">
+          <h1 className="font-['Bebas_Neue'] text-[12vw] leading-[0.85] tracking-tight text-white m-0 p-0">
+            POWERING THE NEXT
+          </h1>
+          <h1 className="font-['Bebas_Neue'] text-[12vw] leading-[0.85] tracking-tight text-white m-0 p-0">
+            GENERATION OF
+          </h1>
+          <h1 className="font-['Bebas_Neue'] text-[12vw] leading-[0.85] tracking-tight text-[#e63946] m-0 p-0">
+            INDIAN
+          </h1>
+          <h1 className="font-['Bebas_Neue'] text-[12vw] leading-[0.85] tracking-tight text-white m-0 p-0">
+            HEALTHCARE.
+          </h1>
+        </div>
+        
+        <div className="h-[1px] w-full bg-[#e63946] mb-12"></div>
+        
+        <div className="grid md:grid-cols-2 gap-12 items-end">
+          <p className="text-xl text-[#6b6b6b] max-w-md leading-relaxed pb-6">
+            To make world-class medical tools and intelligence accessible to every doctor in India. We deploy capital and build technology that transforms patient outcomes across the subcontinent.
+          </p>
+          <div className="relative aspect-[4/3] w-full grayscale contrast-125">
+            <img 
+              src="/__mockup/images/bold-hero-tech.png" 
+              alt="Futuristic Medical Tech" 
+              className="object-cover w-full h-full"
+            />
+            <div className="absolute inset-0 border border-white/20"></div>
           </div>
         </div>
+      </section>
 
-        {/* Thesis Section */}
-        <section id="thesis" className="py-32 px-6 border-b-2 border-black">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-end mb-24 border-b-8 border-black pb-8">
-              <h2 className="text-8xl font-black tracking-tighter uppercase">Thesis</h2>
-              <span className="text-4xl font-display italic text-blue-600">02</span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-16">
-              {[
-                {
-                  title: "Clinical Excellence",
-                  desc: "We believe the next wave of unicorns will be built on undeniable clinical outcomes, not just user acquisition metrics."
-                },
-                {
-                  title: "Bharat First",
-                  desc: "Solutions built for the top 1% won't scale. We invest in models that democratize access for the next 500 million."
-                },
-                {
-                  title: "Deep Tech",
-                  desc: "AI, genomics, and advanced diagnostics are no longer buzzwords. They are the new baseline for healthcare delivery."
-                },
-                {
-                  title: "Provider Empowerment",
-                  desc: "Technology should augment doctors, not replace them. We back tools that 10x clinical productivity."
-                }
-              ].map((item, i) => (
-                <div key={i} className="group cursor-pointer">
-                  <div className="flex justify-between items-center mb-6 border-b border-black pb-4">
-                    <h3 className="text-3xl font-bold uppercase tracking-tight group-hover:text-blue-600 transition-colors">{item.title}</h3>
-                    <Plus className="transform group-hover:rotate-90 transition-transform duration-300" />
-                  </div>
-                  <p className="text-xl text-neutral-600 leading-relaxed font-display">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
+      {/* TICKER / MARQUEE */}
+      <section className="bg-black border-y border-white/20 py-6 overflow-hidden relative flex">
+        <div className="flex whitespace-nowrap animate-marquee w-max">
+          <div className="font-['Bebas_Neue'] text-3xl md:text-5xl tracking-widest text-[#e63946] flex items-center shrink-0">
+            <span className="mx-8">₹420 CR DEPLOYED</span>
+            <span className="mx-8 text-white/30">•</span>
+            <span className="mx-8">2.4M DOCTORS</span>
+            <span className="mx-8 text-white/30">•</span>
+            <span className="mx-8">38 HOSPITALS</span>
+            <span className="mx-8 text-white/30">•</span>
+            <span className="mx-8">12 VENTURES</span>
+            <span className="mx-8 text-white/30">•</span>
+            <span className="mx-8">6 EXITS</span>
+            <span className="mx-8 text-white/30">•</span>
+            
+            {/* DUPLICATE FOR SEAMLESS LOOP */}
+            <span className="mx-8">₹420 CR DEPLOYED</span>
+            <span className="mx-8 text-white/30">•</span>
+            <span className="mx-8">2.4M DOCTORS</span>
+            <span className="mx-8 text-white/30">•</span>
+            <span className="mx-8">38 HOSPITALS</span>
+            <span className="mx-8 text-white/30">•</span>
+            <span className="mx-8">12 VENTURES</span>
+            <span className="mx-8 text-white/30">•</span>
+            <span className="mx-8">6 EXITS</span>
+            <span className="mx-8 text-white/30">•</span>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Portfolio Section */}
-        <section id="portfolio" className="bg-black text-white py-32 px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-end mb-24 border-b-8 border-white pb-8">
-              <h2 className="text-8xl font-black tracking-tighter uppercase">Portfolio</h2>
-              <span className="text-4xl font-display italic text-blue-500">03</span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[1, 2, 3].map((item) => (
-                <div key={item} className="group block">
-                  <div className="aspect-[3/4] overflow-hidden mb-6 relative">
-                    <img 
-                      src={item === 1 ? "/__mockup/images/bold-abstract.png" : "/__mockup/images/bold-hero.png"} 
-                      alt="Portfolio company" 
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                    />
-                    <div className="absolute inset-0 bg-blue-600 mix-blend-multiply opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
-                  </div>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="text-3xl font-bold uppercase mb-2">Company Name</h3>
-                      <p className="text-sm tracking-widest uppercase text-neutral-400">Digital Health</p>
-                    </div>
-                    <ArrowUpRight className="text-blue-500 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Team/Letter Section */}
-        <section id="team" className="py-32 px-6">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div>
-              <div className="aspect-[3/4] w-full max-w-md mx-auto relative group">
-                <div className="absolute top-8 -left-8 w-full h-full bg-blue-600 z-0 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500"></div>
-                <img 
-                  src="/__mockup/images/bold-portrait.png" 
-                  alt="Managing Partner" 
-                  className="w-full h-full object-cover relative z-10 grayscale contrast-125"
-                />
-              </div>
-            </div>
-            <div>
-              <span className="text-blue-600 font-bold tracking-widest uppercase text-sm mb-8 block">04 // The Partnership</span>
-              <h2 className="text-6xl font-black uppercase tracking-tighter mb-12">
-                We are builders, <br />
-                <span className="font-display italic font-light text-neutral-400 normal-case">not just</span> <br />
-                allocators.
-              </h2>
-              <div className="space-y-6 text-xl font-display leading-relaxed">
-                <p>
-                  We started Clavix because we saw a fundamental mismatch between the capital available and the patient, specialized support healthcare founders actually need.
-                </p>
-                <p>
-                  We don't just write checks. We help navigate regulatory mazes, recruit specialized clinical talent, and design go-to-market strategies that actually work in the complex Indian ecosystem.
-                </p>
-              </div>
-              <button className="mt-12 border-2 border-black px-8 py-4 uppercase font-bold tracking-widest text-sm hover:bg-black hover:text-white transition-colors flex items-center gap-4 group">
-                Meet the Team
-                <ArrowRight className="transform group-hover:translate-x-2 transition-transform" size={16} />
-              </button>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-black text-white pt-32 pb-12 px-6">
+      {/* VENTURES */}
+      <section className="bg-white text-black py-32 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-[15vw] leading-[0.8] font-black tracking-tighter uppercase mb-24 text-center">
-            Clavix <span className="text-blue-600">.</span>
-          </h2>
+          <h2 className="font-['Bebas_Neue'] text-7xl md:text-9xl mb-24 tracking-tight">OUR PORTFOLIO</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 border-t border-neutral-800 pt-12">
-            <div className="col-span-1 md:col-span-2">
-              <p className="text-2xl font-display italic text-neutral-400 max-w-sm">
-                Powering the next generation of Indian healthcare.
-              </p>
+          <div className="grid md:grid-cols-2 gap-x-24 gap-y-32">
+            {[
+              { num: "01", name: "ClavixAI", desc: "AI-powered clinical decision support for rural doctors." },
+              { num: "02", name: "MedPulse", desc: "Real-time patient vitals monitoring platform." },
+              { num: "03", name: "SurgicaLink", desc: "Remote surgical training & mentoring network." },
+              { num: "04", name: "DiagnoScan", desc: "Portable diagnostic imaging for tier-2/3 cities." }
+            ].map((venture) => (
+              <div key={venture.num} className="relative group cursor-pointer pl-8 border-l-8 border-[#e63946]">
+                <div className="absolute -top-16 -left-12 font-['Bebas_Neue'] text-[150px] md:text-[180px] leading-none text-[#f0f0f0] select-none transition-transform group-hover:-translate-y-4">
+                  {venture.num}
+                </div>
+                <div className="relative z-10 pt-4">
+                  <h3 className="font-['Playfair_Display'] italic text-4xl md:text-5xl mb-6">{venture.name}</h3>
+                  <p className="text-[#6b6b6b] text-lg max-w-sm">{venture.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MANIFESTO */}
+      <section className="bg-black text-white py-40 px-6">
+        <div className="max-w-5xl mx-auto text-center relative">
+          <span className="absolute -top-24 left-1/2 -translate-x-1/2 font-['Playfair_Display'] text-[150px] leading-none text-[#e63946] opacity-50">"</span>
+          <h2 className="font-['Playfair_Display'] italic text-4xl md:text-6xl leading-tight mb-16 relative z-10">
+            We are not just funding healthcare. We are re-engineering the infrastructure of life itself.
+          </h2>
+          <div className="font-bold uppercase tracking-[0.3em] text-xs text-[#e63946]">
+            — Clavix Investment Thesis
+          </div>
+        </div>
+      </section>
+
+      {/* DATA WALL */}
+      <section className="bg-white border-t-8 border-black">
+        <div className="grid grid-cols-2 md:grid-cols-4 border-b border-black">
+          {[
+            { num: "₹420+", label: "Cr Deployed" },
+            { num: "2.4M", label: "Doctors Reached" },
+            { num: "38", label: "Hospitals (2024)" },
+            { num: "6", label: "Successful Exits" }
+          ].map((stat, i) => (
+            <div key={i} className={`p-12 flex flex-col items-center justify-center text-center ${i !== 0 ? 'md:border-l border-black' : ''} ${i === 1 || i === 3 ? 'border-l border-black md:border-l-0' : ''} ${i < 2 ? 'border-b border-black md:border-b-0' : ''}`}>
+              <div className="font-['Bebas_Neue'] text-6xl md:text-8xl text-black mb-4">{stat.num}</div>
+              <div className="font-bold uppercase tracking-[0.2em] text-xs text-[#6b6b6b]">{stat.label}</div>
             </div>
-            <div>
-              <p className="font-bold uppercase tracking-widest text-sm mb-6 text-neutral-500">Contact</p>
-              <ul className="space-y-4 text-lg">
-                <li><a href="#" className="hover:text-blue-500 transition-colors">pitch@clavix.vc</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">press@clavix.vc</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">careers@clavix.vc</a></li>
-              </ul>
-            </div>
-            <div>
-              <p className="font-bold uppercase tracking-widest text-sm mb-6 text-neutral-500">Social</p>
-              <ul className="space-y-4 text-lg">
-                <li><a href="#" className="hover:text-blue-500 transition-colors">LinkedIn</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Twitter (X)</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Substack</a></li>
-              </ul>
+          ))}
+        </div>
+      </section>
+
+      {/* TEAM */}
+      <section className="bg-black py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="font-['Bebas_Neue'] text-7xl md:text-9xl mb-24 tracking-tight text-white">THE TEAM</h2>
+          
+          <div className="grid md:grid-cols-3 gap-16">
+            {[
+              { name: "ARJUN MEHTA", role: "FOUNDER & CEO", img: "bold-team-1.png" },
+              { name: "PRIYA KAPOOR", role: "CHIEF INVESTMENT OFFICER", img: "bold-team-2.png" },
+              { name: "RAHUL SANGAL", role: "HEAD OF VENTURES", img: "bold-team-3.png" }
+            ].map((member, i) => (
+              <div key={i} className="group">
+                <div className="aspect-[3/4] mb-8 overflow-hidden grayscale contrast-125 border border-white/20 relative">
+                  <div className="absolute inset-0 bg-[#e63946] mix-blend-multiply opacity-0 group-hover:opacity-40 transition-opacity duration-500 z-10 pointer-events-none"></div>
+                  <img 
+                    src={`/__mockup/images/${member.img}`} 
+                    alt={member.name} 
+                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <h3 className="font-['Bebas_Neue'] text-5xl text-white mb-4">{member.name}</h3>
+                <div className="h-[2px] w-12 bg-[#e63946] mb-4 transition-all duration-300 group-hover:w-full"></div>
+                <p className="font-bold uppercase tracking-[0.2em] text-xs text-[#6b6b6b]">{member.role}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-[#e63946] text-white pt-32 pb-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="font-['Bebas_Neue'] text-[20vw] leading-[0.75] mb-16 tracking-tighter text-white">
+            CLAVIX
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-end mb-24">
+            <h3 className="font-['Playfair_Display'] italic text-4xl max-w-sm">
+              Changing Indian Healthcare. Permanently.
+            </h3>
+            <div className="flex flex-col md:flex-row gap-8 md:justify-end font-bold uppercase tracking-[0.2em] text-xs">
+              <a href="#" className="hover:text-black transition-colors">Ventures</a>
+              <a href="#" className="hover:text-black transition-colors">About</a>
+              <a href="#" className="hover:text-black transition-colors">Investors</a>
+              <a href="#" className="hover:text-black transition-colors">Careers</a>
             </div>
           </div>
           
-          <div className="mt-24 flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-widest text-neutral-600">
-            <p>© {new Date().getFullYear()} Clavix Technologies</p>
-            <div className="flex gap-6 mt-4 md:mt-0">
+          <div className="border-t border-white/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/70 uppercase tracking-widest font-bold">
+            <div>© {new Date().getFullYear()} Clavix Technologies</div>
+            <div className="flex gap-8">
               <a href="#" className="hover:text-white transition-colors">Privacy</a>
               <a href="#" className="hover:text-white transition-colors">Terms</a>
             </div>

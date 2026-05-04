@@ -52,28 +52,28 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-14 h-18 flex items-center justify-between py-5">
-        <button onClick={() => scrollTo("hero")} className="flex items-center gap-3 group">
-          <span className="text-[17px] font-bold tracking-[0.18em] text-white font-serif">CLAVIX</span>
-          <span className="hidden sm:block text-[10px] text-zinc-600 tracking-[0.2em] uppercase font-medium border-l border-white/10 pl-3 pt-px">Technologies</span>
+      <div className="max-w-7xl mx-auto px-6 md:px-14 h-16 flex items-center justify-between">
+        <button onClick={() => scrollTo("hero")} className="flex items-center gap-3">
+          <span className="text-[15px] font-bold tracking-[0.22em] text-white font-serif">CLAVIX</span>
+          <span className="hidden sm:block text-[9px] text-zinc-600 tracking-[0.22em] uppercase font-semibold border-l border-white/10 pl-3">Technologies</span>
         </button>
 
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-9">
           {links.map(({ label, id }) => (
             <button
               key={id}
               onClick={() => scrollTo(id)}
-              className="text-[12px] font-medium tracking-[0.14em] uppercase text-zinc-500 hover:text-white transition-colors duration-200"
+              className="text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-500 hover:text-zinc-200 transition-colors duration-200"
             >
               {label}
             </button>
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center">
           <button
             onClick={() => scrollTo("contact")}
-            className="text-[12px] font-medium tracking-[0.08em] text-white border border-white/12 hover:border-white/25 hover:bg-white/5 transition-all px-5 py-2.5 rounded-full"
+            className="text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 hover:text-white border border-white/10 hover:border-white/20 transition-all px-5 py-2 rounded-sm"
           >
             Contact
           </button>
@@ -92,19 +92,19 @@ const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-[#09090b] border-b border-white/5 overflow-hidden"
           >
-            <div className="px-6 py-8 flex flex-col gap-7">
+            <div className="px-6 py-8 flex flex-col gap-6">
               {links.map(({ label, id }) => (
                 <button
                   key={id}
                   onClick={() => scrollTo(id)}
-                  className="text-left text-sm font-medium tracking-[0.12em] uppercase text-zinc-400 hover:text-white transition-colors"
+                  className="text-left text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-500 hover:text-white transition-colors"
                 >
                   {label}
                 </button>
               ))}
               <button
                 onClick={() => scrollTo("contact")}
-                className="text-sm font-medium text-white border border-white/12 rounded-full py-3 px-6 text-center hover:bg-white/5 transition-all"
+                className="text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 border border-white/10 rounded-sm py-2.5 px-6 text-center hover:bg-white/4 transition-all"
               >
                 Contact
               </button>
@@ -162,13 +162,13 @@ const Hero = () => (
             <div className="flex flex-col sm:flex-row items-start gap-3">
               <button
                 onClick={() => document.getElementById("ventures")?.scrollIntoView({ behavior: "smooth" })}
-                className="inline-flex items-center gap-2 h-11 px-7 rounded-full bg-white text-[#09090b] text-sm font-semibold tracking-[0.02em] hover:bg-zinc-100 transition-colors"
+                className="inline-flex items-center gap-2 h-10 px-6 rounded-sm bg-white text-[#09090b] text-[12px] font-semibold tracking-[0.06em] uppercase hover:bg-zinc-100 transition-colors"
               >
                 Our Ventures <ArrowRight className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-                className="inline-flex items-center gap-2 h-11 px-7 rounded-full border border-white/12 text-white text-sm font-medium tracking-[0.02em] hover:border-white/22 hover:bg-white/[0.04] transition-all"
+                className="inline-flex items-center gap-2 h-10 px-6 rounded-sm border border-white/12 text-zinc-300 text-[12px] font-semibold tracking-[0.06em] uppercase hover:border-white/22 hover:text-white transition-all"
               >
                 About the Company
               </button>
@@ -266,19 +266,19 @@ const Hero = () => (
 
 // ─── Philosophy ───────────────────────────────────────────────────────────────
 const Philosophy = () => (
-  <section className="py-28 md:py-40 bg-zinc-950 border-y border-white/5">
-    <div className="max-w-5xl mx-auto px-6 md:px-14 text-center">
-      <motion.div {...fade()}>
-        <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-10">
-          Our Thesis
-        </p>
-        <blockquote className="text-3xl md:text-5xl font-serif text-white leading-[1.2] tracking-[-0.02em] mb-12">
-          "Indian doctors deserve the same quality of medical tools and clinical intelligence as doctors anywhere in the world. We are building that future."
-        </blockquote>
-        <div className="flex items-center justify-center gap-4 text-xs text-zinc-600 font-medium tracking-[0.12em] uppercase">
-          <div className="w-8 h-px bg-white/15" />
-          <span>Clavix Technologies · Founding Principle</span>
-          <div className="w-8 h-px bg-white/15" />
+  <section className="py-20 md:py-28 bg-zinc-950 border-y border-white/5">
+    <div className="max-w-4xl mx-auto px-6 md:px-14">
+      <motion.div {...fade()} className="grid md:grid-cols-[120px_1fr] gap-8 md:gap-16 items-start">
+        <div className="md:pt-1">
+          <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600">Founding Principle</p>
+        </div>
+        <div>
+          <blockquote className="text-xl md:text-2xl font-serif text-zinc-200 leading-[1.55] tracking-[-0.01em] mb-6">
+            "Indian doctors deserve the same quality of medical tools and clinical intelligence as doctors anywhere in the world. We are building that future."
+          </blockquote>
+          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-zinc-600">
+            Clavix Technologies — Est. 2026
+          </p>
         </div>
       </motion.div>
     </div>
@@ -337,11 +337,11 @@ const PORTFOLIO = [
 const Ventures = () => (
   <section id="ventures" className="py-28 md:py-40 bg-[#09090b]">
     <div className="max-w-7xl mx-auto px-6 md:px-14">
-      <motion.div {...fade()} className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+      <motion.div {...fade()} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
         <div>
-          <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-5">Our Portfolio</p>
-          <h2 className="text-4xl md:text-5xl font-serif text-white leading-tight max-w-2xl">
-            Three ventures.<br />One shared mission.
+          <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-4">Our Portfolio</p>
+          <h2 className="text-3xl md:text-[2.6rem] font-serif text-white leading-tight">
+            Portfolio companies
           </h2>
         </div>
         <p className="text-sm text-zinc-500 font-light leading-relaxed max-w-xs md:text-right">
@@ -397,7 +397,7 @@ const Ventures = () => (
                     href={v.href}
                     target={v.href.startsWith("http") ? "_blank" : undefined}
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.08em] uppercase text-zinc-400 hover:text-white border border-white/8 hover:border-white/20 rounded-full px-4 py-2.5 transition-all group-hover:border-white/15"
+                    className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.1em] uppercase text-zinc-500 hover:text-white border border-white/8 hover:border-white/18 rounded-sm px-4 py-2 transition-all group-hover:border-white/14"
                   >
                     {v.status === "Coming Soon" ? "Early Access" : "Visit"}
                     <ArrowUpRight className="w-3 h-3" />
@@ -423,8 +423,8 @@ const About = () => (
 
         {/* Left: narrative */}
         <motion.div {...fade()} className="lg:pr-16">
-          <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-6">Who We Are</p>
-          <h2 className="text-4xl md:text-5xl font-serif text-white leading-tight mb-10">
+          <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-4">Who We Are</p>
+          <h2 className="text-3xl md:text-[2.6rem] font-serif text-white leading-tight mb-8">
             A focused technology group for Indian healthcare.
           </h2>
           <p className="text-base text-zinc-400 font-light leading-relaxed mb-6">
@@ -513,27 +513,27 @@ const Investors = () => (
       <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
 
         <motion.div {...fade()}>
-          <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-6">Investor Relations</p>
-          <h2 className="text-4xl md:text-5xl font-serif text-white leading-tight mb-8">
+          <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-4">Investor Relations</p>
+          <h2 className="text-3xl md:text-[2.6rem] font-serif text-white leading-tight mb-8">
             Partnering with<br />the right capital.
           </h2>
-          <p className="text-base text-zinc-400 font-light leading-relaxed mb-6">
+          <p className="text-base text-zinc-400 font-light leading-relaxed mb-5">
             We are raising a Seed round to accelerate product development, expand our clinical team, and grow distribution across India's medical community.
           </p>
-          <p className="text-base text-zinc-400 font-light leading-relaxed mb-12">
+          <p className="text-base text-zinc-400 font-light leading-relaxed mb-10">
             We are seeking investors who understand long-horizon category creation in regulated markets, and who are aligned with building durable companies rather than optimising for near-term exit metrics.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-3">
             <a
               href="mailto:investor@clavix.in?subject=Requesting Investor Deck — Clavix Technologies"
-              className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-full bg-white text-[#09090b] text-sm font-semibold tracking-[0.03em] hover:bg-zinc-100 transition-colors"
+              className="inline-flex items-center justify-center gap-2 h-10 px-6 rounded-sm bg-white text-[#09090b] text-[12px] font-semibold tracking-[0.06em] uppercase hover:bg-zinc-100 transition-colors"
             >
-              Request Investor Deck <ArrowUpRight className="w-4 h-4" />
+              Request Investor Deck <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
             <a
               href="mailto:investor@clavix.in"
-              className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-full border border-white/12 text-white text-sm font-medium hover:border-white/25 hover:bg-white/5 transition-all"
+              className="inline-flex items-center justify-center gap-2 h-10 px-6 rounded-sm border border-white/12 text-zinc-300 text-[12px] font-semibold tracking-[0.06em] uppercase hover:border-white/22 hover:text-white transition-all"
             >
               Schedule a Call
             </a>
@@ -597,9 +597,9 @@ const CareersSection = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-14">
         <motion.div {...fade()} className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-5">Careers</p>
-            <h2 className="text-4xl md:text-5xl font-serif text-white leading-tight">
-              Join the team<br />building this.
+            <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-4">Careers</p>
+            <h2 className="text-3xl md:text-[2.6rem] font-serif text-white leading-tight">
+              Open positions
             </h2>
           </div>
           <Link href="/careers">
@@ -633,18 +633,18 @@ const CareersSection = () => {
           ))}
         </div>
 
-        <motion.div {...fade(0.3)} className="mt-10 p-8 rounded-2xl border border-white/6 bg-white/[0.015] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <motion.div {...fade(0.3)} className="mt-8 p-7 border-t border-white/6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
-            <h4 className="text-base font-serif font-semibold text-white mb-1">Don't see your role?</h4>
+            <h4 className="text-sm font-semibold text-white mb-1">Don't see your role listed?</h4>
             <p className="text-sm text-zinc-500 font-light">
-              If you're exceptional at what you do and believe in what we're building, reach out regardless.
+              If you are exceptional at your discipline and believe in what we are building, we want to hear from you.
             </p>
           </div>
           <a
             href="mailto:careers@clavix.in?subject=General Application — Clavix Technologies"
-            className="shrink-0 inline-flex items-center gap-2 text-sm font-medium text-white border border-white/12 rounded-full px-6 py-2.5 hover:border-white/25 hover:bg-white/5 transition-all"
+            className="shrink-0 inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.1em] uppercase text-zinc-400 border border-white/10 rounded-sm px-5 py-2 hover:border-white/20 hover:text-white transition-all"
           >
-            Send a General Application <ArrowUpRight className="w-3.5 h-3.5" />
+            General Application <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
         </motion.div>
       </div>
@@ -676,9 +676,9 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
 
           <motion.div {...fade()}>
-            <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-6">Get in Touch</p>
-            <h2 className="text-4xl md:text-5xl font-serif text-white leading-tight mb-8">
-              Let's talk.
+            <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-4">Get in Touch</p>
+            <h2 className="text-3xl md:text-[2.6rem] font-serif text-white leading-tight mb-6">
+              Contact
             </h2>
             <p className="text-base text-zinc-400 font-light leading-relaxed mb-12">
               Whether you're a prospective partner, an investor, a medical professional interested in our products, or simply curious about what we're building — we'd like to hear from you.
@@ -741,7 +741,7 @@ const Contact = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full h-12 rounded-xl bg-white text-[#09090b] text-sm font-semibold hover:bg-zinc-100 transition-colors"
+                  className="w-full h-10 rounded-sm bg-white text-[#09090b] text-[12px] font-semibold tracking-[0.06em] uppercase hover:bg-zinc-100 transition-colors"
                 >
                   Send Message
                 </button>

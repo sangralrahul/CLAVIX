@@ -890,7 +890,7 @@ export default function Apply() {
     return (
       <main className="bg-[#09090b] min-h-screen flex items-center justify-center text-white">
         <div className="text-center">
-          <h1 className="text-3xl font-serif mb-4">Role not found</h1>
+          <h1 className="text-3xl font-bold mb-4 tracking-[-0.02em]">Role not found</h1>
           <Link href="/careers">
             <Button variant="outline" className="border-white/10 rounded-full">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Careers
@@ -936,7 +936,7 @@ export default function Apply() {
             <div className="w-20 h-20 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center mx-auto mb-8">
               <CheckCircle2 className="w-9 h-9 text-blue-400" />
             </div>
-            <h2 className="text-3xl font-serif text-white mb-4">Application sent!</h2>
+            <h2 className="text-3xl font-bold text-white mb-4 tracking-[-0.02em]">Application sent!</h2>
             <p className="text-zinc-400 leading-relaxed mb-4">
               Your email client opened with your application pre-filled for <strong className="text-white">{job.title}</strong>. Send it to complete your application.
             </p>
@@ -984,7 +984,7 @@ export default function Apply() {
                       </span>
                     </div>
                   </div>
-                  <h1 className="text-3xl font-serif text-white leading-tight mb-4">{job.title}</h1>
+                  <h1 className="text-3xl font-black text-white leading-tight mb-4 tracking-[-0.025em]">{job.title}</h1>
                   <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-zinc-500">
                     <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" />{job.location}</span>
                     <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{job.experience} exp.</span>
@@ -1026,7 +1026,7 @@ export default function Apply() {
               <div className="bg-[#0d0d13] border border-white/6 rounded-2xl overflow-hidden">
                 {/* Form header */}
                 <div className="px-8 py-6 border-b border-white/5 bg-white/[0.01]">
-                  <h2 className="text-xl font-serif text-white">Submit Your Application</h2>
+                  <h2 className="text-xl font-bold text-white tracking-[-0.02em]">Submit Your Application</h2>
                   <p className="text-sm text-zinc-500 mt-1">Fields marked <span className="text-red-400">*</span> are required.</p>
                 </div>
 

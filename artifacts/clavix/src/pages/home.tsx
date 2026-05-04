@@ -118,38 +118,41 @@ const Navbar = () => {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 const Hero = () => (
-  <section id="hero" className="relative min-h-[100dvh] flex flex-col justify-between bg-[#09090b]">
-    <div className="max-w-7xl mx-auto px-6 md:px-14 w-full flex flex-col flex-1 justify-center pt-28 pb-0">
+  <section id="hero" className="relative min-h-[100dvh] flex flex-col justify-between bg-[#09090b] overflow-hidden">
+    {/* Very subtle top gradient */}
+    <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(30,58,138,0.08),transparent)]" />
+
+    <div className="max-w-7xl mx-auto px-6 md:px-14 w-full flex flex-col flex-1 justify-center pt-28 pb-0 relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       >
         {/* Eyebrow */}
-        <p className="text-[10px] font-semibold tracking-[0.32em] uppercase text-zinc-600 mb-10">
-          Clavix Technologies · Healthcare Technology Group · India
+        <p className="text-[10px] font-semibold tracking-[0.35em] uppercase text-zinc-500 mb-10">
+          Healthcare Technology Group · India · Est. 2026
         </p>
 
-        {/* Headline — bold, confident, full-width */}
-        <h1 className="text-[2.6rem] sm:text-[3.4rem] md:text-[4.25rem] lg:text-[5rem] font-black text-white leading-[1.04] tracking-[-0.03em] mb-8 max-w-4xl">
+        {/* Headline */}
+        <h1 className="text-[2.6rem] sm:text-[3.4rem] md:text-[4.25rem] lg:text-[5rem] font-black text-white leading-[1.04] tracking-[-0.04em] mb-7 max-w-4xl">
           Building India's medical technology infrastructure.
         </h1>
 
-        <p className="text-[16px] md:text-[17px] text-zinc-400 font-light leading-[1.8] max-w-xl mb-10">
+        <p className="text-[16px] md:text-[17px] text-zinc-400 font-normal leading-[1.75] max-w-lg mb-10">
           We design, build, and operate the software platforms serving India's 1.2 million practising physicians and the institutions that employ them.
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-wrap items-center gap-4 mb-16">
+        <div className="flex flex-wrap items-center gap-5 mb-16">
           <button
             onClick={() => document.getElementById("ventures")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 h-11 px-7 bg-white text-[#09090b] text-[13px] font-bold tracking-[0.02em] hover:bg-zinc-100 transition-colors rounded-sm"
+            className="inline-flex items-center gap-2 h-11 px-8 bg-white text-[#09090b] text-[14px] font-bold tracking-[-0.01em] hover:bg-zinc-100 transition-colors rounded-sm"
           >
             Our Companies <ArrowRight className="w-4 h-4" />
           </button>
           <button
             onClick={() => document.getElementById("investors")?.scrollIntoView({ behavior: "smooth" })}
-            className="text-[13px] font-semibold text-zinc-500 hover:text-white transition-colors"
+            className="text-[14px] font-medium text-zinc-400 hover:text-white transition-colors"
           >
             Investor Relations →
           </button>
@@ -159,32 +162,32 @@ const Hero = () => (
 
     {/* Company tiles — full width at bottom of hero */}
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="w-full border-t border-white/8 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/8"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.4, duration: 0.8 }}
+      className="w-full border-t border-white/8 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/8 relative z-10"
     >
       {[
-        { name: "AETHEX", tagline: "India's Medical Marketplace", status: "Live", href: "https://aethex.in" },
-        { name: "CADUS AI", tagline: "Clinical Intelligence Platform", status: "Live", href: "https://aethex.in/ai-assistant" },
-        { name: "AETHEX OS", tagline: "Hospital Management System", status: "In Development", href: "mailto:hello@clavix.in?subject=Aethex OS Early Access" },
+        { name: "Aethex", tagline: "India's Medical Marketplace", status: "Live", href: "https://aethex.in" },
+        { name: "Cadus AI", tagline: "Clinical Intelligence Platform", status: "Live", href: "https://aethex.in/ai-assistant" },
+        { name: "Aethex OS", tagline: "Hospital Management System", status: "In Development", href: "mailto:hello@clavix.in?subject=Aethex OS Early Access" },
       ].map((v) => (
         <a
           key={v.name}
           href={v.href}
           target={v.href.startsWith("http") ? "_blank" : undefined}
           rel="noopener noreferrer"
-          className="group flex flex-col justify-between px-8 py-7 hover:bg-white/[0.025] transition-colors"
+          className="group flex items-center justify-between px-8 py-6 hover:bg-white/[0.03] transition-colors"
         >
-          <div className="flex items-center justify-between mb-8">
-            <span className={`text-[10px] font-semibold tracking-[0.18em] uppercase ${
+          <div>
+            <p className="text-[15px] font-bold text-white mb-0.5 group-hover:text-zinc-200 transition-colors">{v.name}</p>
+            <p className="text-[12px] text-zinc-600">{v.tagline}</p>
+          </div>
+          <div className="flex items-center gap-3 shrink-0 ml-4">
+            <span className={`text-[10px] font-semibold tracking-[0.15em] uppercase ${
               v.status === "Live" ? "text-emerald-500" : "text-zinc-600"
             }`}>{v.status}</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-700 group-hover:text-zinc-400 transition-colors" />
-          </div>
-          <div>
-            <h3 className="text-[15px] font-bold text-white mb-1 group-hover:text-zinc-200 transition-colors">{v.name}</h3>
-            <p className="text-[12px] text-zinc-600 font-light">{v.tagline}</p>
+            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-700 group-hover:text-zinc-300 transition-colors" />
           </div>
         </a>
       ))}
@@ -466,7 +469,7 @@ const Investors = () => (
                 <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-zinc-600 mb-1">{label}</p>
                 <p className="text-sm text-zinc-500 font-light">{note}</p>
               </div>
-              <p className="text-2xl md:text-3xl font-serif font-semibold text-white">{value}</p>
+              <p className="text-2xl md:text-3xl font-black text-white tracking-[-0.02em]">{value}</p>
             </div>
           ))}
 
@@ -613,7 +616,7 @@ const Contact = () => {
                 <div className="w-14 h-14 rounded-full border border-blue-500/30 bg-blue-500/8 flex items-center justify-center mb-4">
                   <Mail className="w-6 h-6 text-blue-400" />
                 </div>
-                <h3 className="text-xl font-serif text-white">Email client opened</h3>
+                <h3 className="text-xl font-bold text-white">Email client opened</h3>
                 <p className="text-sm text-zinc-500 font-light max-w-xs">
                   Your message has been pre-filled. Send it to complete your enquiry.
                 </p>

@@ -646,7 +646,7 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
               </span>
               <span className="text-zinc-500 text-xs">{job.location}</span>
             </div>
-            <DialogTitle className="text-2xl font-serif text-white">
+            <DialogTitle className="text-2xl font-bold text-white tracking-[-0.02em]">
               Apply — {job.title}
             </DialogTitle>
             <DialogDescription className="sr-only">
@@ -668,7 +668,7 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
                   <CheckCircle2 className="w-7 h-7 text-blue-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-serif text-white mb-2">Application submitted!</h3>
+                  <h3 className="text-xl font-bold text-white mb-2 tracking-[-0.02em]">Application submitted!</h3>
                   <p className="text-zinc-400 text-sm max-w-sm leading-relaxed">
                     Your email client has opened with your application pre-filled.
                     {(resumeFile || coverFile) && (
@@ -889,7 +889,7 @@ const JobCard = ({ job, defaultOpen = false }: { job: (typeof JOBS)[0]; defaultO
               <Icon className={`w-5 h-5 ${job.accent}`} />
             </div>
             <div className="min-w-0">
-              <h3 className="text-xl font-serif text-white mb-1.5">{job.title}</h3>
+              <h3 className="text-xl font-bold text-white mb-1.5 tracking-[-0.02em]">{job.title}</h3>
               <div className="flex flex-wrap items-center gap-3">
                 <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.1em] border ${job.badge}`}>
                   {job.dept}
@@ -1062,7 +1062,7 @@ export default function Careers() {
           transition={{ duration: 0.8 }}
         >
           <div className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500 mb-6">Careers at Clavix</div>
-          <h1 className="text-5xl md:text-7xl font-serif text-white mb-8 leading-[1.05]">
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-8 leading-[1.02] tracking-[-0.04em]">
             Build the future of<br />
             <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Indian healthcare.</span>
           </h1>
@@ -1105,7 +1105,7 @@ export default function Careers() {
               },
             ].map(({ title, desc }) => (
               <div key={title}>
-                <h3 className="text-white font-serif text-lg mb-3">{title}</h3>
+                <h3 className="text-white font-bold text-lg mb-3 tracking-[-0.01em]">{title}</h3>
                 <p className="text-zinc-400 text-sm font-light leading-relaxed">{desc}</p>
               </div>
             ))}
@@ -1123,7 +1123,7 @@ export default function Careers() {
             className="mb-12"
           >
             <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500 mb-4">Open Positions</h2>
-            <h3 className="text-3xl md:text-4xl font-serif text-white">3 roles · All remote</h3>
+            <h3 className="text-3xl md:text-4xl font-black text-white tracking-[-0.025em]">3 roles · All remote</h3>
           </motion.div>
 
           <div className="space-y-4">
@@ -1142,7 +1142,7 @@ export default function Careers() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-serif text-white mb-6">Don't see your role?</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-6 tracking-[-0.025em]">Don't see your role?</h2>
             <p className="text-zinc-400 font-light leading-relaxed mb-10">
               If you're exceptional at what you do and believe in what we're building, reach out anyway. We're always open to talking to the right people.
             </p>

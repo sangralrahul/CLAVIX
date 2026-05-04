@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link, useLocation } from "wouter";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowRight, Menu, X, CheckCircle2, ChevronDown, BrainCircuit, ExternalLink, Database, Cpu, ShieldCheck, BarChart3, ShoppingBag, Linkedin, Twitter, Mail, MapPin, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -566,15 +567,23 @@ const Investors = () => {
 };
 
 const Careers = () => {
+  const [, navigate] = useLocation();
+
   const roles = [
-    { title: "Full Stack Developer", dept: "Engineering", type: "Remote" },
-    { title: "AI/ML Engineer", dept: "Engineering", type: "Remote" },
-    { title: "Medical Content Writer", dept: "Clinical", type: "Remote" }
+    { id: "full-stack-developer", title: "Full Stack Developer", dept: "Engineering", type: "Remote", color: "blue" },
+    { id: "ai-ml-engineer", title: "AI/ML Engineer", dept: "Engineering", type: "Remote", color: "violet" },
+    { id: "medical-content-writer", title: "Medical Content Writer", dept: "Clinical", type: "Remote", color: "cyan" },
   ];
+
+  const badgeMap: Record<string, string> = {
+    blue: "bg-blue-500/10 text-blue-400 border border-blue-500/20",
+    violet: "bg-violet-500/10 text-violet-400 border border-violet-500/20",
+    cyan: "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20",
+  };
 
   return (
     <section id="careers" className="py-28 md:py-40 relative bg-[#09090b]">
-      <div className="max-w-4xl mx-auto px-6 md:px-16">
+      <div className="max-w-5xl mx-auto px-6 md:px-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -583,44 +592,66 @@ const Careers = () => {
           className="mb-16"
         >
           <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500 mb-6">Careers</h2>
-          <h3 className="text-4xl md:text-5xl font-serif text-white leading-tight mb-6">
-            Join the mission.
-          </h3>
-          <p className="text-lg text-zinc-400 font-light mb-8">
-            Build tools that will be used by doctors across the country. We are a small, elite team moving extremely fast.
-          </p>
-          <a href="mailto:email@aethex.in" className="text-blue-400 hover:text-blue-300 text-sm font-medium tracking-wide">
-            Apply at email@aethex.in
-          </a>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div>
+              <h3 className="text-4xl md:text-5xl font-serif text-white leading-tight mb-5">
+                Join the mission.
+              </h3>
+              <p className="text-lg text-zinc-400 font-light max-w-lg">
+                Build tools used by doctors across India. Small, elite team. Real ownership. Real impact.
+              </p>
+            </div>
+            <Link href="/careers">
+              <Button variant="outline" className="shrink-0 rounded-full border-white/10 hover:bg-white/5 text-zinc-300 hover:text-white px-6 h-11 gap-2">
+                View All Openings <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
         </motion.div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {roles.map((role, i) => (
             <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              key={role.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group flex flex-col md:flex-row md:items-center justify-between p-6 rounded-2xl bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.04)] border border-transparent hover:border-white/5 transition-all gap-4"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="group flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 rounded-2xl bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.035)] border border-white/5 hover:border-white/10 transition-all duration-300 gap-4 cursor-pointer"
+              onClick={() => navigate(`/careers#${role.id}`)}
             >
-              <div>
-                <h4 className="text-lg font-medium text-white mb-2">{role.title}</h4>
-                <div className="flex items-center gap-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">
-                  <span>{role.dept}</span>
-                  <span className="w-1 h-1 bg-zinc-700 rounded-full"></span>
-                  <span>{role.type}</span>
+              <div className="flex items-center gap-5">
+                <div>
+                  <h4 className="text-lg font-medium text-white mb-2">{role.title}</h4>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.1em] ${badgeMap[role.color]}`}>
+                      {role.dept}
+                    </span>
+                    <span className="text-xs text-zinc-500">Remote · India</span>
+                  </div>
                 </div>
               </div>
-              <a 
-                href={`mailto:email@aethex.in?subject=Application for ${role.title}`}
-                className="inline-flex items-center text-sm font-medium text-white group-hover:text-blue-400 transition-colors"
-              >
-                Apply Now <ArrowRight className="ml-2 w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-              </a>
+              <div className="flex items-center gap-2 text-sm font-medium text-zinc-400 group-hover:text-white transition-colors shrink-0">
+                View & Apply
+                <ArrowRight className="w-4 h-4 -translate-x-1 group-hover:translate-x-0 opacity-50 group-hover:opacity-100 transition-all" />
+              </div>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-8 text-center"
+        >
+          <p className="text-sm text-zinc-600">
+            Don't see your role?{" "}
+            <a href="mailto:careers@clavix.in" className="text-zinc-400 hover:text-white transition-colors underline underline-offset-2">
+              Send a general application
+            </a>
+          </p>
+        </motion.div>
       </div>
     </section>
   );

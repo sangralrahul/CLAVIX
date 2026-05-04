@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import {
-  ArrowLeft, ArrowRight, MapPin, Clock, Briefcase, ChevronDown, ChevronUp,
-  CheckCircle2, ExternalLink, Upload, X, Send, Code2, BrainCircuit, FileText,
-  Globe, Linkedin, Github
+  ArrowLeft, ArrowRight, MapPin, Clock, ChevronDown, ChevronUp,
+  CheckCircle2, Upload, X, Send, Code2, BrainCircuit, FileText,
+  Globe, Paperclip
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 const JOBS = [
   {
@@ -136,11 +136,96 @@ interface ApplicationFormProps {
   onClose: () => void;
 }
 
+const FileUploadZone = ({
+  label,
+  hint,
+  accept,
+  file,
+  onFile,
+  onClear,
+}: {
+  label: string;
+  hint: string;
+  accept: string;
+  file: File | null;
+  onFile: (f: File) => void;
+  onClear: () => void;
+}) => {
+  const ref = useRef<HTMLInputElement>(null);
+  const [dragging, setDragging] = useState(false);
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDragging(false);
+    const f = e.dataTransfer.files[0];
+    if (f) onFile(f);
+  };
+
+  const fmt = (bytes: number) =>
+    bytes < 1024 * 1024
+      ? `${(bytes / 1024).toFixed(0)} KB`
+      : `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-[0.18em]">{label}</span>
+        <span className="text-[10px] text-zinc-600 italic">Optional</span>
+      </div>
+      {file ? (
+        <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-500/8 border border-blue-500/25">
+          <Paperclip className="w-4 h-4 text-blue-400 shrink-0" />
+          <div className="flex-1 min-w-0">
+            <p className="text-sm text-white truncate font-medium">{file.name}</p>
+            <p className="text-[11px] text-zinc-500">{fmt(file.size)}</p>
+          </div>
+          <button
+            type="button"
+            onClick={onClear}
+            className="w-6 h-6 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors shrink-0"
+          >
+            <X className="w-3 h-3 text-zinc-400" />
+          </button>
+        </div>
+      ) : (
+        <div
+          onClick={() => ref.current?.click()}
+          onDragOver={e => { e.preventDefault(); setDragging(true); }}
+          onDragLeave={() => setDragging(false)}
+          onDrop={handleDrop}
+          className={`flex flex-col items-center justify-center gap-2 px-4 py-5 rounded-xl border border-dashed cursor-pointer transition-all duration-200 ${
+            dragging
+              ? "border-blue-500/60 bg-blue-500/8"
+              : "border-white/10 bg-white/[0.015] hover:border-white/20 hover:bg-white/[0.03]"
+          }`}
+        >
+          <Upload className={`w-5 h-5 ${dragging ? "text-blue-400" : "text-zinc-600"}`} />
+          <div className="text-center">
+            <p className="text-xs text-zinc-400 font-medium">
+              Drop file here or <span className="text-blue-400 underline underline-offset-2">browse</span>
+            </p>
+            <p className="text-[11px] text-zinc-600 mt-0.5">{hint}</p>
+          </div>
+          <input
+            ref={ref}
+            type="file"
+            accept={accept}
+            className="hidden"
+            onChange={e => { const f = e.target.files?.[0]; if (f) onFile(f); }}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
   const [form, setForm] = useState({
     name: "", email: "", phone: "", linkedin: "", portfolio: "",
     experience: "", notice: "", salary: "", cover: "", resumeLink: "",
   });
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [coverFile, setCoverFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
   const set = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -148,6 +233,13 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const resumeLine = resumeFile
+      ? `RESUME FILE: ${resumeFile.name} (${(resumeFile.size / 1024).toFixed(0)} KB) — please attach this file to your email`
+      : `RESUME LINK: ${form.resumeLink || "Not provided"}`;
+    const coverFileLine = coverFile
+      ? `\nCOVER LETTER FILE: ${coverFile.name} — please attach this file to your email`
+      : "";
+
     const subject = encodeURIComponent(`Application for ${job.title} — ${form.name}`);
     const body = encodeURIComponent(
       `ROLE: ${job.title}\n\n` +
@@ -157,10 +249,10 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
       `LINKEDIN: ${form.linkedin || "Not provided"}\n` +
       `PORTFOLIO / GITHUB: ${form.portfolio || "Not provided"}\n` +
       `EXPERIENCE: ${form.experience}\n` +
-      `NOTICE PERIOD: ${form.notice}\n` +
+      `NOTICE PERIOD: ${form.notice || "Not specified"}\n` +
       `EXPECTED SALARY: ${form.salary || "Open to discussion"}\n` +
-      `RESUME LINK: ${form.resumeLink || "Not provided"}\n\n` +
-      `COVER LETTER:\n${form.cover}`
+      `${resumeLine}${coverFileLine}\n\n` +
+      (form.cover ? `COVER LETTER:\n${form.cover}` : "(No written cover letter provided)")
     );
     window.open(`mailto:careers@clavix.in?subject=${subject}&body=${body}`, "_blank");
     setSubmitted(true);
@@ -168,7 +260,12 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
 
   const handleClose = () => {
     onClose();
-    setTimeout(() => setSubmitted(false), 500);
+    setTimeout(() => {
+      setSubmitted(false);
+      setResumeFile(null);
+      setCoverFile(null);
+      setForm({ name: "", email: "", phone: "", linkedin: "", portfolio: "", experience: "", notice: "", salary: "", cover: "", resumeLink: "" });
+    }, 400);
   };
 
   const inputCls = "bg-[#0d0d10] border-white/10 text-white h-11 rounded-xl focus-visible:ring-1 focus-visible:ring-blue-500 focus-visible:border-blue-500/50 placeholder:text-zinc-600 text-sm";
@@ -188,6 +285,9 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
             <DialogTitle className="text-2xl font-serif text-white">
               Apply — {job.title}
             </DialogTitle>
+            <DialogDescription className="sr-only">
+              Application form for the {job.title} position at Clavix Technologies.
+            </DialogDescription>
           </DialogHeader>
         </div>
 
@@ -205,8 +305,13 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
                 </div>
                 <div>
                   <h3 className="text-xl font-serif text-white mb-2">Application submitted!</h3>
-                  <p className="text-zinc-400 text-sm max-w-sm">
-                    Your email client has opened with your application pre-filled. We review every application and will get back to you within 5–7 business days.
+                  <p className="text-zinc-400 text-sm max-w-sm leading-relaxed">
+                    Your email client has opened with your application pre-filled.
+                    {(resumeFile || coverFile) && (
+                      <span className="block mt-2 text-amber-400/80">
+                        Don't forget to attach your {[resumeFile && "resume", coverFile && "cover letter"].filter(Boolean).join(" and ")} before sending.
+                      </span>
+                    )}
                   </p>
                 </div>
                 <Button onClick={handleClose} variant="outline" className="rounded-full border-white/10 hover:bg-white/5 mt-2">
@@ -219,7 +324,7 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 onSubmit={handleSubmit}
-                className="space-y-5"
+                className="space-y-6"
               >
                 {/* Personal Info */}
                 <div>
@@ -249,17 +354,11 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
                 {/* Links */}
                 <div>
                   <h4 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-4 pb-2 border-b border-white/5">
-                    Portfolio & Resume
+                    Portfolio & Links
                   </h4>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className={labelCls}>Portfolio / GitHub / Work Samples</label>
-                      <Input value={form.portfolio} onChange={set("portfolio")} className={inputCls} placeholder="github.com/yourname" />
-                    </div>
-                    <div>
-                      <label className={labelCls}>Resume Link (Google Drive / Notion)</label>
-                      <Input value={form.resumeLink} onChange={set("resumeLink")} className={inputCls} placeholder="drive.google.com/..." />
-                    </div>
+                  <div>
+                    <label className={labelCls}>Portfolio / GitHub / Work Samples</label>
+                    <Input value={form.portfolio} onChange={set("portfolio")} className={inputCls} placeholder="github.com/yourname" />
                   </div>
                 </div>
 
@@ -308,22 +407,71 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
                   </div>
                 </div>
 
-                {/* Cover Letter */}
+                {/* Uploads */}
                 <div>
                   <h4 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-4 pb-2 border-b border-white/5">
-                    Cover Letter *
+                    Documents
                   </h4>
-                  <label className={labelCls}>Tell us why you want to join Clavix and what you'd bring *</label>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <FileUploadZone
+                      label="Resume / CV"
+                      hint="PDF, DOC, DOCX · Max 5 MB"
+                      accept=".pdf,.doc,.docx"
+                      file={resumeFile}
+                      onFile={setResumeFile}
+                      onClear={() => setResumeFile(null)}
+                    />
+                    <FileUploadZone
+                      label="Cover Letter File"
+                      hint="PDF, DOC, DOCX, TXT · Max 5 MB"
+                      accept=".pdf,.doc,.docx,.txt"
+                      file={coverFile}
+                      onFile={setCoverFile}
+                      onClear={() => setCoverFile(null)}
+                    />
+                  </div>
+                  {!resumeFile && (
+                    <div className="mt-3">
+                      <label className={labelCls}>Or paste a Resume Link (Google Drive / Notion)</label>
+                      <Input
+                        value={form.resumeLink}
+                        onChange={set("resumeLink")}
+                        className={inputCls}
+                        placeholder="drive.google.com/..."
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Cover Letter text */}
+                <div>
+                  <h4 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-4 pb-2 border-b border-white/5">
+                    Cover Letter
+                  </h4>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className={`${labelCls} mb-0`}>Written cover letter</label>
+                    <span className="text-[10px] text-zinc-600 italic">Optional if file uploaded above</span>
+                  </div>
                   <Textarea
                     value={form.cover}
                     onChange={set("cover")}
-                    required
-                    className="bg-[#0d0d10] border-white/10 text-white min-h-[140px] rounded-xl focus-visible:ring-1 focus-visible:ring-blue-500 resize-none placeholder:text-zinc-600 text-sm"
-                    placeholder="Tell us about yourself, why you're excited about this role, and what specific experience makes you a strong fit. The more specific, the better."
+                    className="bg-[#0d0d10] border-white/10 text-white min-h-[130px] rounded-xl focus-visible:ring-1 focus-visible:ring-blue-500 resize-none placeholder:text-zinc-600 text-sm"
+                    placeholder="Tell us about yourself, why you're excited about this role, and what specific experience makes you a strong fit…"
                   />
                 </div>
 
-                <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                {(resumeFile || coverFile) && (
+                  <div className="flex items-start gap-2.5 px-4 py-3 rounded-xl bg-amber-500/6 border border-amber-500/20">
+                    <Paperclip className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <p className="text-xs text-amber-300/80 leading-relaxed">
+                      After your email client opens, please manually attach{" "}
+                      <strong>{[resumeFile?.name, coverFile?.name].filter(Boolean).join(" and ")}</strong>{" "}
+                      before sending.
+                    </p>
+                  </div>
+                )}
+
+                <div className="pt-1 flex flex-col sm:flex-row gap-3">
                   <Button
                     type="submit"
                     className="flex-1 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-all shadow-[0_0_20px_rgba(37,99,235,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]"

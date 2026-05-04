@@ -119,75 +119,144 @@ const Navbar = () => {
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 const Hero = () => (
   <section id="hero" className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-[#09090b]">
-    {/* Subtle radial glow */}
+    {/* Radial glow — very subtle */}
     <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-blue-700/8 rounded-full blur-[160px]" />
+      <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-600/5 rounded-full blur-[200px]" />
     </div>
 
-    {/* Fine grid overlay */}
-    <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
-      style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px)", backgroundSize: "80px 80px" }}
+    {/* Fine grid */}
+    <div
+      className="absolute inset-0 pointer-events-none opacity-[0.022]"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px)",
+        backgroundSize: "72px 72px",
+      }}
     />
 
-    <div className="max-w-7xl mx-auto px-6 md:px-14 w-full relative z-10 pt-32 pb-24">
+    <div className="max-w-7xl mx-auto px-6 md:px-14 w-full relative z-10 pt-36 pb-32">
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="flex items-center gap-3 mb-10">
+        {/* Category label */}
+        <div className="flex items-center gap-2.5 mb-10">
           <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-          <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-500">
-            Healthcare Technology Group · Est. 2026
+          <span className="text-[11px] font-semibold tracking-[0.26em] uppercase text-zinc-500">
+            Healthcare Technology Group · Incorporated in India · Est. 2026
           </span>
         </div>
 
-        <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[6.5rem] font-serif font-bold text-white leading-[1.02] tracking-tight max-w-5xl mb-10">
-          Powering the next<br />
-          generation of{" "}
-          <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400">
-            Indian healthcare.
-          </span>
-        </h1>
+        {/* Two-column layout */}
+        <div className="grid lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-14 lg:gap-20 items-start">
 
-        <p className="text-lg md:text-xl text-zinc-400 font-light max-w-xl leading-relaxed mb-14 tracking-[-0.01em]">
-          We build, own, and operate the technology infrastructure that serves India's 1.2 million doctors and the healthcare institutions that employ them.
-        </p>
+          {/* Left — identity + CTAs */}
+          <div>
+            <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] lg:text-[4rem] font-serif font-bold text-white leading-[1.07] tracking-tight mb-7">
+              Building India's medical<br className="hidden sm:block" /> technology infrastructure.
+            </h1>
+            <p className="text-base md:text-lg text-zinc-400 font-light leading-[1.75] mb-10 max-w-lg">
+              Clavix Technologies is a privately held healthcare technology company based in Delhi. We design, build, and operate software platforms that serve India's 1.2 million practising doctors and the institutions that employ them.
+            </p>
+            <div className="flex flex-col sm:flex-row items-start gap-3">
+              <button
+                onClick={() => document.getElementById("ventures")?.scrollIntoView({ behavior: "smooth" })}
+                className="inline-flex items-center gap-2 h-11 px-7 rounded-full bg-white text-[#09090b] text-sm font-semibold tracking-[0.02em] hover:bg-zinc-100 transition-colors"
+              >
+                Our Ventures <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+                className="inline-flex items-center gap-2 h-11 px-7 rounded-full border border-white/12 text-white text-sm font-medium tracking-[0.02em] hover:border-white/22 hover:bg-white/[0.04] transition-all"
+              >
+                About the Company
+              </button>
+            </div>
+          </div>
 
-        <div className="flex flex-col sm:flex-row items-start gap-4">
-          <button
-            onClick={() => document.getElementById("ventures")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2.5 h-13 px-8 py-3.5 rounded-full bg-white text-[#09090b] text-sm font-semibold tracking-[0.03em] hover:bg-zinc-100 transition-colors shadow-[0_0_40px_rgba(255,255,255,0.08)]"
+          {/* Right — venture index */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-2.5"
           >
-            Our Ventures <ArrowRight className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => document.getElementById("investors")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2.5 h-13 px-8 py-3.5 rounded-full border border-white/12 text-white text-sm font-medium tracking-[0.03em] hover:border-white/25 hover:bg-white/5 transition-all"
-          >
-            Investor Relations
-          </button>
+            <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-zinc-600 mb-4">Portfolio Companies</p>
+            {[
+              {
+                name: "AETHEX",
+                desc: "India's Medical Marketplace",
+                status: "Live",
+                statusCls: "text-emerald-400",
+                dot: "bg-cyan-400",
+                href: "https://aethex.in",
+              },
+              {
+                name: "CADUS AI",
+                desc: "Clinical Intelligence Platform",
+                status: "Live",
+                statusCls: "text-emerald-400",
+                dot: "bg-blue-400",
+                href: "https://aethex.in/ai-assistant",
+              },
+              {
+                name: "AETHEX OS",
+                desc: "Hospital Management System",
+                status: "In Development",
+                statusCls: "text-violet-400",
+                dot: "bg-violet-400",
+                href: "mailto:hello@clavix.in?subject=Aethex OS Early Access",
+              },
+            ].map((v) => (
+              <a
+                key={v.name}
+                href={v.href}
+                target={v.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-4 rounded-xl border border-white/6 bg-white/[0.018] hover:bg-white/[0.035] hover:border-white/12 transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`w-2 h-2 rounded-full shrink-0 ${v.dot}`} />
+                  <div>
+                    <p className="text-sm font-semibold text-white leading-tight">{v.name}</p>
+                    <p className="text-[11px] text-zinc-500 font-light mt-0.5">{v.desc}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className={`text-[10px] font-semibold tracking-[0.1em] uppercase ${v.statusCls}`}>{v.status}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-600 group-hover:text-zinc-300 transition-colors" />
+                </div>
+              </a>
+            ))}
+            <button
+              onClick={() => document.getElementById("investors")?.scrollIntoView({ behavior: "smooth" })}
+              className="w-full mt-1 text-[11px] font-medium tracking-[0.06em] text-zinc-600 hover:text-zinc-400 transition-colors py-2 text-center"
+            >
+              Investor Relations →
+            </button>
+          </motion.div>
         </div>
       </motion.div>
     </div>
 
-    {/* Bottom metrics bar */}
+    {/* Bottom stats strip */}
     <div className="absolute bottom-0 inset-x-0 border-t border-white/5">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.8 }}
-        className="max-w-7xl mx-auto px-6 md:px-14 py-6 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5"
+        transition={{ delay: 0.7, duration: 0.9 }}
+        className="max-w-7xl mx-auto px-6 md:px-14 py-0 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5"
       >
         {[
-          { label: "Ventures", value: "3" },
-          { label: "Target Market", value: "1.2M+" },
-          { label: "Domicile", value: "Delhi, IN" },
-          { label: "Stage", value: "Seed" },
+          { label: "Incorporated", value: "India" },
+          { label: "Headquarters", value: "Delhi" },
+          { label: "Addressable Market", value: "1.2M Doctors" },
+          { label: "Current Stage", value: "Seed" },
         ].map(({ label, value }) => (
-          <div key={label} className="bg-[#09090b] px-6 py-4">
-            <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-600 mb-1">{label}</p>
-            <p className="text-lg font-serif font-semibold text-white">{value}</p>
+          <div key={label} className="px-6 py-5">
+            <p className="text-[9px] font-semibold tracking-[0.22em] uppercase text-zinc-600 mb-1.5">{label}</p>
+            <p className="text-sm font-semibold text-white tracking-[-0.01em]">{value}</p>
           </div>
         ))}
       </motion.div>

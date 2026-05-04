@@ -118,139 +118,92 @@ const Navbar = () => {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 const Hero = () => (
-  <section id="hero" className="relative min-h-[100dvh] flex flex-col justify-center bg-[#09090b]">
-    <div className="max-w-7xl mx-auto px-6 md:px-14 w-full pt-28 pb-24">
+  <section id="hero" className="relative min-h-[100dvh] flex flex-col justify-between bg-[#09090b]">
+    <div className="max-w-7xl mx-auto px-6 md:px-14 w-full flex flex-col flex-1 justify-center pt-28 pb-0">
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       >
-        {/* Eyebrow rule */}
-        <div className="border-t border-white/10 pt-7 mb-14">
-          <span className="text-[10px] font-semibold tracking-[0.3em] uppercase text-zinc-500">
-            Healthcare Technology · India · Est. 2026
-          </span>
-        </div>
+        {/* Eyebrow */}
+        <p className="text-[10px] font-semibold tracking-[0.32em] uppercase text-zinc-600 mb-10">
+          Clavix Technologies · Healthcare Technology Group · India
+        </p>
 
-        {/* Main grid */}
-        <div className="grid lg:grid-cols-[1fr_1px_320px] xl:grid-cols-[1fr_1px_360px] gap-0 items-start">
+        {/* Headline — bold, confident, full-width */}
+        <h1 className="text-[2.6rem] sm:text-[3.4rem] md:text-[4.25rem] lg:text-[5rem] font-black text-white leading-[1.04] tracking-[-0.03em] mb-8 max-w-4xl">
+          Building India's medical technology infrastructure.
+        </h1>
 
-          {/* Left */}
-          <div className="lg:pr-16 xl:pr-20">
-            <h1 className="text-[2rem] sm:text-[2.4rem] md:text-[2.75rem] font-serif font-semibold text-white leading-[1.18] tracking-[-0.015em] mb-8 max-w-2xl">
-              Building India's medical<br />technology infrastructure.
-            </h1>
-            <p className="text-[15px] text-zinc-400 font-light leading-[1.85] mb-10 max-w-md">
-              Clavix Technologies is a privately held healthcare technology company headquartered in Delhi. We design, build, and operate software platforms that serve India's 1.2 million practising physicians and the institutions that employ them.
-            </p>
-            <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
-              <button
-                onClick={() => document.getElementById("ventures")?.scrollIntoView({ behavior: "smooth" })}
-                className="group inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.12em] uppercase text-white pb-px border-b border-white/40 hover:border-white transition-colors"
-              >
-                Our Ventures <ArrowRight className="w-3 h-3" />
-              </button>
-              <button
-                onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-                className="text-[11px] font-semibold tracking-[0.12em] uppercase text-zinc-500 pb-px border-b border-transparent hover:text-zinc-300 hover:border-white/20 transition-colors"
-              >
-                About
-              </button>
-              <button
-                onClick={() => document.getElementById("investors")?.scrollIntoView({ behavior: "smooth" })}
-                className="text-[11px] font-semibold tracking-[0.12em] uppercase text-zinc-500 pb-px border-b border-transparent hover:text-zinc-300 hover:border-white/20 transition-colors"
-              >
-                Investors
-              </button>
-              <button
-                onClick={() => document.getElementById("careers")?.scrollIntoView({ behavior: "smooth" })}
-                className="text-[11px] font-semibold tracking-[0.12em] uppercase text-zinc-500 pb-px border-b border-transparent hover:text-zinc-300 hover:border-white/20 transition-colors"
-              >
-                Careers
-              </button>
-            </div>
-          </div>
+        <p className="text-[16px] md:text-[17px] text-zinc-400 font-light leading-[1.8] max-w-xl mb-10">
+          We design, build, and operate the software platforms serving India's 1.2 million practising physicians and the institutions that employ them.
+        </p>
 
-          {/* Vertical rule */}
-          <div className="hidden lg:block w-px bg-white/8 self-stretch mx-14" />
-
-          {/* Right — clean portfolio index */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="pt-1 mt-12 lg:mt-0"
+        {/* CTAs */}
+        <div className="flex flex-wrap items-center gap-4 mb-16">
+          <button
+            onClick={() => document.getElementById("ventures")?.scrollIntoView({ behavior: "smooth" })}
+            className="inline-flex items-center gap-2 h-11 px-7 bg-white text-[#09090b] text-[13px] font-bold tracking-[0.02em] hover:bg-zinc-100 transition-colors rounded-sm"
           >
-            <p className="text-[9px] font-semibold tracking-[0.32em] uppercase text-zinc-600 mb-5">Portfolio</p>
-            <div>
-              {[
-                { name: "AETHEX", desc: "Medical Marketplace", status: "Live", href: "https://aethex.in" },
-                { name: "CADUS AI", desc: "Clinical Intelligence Platform", status: "Live", href: "https://aethex.in/ai-assistant" },
-                { name: "AETHEX OS", desc: "Hospital Management System", status: "In Development", href: "mailto:hello@clavix.in?subject=Aethex OS Early Access" },
-              ].map((v, i) => (
-                <a
-                  key={v.name}
-                  href={v.href}
-                  target={v.href.startsWith("http") ? "_blank" : undefined}
-                  rel="noopener noreferrer"
-                  className={`flex items-start justify-between py-4 group ${i < 2 ? "border-b border-white/6" : ""}`}
-                >
-                  <div>
-                    <p className="text-[13px] font-semibold text-white group-hover:text-zinc-300 transition-colors">{v.name}</p>
-                    <p className="text-[11px] text-zinc-600 font-light mt-0.5">{v.desc}</p>
-                  </div>
-                  <div className="flex items-center gap-1.5 pt-0.5 shrink-0 ml-4">
-                    <span className="text-[10px] text-zinc-600 font-medium">{v.status}</span>
-                    <ArrowUpRight className="w-3 h-3 text-zinc-700 group-hover:text-zinc-400 transition-colors" />
-                  </div>
-                </a>
-              ))}
-            </div>
-          </motion.div>
+            Our Companies <ArrowRight className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => document.getElementById("investors")?.scrollIntoView({ behavior: "smooth" })}
+            className="text-[13px] font-semibold text-zinc-500 hover:text-white transition-colors"
+          >
+            Investor Relations →
+          </button>
         </div>
       </motion.div>
     </div>
 
-    {/* Bottom stats bar */}
-    <div className="absolute bottom-0 inset-x-0 border-t border-white/8">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.55, duration: 0.8 }}
-        className="max-w-7xl mx-auto px-6 md:px-14 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/8"
-      >
-        {[
-          { label: "Incorporated", value: "India" },
-          { label: "Headquarters", value: "New Delhi" },
-          { label: "Addressable Market", value: "1.2M+ Physicians" },
-          { label: "Stage", value: "Seed" },
-        ].map(({ label, value }) => (
-          <div key={label} className="px-6 py-5">
-            <p className="text-[9px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-1">{label}</p>
-            <p className="text-[13px] font-medium text-zinc-200">{value}</p>
+    {/* Company tiles — full width at bottom of hero */}
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="w-full border-t border-white/8 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/8"
+    >
+      {[
+        { name: "AETHEX", tagline: "India's Medical Marketplace", status: "Live", href: "https://aethex.in" },
+        { name: "CADUS AI", tagline: "Clinical Intelligence Platform", status: "Live", href: "https://aethex.in/ai-assistant" },
+        { name: "AETHEX OS", tagline: "Hospital Management System", status: "In Development", href: "mailto:hello@clavix.in?subject=Aethex OS Early Access" },
+      ].map((v) => (
+        <a
+          key={v.name}
+          href={v.href}
+          target={v.href.startsWith("http") ? "_blank" : undefined}
+          rel="noopener noreferrer"
+          className="group flex flex-col justify-between px-8 py-7 hover:bg-white/[0.025] transition-colors"
+        >
+          <div className="flex items-center justify-between mb-8">
+            <span className={`text-[10px] font-semibold tracking-[0.18em] uppercase ${
+              v.status === "Live" ? "text-emerald-500" : "text-zinc-600"
+            }`}>{v.status}</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-700 group-hover:text-zinc-400 transition-colors" />
           </div>
-        ))}
-      </motion.div>
-    </div>
+          <div>
+            <h3 className="text-[15px] font-bold text-white mb-1 group-hover:text-zinc-200 transition-colors">{v.name}</h3>
+            <p className="text-[12px] text-zinc-600 font-light">{v.tagline}</p>
+          </div>
+        </a>
+      ))}
+    </motion.div>
   </section>
 );
 
 // ─── Philosophy ───────────────────────────────────────────────────────────────
 const Philosophy = () => (
-  <section className="py-20 md:py-28 bg-zinc-950 border-y border-white/5">
-    <div className="max-w-4xl mx-auto px-6 md:px-14">
-      <motion.div {...fade()} className="grid md:grid-cols-[120px_1fr] gap-8 md:gap-16 items-start">
-        <div className="md:pt-1">
-          <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600">Founding Principle</p>
-        </div>
-        <div>
-          <blockquote className="text-xl md:text-2xl font-serif text-zinc-200 leading-[1.55] tracking-[-0.01em] mb-6">
-            "Indian doctors deserve the same quality of medical tools and clinical intelligence as doctors anywhere in the world. We are building that future."
-          </blockquote>
-          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-zinc-600">
-            Clavix Technologies — Est. 2026
-          </p>
-        </div>
+  <section className="py-24 md:py-32 bg-zinc-950 border-y border-white/6">
+    <div className="max-w-5xl mx-auto px-6 md:px-14">
+      <motion.div {...fade()}>
+        <p className="text-[10px] font-semibold tracking-[0.3em] uppercase text-zinc-600 mb-8">Founding Principle</p>
+        <blockquote className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-[1.15] tracking-[-0.025em] mb-8 max-w-4xl">
+          "Indian doctors deserve the same quality of medical tools and clinical intelligence as doctors anywhere in the world."
+        </blockquote>
+        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-600">
+          Clavix Technologies — Est. 2026
+        </p>
       </motion.div>
     </div>
   </section>
@@ -306,69 +259,62 @@ const PORTFOLIO = [
 ];
 
 const Ventures = () => (
-  <section id="ventures" className="py-24 md:py-36 bg-[#09090b] border-t border-white/8">
+  <section id="ventures" className="py-24 md:py-32 bg-[#09090b] border-t border-white/8">
     <div className="max-w-7xl mx-auto px-6 md:px-14">
-      <motion.div {...fade()} className="grid md:grid-cols-[200px_1fr] gap-8 md:gap-16 items-start mb-16">
+      <motion.div {...fade()} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
         <div>
-          <p className="text-[9px] font-semibold tracking-[0.3em] uppercase text-zinc-600 mb-3">Portfolio</p>
-          <h2 className="text-xl font-serif font-semibold text-white leading-snug">
+          <p className="text-[10px] font-semibold tracking-[0.3em] uppercase text-zinc-600 mb-4">Our Portfolio</p>
+          <h2 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-[-0.025em]">
             Our companies
           </h2>
         </div>
-        <p className="text-sm text-zinc-500 font-light leading-relaxed max-w-lg md:pt-7">
-          Each company is independently operated with shared infrastructure, a common technology core, and a unified founding vision.
+        <p className="text-sm text-zinc-500 font-light leading-relaxed max-w-sm md:text-right">
+          Each independently operated with shared infrastructure and a unified founding vision.
         </p>
       </motion.div>
 
-      <div className="border-t border-white/8">
+      {/* 3-column product grid */}
+      <div className="grid md:grid-cols-3 gap-px bg-white/8">
         {PORTFOLIO.map((v, i) => {
           const Icon = v.icon;
           return (
             <motion.div
               key={v.name}
-              {...fade(i * 0.08)}
-              className="group border-b border-white/8"
+              {...fade(i * 0.1)}
+              className="group bg-[#09090b] hover:bg-white/[0.022] transition-colors duration-300 p-8 md:p-10 flex flex-col"
             >
-              <div className="py-10 grid md:grid-cols-[220px_1fr_160px] gap-6 md:gap-12 items-start">
-                {/* Left: identity */}
-                <div>
-                  <div className="flex items-center gap-3 mb-1.5">
-                    <h3 className="text-base font-semibold text-white tracking-wide">{v.name}</h3>
-                    <span className={`text-[9px] font-semibold tracking-[0.1em] uppercase ${
-                      v.status === "Live" ? "text-emerald-500" : "text-zinc-500"
-                    }`}>
-                      {v.status}
-                    </span>
-                  </div>
-                  <p className="text-xs text-zinc-600 font-medium">{v.tagline}</p>
-                  <p className="mt-2 text-[10px] text-zinc-700 font-semibold tracking-[0.1em] uppercase">{v.model}</p>
-                </div>
+              <div className="flex items-center justify-between mb-10">
+                <span className={`text-[10px] font-semibold tracking-[0.2em] uppercase ${
+                  v.status === "Live" ? "text-emerald-500" : "text-zinc-600"
+                }`}>{v.status}</span>
+                <Icon className="w-4 h-4 text-zinc-700 group-hover:text-zinc-500 transition-colors" />
+              </div>
 
-                {/* Middle: description + features */}
-                <div>
-                  <p className="text-sm text-zinc-400 font-light leading-relaxed mb-5">{v.description}</p>
-                  <div className="grid sm:grid-cols-2 gap-x-8 gap-y-1.5">
-                    {v.features.map((f) => (
-                      <div key={f} className="flex items-center gap-2 text-xs text-zinc-600 font-light">
-                        <span className="w-3 h-px bg-white/20 shrink-0" />
-                        {f}
-                      </div>
-                    ))}
-                  </div>
+              <div className="mb-auto">
+                <h3 className="text-2xl font-black text-white mb-1.5 tracking-[-0.02em]">{v.name}</h3>
+                <p className="text-[11px] text-zinc-600 font-medium tracking-[0.04em] mb-1">{v.tagline}</p>
+                <p className="text-[10px] text-zinc-700 font-semibold tracking-[0.1em] uppercase mb-6">{v.model}</p>
+                <p className="text-[13px] text-zinc-400 font-light leading-[1.8] mb-7">{v.description}</p>
+                <div className="space-y-2">
+                  {v.features.map((f) => (
+                    <div key={f} className="flex items-center gap-2.5 text-[11px] text-zinc-600 font-light">
+                      <span className="w-3 h-px bg-white/15 shrink-0" />
+                      {f}
+                    </div>
+                  ))}
                 </div>
+              </div>
 
-                {/* Right: link */}
-                <div className="flex md:justify-end md:pt-0.5">
-                  <a
-                    href={v.href}
-                    target={v.href.startsWith("http") ? "_blank" : undefined}
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.12em] uppercase text-zinc-500 hover:text-white pb-px border-b border-transparent hover:border-white/30 transition-all"
-                  >
-                    {v.status === "Coming Soon" ? "Early Access" : "Visit"}
-                    <ArrowUpRight className="w-3 h-3" />
-                  </a>
-                </div>
+              <div className="mt-8 pt-6 border-t border-white/6">
+                <a
+                  href={v.href}
+                  target={v.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-zinc-500 hover:text-white transition-colors"
+                >
+                  {v.status === "Coming Soon" ? "Request early access" : `Visit ${v.name}`}
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
               </div>
             </motion.div>
           );
@@ -386,8 +332,8 @@ const About = () => (
 
         {/* Left: narrative */}
         <motion.div {...fade()} className="lg:pr-16">
-          <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-4">Who We Are</p>
-          <h2 className="text-3xl md:text-[2.6rem] font-serif text-white leading-tight mb-8">
+          <p className="text-[10px] font-semibold tracking-[0.3em] uppercase text-zinc-600 mb-4">Who We Are</p>
+          <h2 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-[-0.025em] mb-8">
             A focused technology group for Indian healthcare.
           </h2>
           <p className="text-base text-zinc-400 font-light leading-relaxed mb-6">
@@ -478,8 +424,8 @@ const Investors = () => (
       <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
 
         <motion.div {...fade()}>
-          <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-4">Investor Relations</p>
-          <h2 className="text-3xl md:text-[2.6rem] font-serif text-white leading-tight mb-8">
+          <p className="text-[10px] font-semibold tracking-[0.3em] uppercase text-zinc-600 mb-4">Investor Relations</p>
+          <h2 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-[-0.025em] mb-8">
             Partnering with<br />the right capital.
           </h2>
           <p className="text-base text-zinc-400 font-light leading-relaxed mb-5">
@@ -562,8 +508,8 @@ const CareersSection = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-14">
         <motion.div {...fade()} className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div>
-            <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-4">Careers</p>
-            <h2 className="text-3xl md:text-[2.6rem] font-serif text-white leading-tight">
+            <p className="text-[10px] font-semibold tracking-[0.3em] uppercase text-zinc-600 mb-4">Careers</p>
+            <h2 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-[-0.025em]">
               Open positions
             </h2>
           </div>
@@ -638,8 +584,8 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
 
           <motion.div {...fade()}>
-            <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-4">Get in Touch</p>
-            <h2 className="text-3xl md:text-[2.6rem] font-serif text-white leading-tight mb-6">
+            <p className="text-[10px] font-semibold tracking-[0.3em] uppercase text-zinc-600 mb-4">Get in Touch</p>
+            <h2 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-[-0.025em] mb-6">
               Contact
             </h2>
             <p className="text-base text-zinc-400 font-light leading-relaxed mb-12">

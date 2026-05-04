@@ -610,7 +610,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          <motion.div {...fade(0.15)}>
+          <motion.div>
             {sent ? (
               <div className="h-full flex flex-col items-center justify-center text-center gap-4 py-20">
                 <div className="w-14 h-14 rounded-full border border-blue-500/30 bg-blue-500/8 flex items-center justify-center mb-4">

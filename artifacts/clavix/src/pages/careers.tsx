@@ -502,7 +502,6 @@ const ApplicationForm = ({ job, open, onClose }: ApplicationFormProps) => {
 
 const JobCard = ({ job, defaultOpen = false }: { job: (typeof JOBS)[0]; defaultOpen?: boolean }) => {
   const [expanded, setExpanded] = useState(defaultOpen);
-  const [applyOpen, setApplyOpen] = useState(false);
   const Icon = job.icon;
   const c = colorMap[job.color];
 
@@ -651,12 +650,13 @@ const JobCard = ({ job, defaultOpen = false }: { job: (typeof JOBS)[0]; defaultO
                       </div>
                     </div>
 
-                    <Button
-                      onClick={() => setApplyOpen(true)}
-                      className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium shadow-[0_0_20px_rgba(37,99,235,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] transition-all"
-                    >
-                      Apply Now <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
+                    <Link href={`/careers/apply/${job.id}`}>
+                      <Button
+                        className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium shadow-[0_0_20px_rgba(37,99,235,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] transition-all"
+                      >
+                        Apply Now <ArrowRight className="ml-2 w-4 h-4" />
+                      </Button>
+                    </Link>
                     <p className="text-[11px] text-zinc-600 text-center">We respond within 5–7 business days</p>
                   </div>
                 </div>
@@ -665,15 +665,11 @@ const JobCard = ({ job, defaultOpen = false }: { job: (typeof JOBS)[0]; defaultO
           )}
         </AnimatePresence>
       </motion.div>
-
-      <ApplicationForm job={job} open={applyOpen} onClose={() => setApplyOpen(false)} />
     </>
   );
 };
 
 export default function Careers() {
-  const [applyOpen, setApplyOpen] = useState(false);
-  const [selectedJob, setSelectedJob] = useState(JOBS[0]);
 
   return (
     <main className="bg-[#09090b] min-h-screen text-white font-sans selection:bg-blue-500/30">

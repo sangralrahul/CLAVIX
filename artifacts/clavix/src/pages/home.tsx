@@ -1,74 +1,86 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, Menu, X, CheckCircle2, ChevronDown, BrainCircuit, ExternalLink, Database, Cpu, ShieldCheck, BarChart3, ShoppingBag, Linkedin, Twitter, Mail, MapPin, Building2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowRight, Menu, X, ExternalLink, BrainCircuit,
+  ShoppingBag, Database, Linkedin, Twitter, Mail,
+  ArrowUpRight, ChevronRight
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
+// ─── Utility ──────────────────────────────────────────────────────────────────
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
+});
+
+// ─── Navbar ───────────────────────────────────────────────────────────────────
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const fn = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   const scrollTo = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMobileOpen(false);
   };
+
+  const links = [
+    { label: "Ventures", id: "ventures" },
+    { label: "About", id: "about" },
+    { label: "Investors", id: "investors" },
+    { label: "Careers", id: "careers" },
+  ];
 
   return (
     <motion.nav
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.6 }}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#09090b]/90 backdrop-blur-xl border-b border-white/5 py-4 shadow-[0_1px_30px_rgba(0,0,0,0.5)]"
-          : "bg-gradient-to-b from-black/60 to-transparent border-b border-transparent py-6"
+          ? "bg-[#09090b]/96 backdrop-blur-2xl border-b border-white/6"
+          : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-16 flex items-center justify-between">
-        <div className="flex items-center gap-1 cursor-pointer" onClick={() => scrollTo("hero")} data-testid="nav-logo">
-          <span className="text-xl font-bold tracking-[0.15em] text-white font-serif relative">
-            CLAVIX
-            <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-blue-600 rounded-full opacity-50"></span>
-          </span>
-        </div>
+      <div className="max-w-7xl mx-auto px-6 md:px-14 h-18 flex items-center justify-between py-5">
+        <button onClick={() => scrollTo("hero")} className="flex items-center gap-3 group">
+          <span className="text-[17px] font-bold tracking-[0.18em] text-white font-serif">CLAVIX</span>
+          <span className="hidden sm:block text-[10px] text-zinc-600 tracking-[0.2em] uppercase font-medium border-l border-white/10 pl-3 pt-px">Technologies</span>
+        </button>
 
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-          {["ventures", "about", "investors", "careers"].map((item) => (
+        <div className="hidden md:flex items-center gap-10">
+          {links.map(({ label, id }) => (
             <button
-              key={item}
-              onClick={() => scrollTo(item)}
-              className="hover:text-white transition-colors uppercase tracking-widest text-[13px] font-sans"
-              data-testid={`nav-link-${item}`}
+              key={id}
+              onClick={() => scrollTo(id)}
+              className="text-[12px] font-medium tracking-[0.14em] uppercase text-zinc-500 hover:text-white transition-colors duration-200"
             >
-              {item}
+              {label}
             </button>
           ))}
         </div>
 
-        <div className="hidden md:block">
-          <Button 
-            variant="outline" 
-            className="border-white/10 bg-white/5 hover:bg-white/10 hover:text-white rounded-full px-6 text-sm font-sans"
+        <div className="hidden md:flex items-center gap-3">
+          <button
             onClick={() => scrollTo("contact")}
-            data-testid="nav-contact-btn"
+            className="text-[12px] font-medium tracking-[0.08em] text-white border border-white/12 hover:border-white/25 hover:bg-white/5 transition-all px-5 py-2.5 rounded-full"
           >
-            Get in Touch
-          </Button>
+            Contact
+          </button>
         </div>
 
-        <button className="md:hidden text-white" onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? <X /> : <Menu />}
+        <button className="md:hidden text-white p-1" onClick={() => setMobileOpen(!mobileOpen)}>
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
@@ -80,23 +92,22 @@ const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-[#09090b] border-b border-white/5 overflow-hidden"
           >
-            <div className="px-6 py-8 flex flex-col gap-6">
-              {["ventures", "about", "investors", "careers"].map((item) => (
+            <div className="px-6 py-8 flex flex-col gap-7">
+              {links.map(({ label, id }) => (
                 <button
-                  key={item}
-                  onClick={() => scrollTo(item)}
-                  className="text-left text-zinc-400 hover:text-white transition-colors uppercase tracking-widest text-sm font-medium"
+                  key={id}
+                  onClick={() => scrollTo(id)}
+                  className="text-left text-sm font-medium tracking-[0.12em] uppercase text-zinc-400 hover:text-white transition-colors"
                 >
-                  {item}
+                  {label}
                 </button>
               ))}
-              <Button 
-                variant="outline" 
-                className="w-full border-white/10 bg-white/5 hover:bg-white/10 text-white rounded-full"
+              <button
                 onClick={() => scrollTo("contact")}
+                className="text-sm font-medium text-white border border-white/12 rounded-full py-3 px-6 text-center hover:bg-white/5 transition-all"
               >
-                Get in Touch
-              </Button>
+                Contact
+              </button>
             </div>
           </motion.div>
         )}
@@ -105,829 +116,685 @@ const Navbar = () => {
   );
 };
 
-const Hero = () => {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
-
-  return (
-    <section id="hero" className="relative min-h-[100dvh] flex items-center pt-20 overflow-hidden bg-[#09090b]">
-      {/* Background Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[40rem] h-[40rem] bg-blue-600/10 rounded-full blur-[120px] -z-10 mix-blend-screen opacity-60" />
-      <div className="absolute top-1/3 right-1/4 w-[35rem] h-[35rem] bg-cyan-400/5 rounded-full blur-[100px] -z-10 mix-blend-screen opacity-50" />
-      <div className="absolute bottom-1/4 left-1/2 w-[45rem] h-[45rem] bg-violet-600/5 rounded-full blur-[150px] -z-10 mix-blend-screen opacity-40" />
-
-      <div className="max-w-7xl mx-auto px-6 md:px-16 w-full relative z-10 grid lg:grid-cols-[55%_45%] gap-12 items-center">
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-start"
-        >
-          <div className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500 mb-8">
-            Healthcare Technology · Est. 2026
-          </div>
-          
-          <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-bold font-serif text-white leading-[1.05] tracking-tight mb-8">
-            Powering the<br/>
-            next generation<br/>
-            of <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Indian healthcare.</span>
-          </h1>
-          
-          <p className="text-base md:text-lg text-zinc-400 font-light max-w-md leading-relaxed mb-10">
-            To make world-class medical tools and intelligence accessible to every doctor in India.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-12">
-            <Button 
-              className="rounded-full px-8 h-12 text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium border-0 transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]"
-              onClick={() => document.getElementById("ventures")?.scrollIntoView({ behavior: "smooth" })}
-              data-testid="hero-explore-btn"
-            >
-              Explore Ventures
-            </Button>
-            <Button 
-              variant="ghost" 
-              className="rounded-full px-8 h-12 text-sm hover:bg-white/5 text-zinc-300 hover:text-white border border-transparent hover:border-white/10 transition-all group"
-              onClick={() => document.getElementById("investors")?.scrollIntoView({ behavior: "smooth" })}
-              data-testid="hero-investor-btn"
-            >
-              Investor Relations <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
-
-          <div className="flex items-center gap-6 text-sm font-medium text-zinc-500 tracking-wider">
-            <span>3 Ventures Built</span>
-            <span className="w-1 h-1 bg-zinc-700 rounded-full"></span>
-            <span>1.2M+ Doctors</span>
-            <span className="w-1 h-1 bg-zinc-700 rounded-full"></span>
-            <span>Delhi, India</span>
-          </div>
-        </motion.div>
-
-        <motion.div 
-          className="relative hidden lg:block"
-          style={{ y: y1, opacity }}
-        >
-          <div className="relative rounded-3xl overflow-hidden aspect-[3/4] border border-white/10 shadow-[0_0_50px_rgba(37,99,235,0.15)]">
-            <img 
-              src="/images/hero-doctor.png" 
-              alt="Indian doctor using AI interface" 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent opacity-80" />
-            
-            {/* Floating Card */}
-            <div className="absolute bottom-10 left-10 right-10 bg-white/10 backdrop-blur-xl border border-white/20 p-5 rounded-2xl flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-                  <BrainCircuit className="w-5 h-5 text-blue-400" />
-                </div>
-                <div>
-                  <div className="text-white font-medium font-serif text-lg">CADUS AI</div>
-                  <div className="text-zinc-400 text-xs">Processing diagnostics...</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/30">
-                <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                <span className="text-[10px] uppercase tracking-wider text-blue-300 font-bold">Live</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-      </div>
-
-      <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-        onClick={() => document.getElementById("ticker")?.scrollIntoView({ behavior: "smooth" })}
-      >
-        <span className="text-[10px] uppercase tracking-[0.25em] text-zinc-600">Scroll</span>
-        <ChevronDown className="w-4 h-4 text-zinc-600" />
-      </motion.div>
-    </section>
-  );
-};
-
-const Ticker = () => {
-  const items = [
-    "AETHEX · India's Medical Marketplace",
-    "CADUS AI · Clinical Intelligence Platform",
-    "AETHEX OS · Coming 2025",
-    "Delhi, India · Est. 2026",
-    "1.2M+ Target Doctors",
-    "₹20 Cr Pre-Money Valuation",
-    "Seed Round Open",
-  ];
-
-  return (
-    <div id="ticker" className="border-y border-white/5 bg-white/[0.015] overflow-hidden py-4 relative">
-      <div className="flex animate-marquee whitespace-nowrap">
-        {[...items, ...items].map((item, i) => (
-          <span key={i} className="inline-flex items-center gap-4 mx-8 text-xs font-medium text-zinc-500 tracking-[0.15em] uppercase">
-            <span className="w-1 h-1 rounded-full bg-zinc-600 inline-block"></span>
-            {item}
-          </span>
-        ))}
-      </div>
+// ─── Hero ─────────────────────────────────────────────────────────────────────
+const Hero = () => (
+  <section id="hero" className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-[#09090b]">
+    {/* Subtle radial glow */}
+    <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-blue-700/8 rounded-full blur-[160px]" />
     </div>
-  );
-};
 
-const Ventures = () => {
-  return (
-    <section id="ventures" className="py-28 md:py-40 relative bg-[#09090b]">
-      <div className="max-w-7xl mx-auto px-6 md:px-16">
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="mb-20 md:mb-24"
-        >
-          <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500 mb-6">Our Portfolio</h2>
-          <p className="text-4xl md:text-5xl font-serif text-white max-w-3xl leading-tight">
-            Building the infrastructure for modern medical practice.
-          </p>
-        </motion.div>
+    {/* Fine grid overlay */}
+    <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
+      style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px)", backgroundSize: "80px 80px" }}
+    />
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* AETHEX */}
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="group relative flex flex-col justify-between p-10 md:p-12 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] hover:border-cyan-500/30 transition-all duration-500 overflow-hidden border-t-2 border-t-cyan-500/50"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-cyan-500/10 transition-all duration-700" />
-            
-            <div>
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20">
-                    <ShoppingBag className="w-5 h-5 text-cyan-400" />
-                  </div>
-                  <h3 className="text-2xl font-serif text-white tracking-wide">AETHEX</h3>
-                </div>
-                <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-[10px] font-bold text-cyan-400 border border-cyan-500/20 uppercase tracking-[0.1em]">Live</span>
-              </div>
-              
-              <h4 className="text-xl font-medium text-white mb-4 font-sans">India's Medical Marketplace</h4>
-              <p className="text-zinc-400 leading-relaxed mb-8 font-light">
-                Surgical instruments, diagnostics, scrubs, stethoscopes, portable devices, NEET-PG study materials.
-              </p>
-
-              <ul className="space-y-4 mb-12">
-                {["Medical Shop", "Study Hub", "GST Invoice", "Fast Delivery"].map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm text-zinc-300 font-light">
-                    <CheckCircle2 className="w-4 h-4 text-cyan-500" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <a 
-              href="https://aethex.in" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-white group/btn hover:text-cyan-400 transition-colors"
-            >
-              Visit Aethex 
-              <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
-            </a>
-          </motion.div>
-
-          {/* CADUS AI */}
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="group relative flex flex-col justify-between p-10 md:p-12 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] hover:border-blue-500/30 transition-all duration-500 overflow-hidden lg:mt-12 lg:-mb-12 border-t-2 border-t-blue-500/50"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-500/10 transition-all duration-700" />
-            
-            <div>
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
-                    <BrainCircuit className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <h3 className="text-2xl font-serif text-white tracking-wide">CADUS AI</h3>
-                </div>
-                <span className="px-3 py-1 rounded-full bg-blue-500/10 text-[10px] font-bold text-blue-400 border border-blue-500/20 uppercase tracking-[0.1em]">Live</span>
-              </div>
-              
-              <h4 className="text-xl font-medium text-white mb-4 font-sans">Clinical AI Assistant</h4>
-              <p className="text-zinc-400 leading-relaxed mb-8 font-light">
-                Diagnosis generation, lab interpretation, drug interactions, voice input, image analysis, PDF export.
-              </p>
-
-              <ul className="space-y-4 mb-12">
-                {["Tiers: Minor/Medius/Magnus", "Clinical Diagnosis", "Lab Interpretation", "Multimodal Analysis"].map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm text-zinc-300 font-light">
-                    <CheckCircle2 className="w-4 h-4 text-blue-500" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <a 
-              href="https://aethex.in/ai-assistant" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-white group/btn hover:text-blue-400 transition-colors"
-            >
-              Discover CADUS AI 
-              <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
-            </a>
-          </motion.div>
+    <div className="max-w-7xl mx-auto px-6 md:px-14 w-full relative z-10 pt-32 pb-24">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="flex items-center gap-3 mb-10">
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+          <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-500">
+            Healthcare Technology Group · Est. 2026
+          </span>
         </div>
 
-        {/* AETHEX OS */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.9 }}
-          className="mt-12 lg:mt-32 group relative rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] hover:border-violet-500/30 transition-all duration-700"
-        >
-          {/* Violet gradient background strip */}
-          <div className="absolute inset-0 bg-gradient-to-r from-violet-900/10 via-transparent to-transparent pointer-events-none" />
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/5 rounded-full blur-[120px] pointer-events-none group-hover:bg-violet-600/10 transition-all duration-700" />
+        <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[6.5rem] font-serif font-bold text-white leading-[1.02] tracking-tight max-w-5xl mb-10">
+          Powering the next<br />
+          generation of{" "}
+          <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400">
+            Indian healthcare.
+          </span>
+        </h1>
 
-          <div className="relative p-10 md:p-16 grid lg:grid-cols-[1.2fr_1fr] gap-16 items-center">
-            <div>
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
-                  <Database className="w-6 h-6 text-violet-400" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-4">
-                    <h3 className="text-2xl font-serif text-white tracking-wide">AETHEX OS</h3>
-                    <span className="px-3 py-1 rounded-full bg-violet-500/10 text-[10px] font-bold text-violet-300 border border-violet-500/25 uppercase tracking-[0.1em] animate-pulse">
-                      Coming Soon
+        <p className="text-lg md:text-xl text-zinc-400 font-light max-w-xl leading-relaxed mb-14 tracking-[-0.01em]">
+          We build, own, and operate the technology infrastructure that serves India's 1.2 million doctors and the healthcare institutions that employ them.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-start gap-4">
+          <button
+            onClick={() => document.getElementById("ventures")?.scrollIntoView({ behavior: "smooth" })}
+            className="inline-flex items-center gap-2.5 h-13 px-8 py-3.5 rounded-full bg-white text-[#09090b] text-sm font-semibold tracking-[0.03em] hover:bg-zinc-100 transition-colors shadow-[0_0_40px_rgba(255,255,255,0.08)]"
+          >
+            Our Ventures <ArrowRight className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => document.getElementById("investors")?.scrollIntoView({ behavior: "smooth" })}
+            className="inline-flex items-center gap-2.5 h-13 px-8 py-3.5 rounded-full border border-white/12 text-white text-sm font-medium tracking-[0.03em] hover:border-white/25 hover:bg-white/5 transition-all"
+          >
+            Investor Relations
+          </button>
+        </div>
+      </motion.div>
+    </div>
+
+    {/* Bottom metrics bar */}
+    <div className="absolute bottom-0 inset-x-0 border-t border-white/5">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8, duration: 0.8 }}
+        className="max-w-7xl mx-auto px-6 md:px-14 py-6 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5"
+      >
+        {[
+          { label: "Ventures", value: "3" },
+          { label: "Target Market", value: "1.2M+" },
+          { label: "Domicile", value: "Delhi, IN" },
+          { label: "Stage", value: "Seed" },
+        ].map(({ label, value }) => (
+          <div key={label} className="bg-[#09090b] px-6 py-4">
+            <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-600 mb-1">{label}</p>
+            <p className="text-lg font-serif font-semibold text-white">{value}</p>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  </section>
+);
+
+// ─── Philosophy ───────────────────────────────────────────────────────────────
+const Philosophy = () => (
+  <section className="py-28 md:py-40 bg-zinc-950 border-y border-white/5">
+    <div className="max-w-5xl mx-auto px-6 md:px-14 text-center">
+      <motion.div {...fade()}>
+        <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-10">
+          Our Thesis
+        </p>
+        <blockquote className="text-3xl md:text-5xl font-serif text-white leading-[1.2] tracking-[-0.02em] mb-12">
+          "Indian doctors deserve the same quality of medical tools and clinical intelligence as doctors anywhere in the world. We are building that future."
+        </blockquote>
+        <div className="flex items-center justify-center gap-4 text-xs text-zinc-600 font-medium tracking-[0.12em] uppercase">
+          <div className="w-8 h-px bg-white/15" />
+          <span>Clavix Technologies · Founding Principle</span>
+          <div className="w-8 h-px bg-white/15" />
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
+// ─── Ventures ─────────────────────────────────────────────────────────────────
+const PORTFOLIO = [
+  {
+    name: "AETHEX",
+    tagline: "India's Medical Marketplace",
+    description:
+      "End-to-end procurement for India's medical community. Surgical instruments, diagnostics, pharma consumables, NEET-PG study material, GST-compliant invoicing, and fast delivery — all in one platform.",
+    status: "Live",
+    statusColor: "text-emerald-400 bg-emerald-400/8 border-emerald-400/20",
+    href: "https://aethex.in",
+    accent: "border-cyan-500/30 hover:border-cyan-500/60",
+    dot: "bg-cyan-400",
+    model: "B2C · B2B",
+    icon: ShoppingBag,
+    iconColor: "text-cyan-400 bg-cyan-500/8 border-cyan-500/15",
+    features: ["Medical Shop & Pharmacy", "Study Hub for PG Aspirants", "GST Invoice Generation", "Pan-India Delivery"],
+  },
+  {
+    name: "CADUS AI",
+    tagline: "Clinical Intelligence Platform",
+    description:
+      "AI-powered clinical decision support for practising physicians. Differential diagnosis, lab interpretation, drug interactions, voice input, multimodal image analysis, and PDF export — in three precision tiers.",
+    status: "Live",
+    statusColor: "text-emerald-400 bg-emerald-400/8 border-emerald-400/20",
+    href: "https://aethex.in/ai-assistant",
+    accent: "border-blue-500/30 hover:border-blue-500/60",
+    dot: "bg-blue-400",
+    model: "SaaS · B2B",
+    icon: BrainCircuit,
+    iconColor: "text-blue-400 bg-blue-500/8 border-blue-500/15",
+    features: ["Minor / Medius / Magnus Tiers", "Clinical Diagnosis Engine", "Lab & Radiology Interpretation", "Multimodal AI Analysis"],
+  },
+  {
+    name: "AETHEX OS",
+    tagline: "Hospital Management System",
+    description:
+      "An AI-native operating layer for healthcare institutions — unifying patient records, clinical workflows, pharmacy, diagnostics, and administrative intelligence into one seamless system.",
+    status: "Coming Soon",
+    statusColor: "text-violet-400 bg-violet-400/8 border-violet-400/20",
+    href: "mailto:hello@clavix.in?subject=Aethex OS Early Access",
+    accent: "border-violet-500/30 hover:border-violet-500/60",
+    dot: "bg-violet-400",
+    model: "B2B · SaaS",
+    icon: Database,
+    iconColor: "text-violet-400 bg-violet-500/8 border-violet-500/15",
+    features: ["Unified Patient Records", "Clinical Workflow Engine", "Pharmacy & Diagnostics", "Admin Intelligence Dashboard"],
+  },
+];
+
+const Ventures = () => (
+  <section id="ventures" className="py-28 md:py-40 bg-[#09090b]">
+    <div className="max-w-7xl mx-auto px-6 md:px-14">
+      <motion.div {...fade()} className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+        <div>
+          <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-5">Our Portfolio</p>
+          <h2 className="text-4xl md:text-5xl font-serif text-white leading-tight max-w-2xl">
+            Three ventures.<br />One shared mission.
+          </h2>
+        </div>
+        <p className="text-sm text-zinc-500 font-light leading-relaxed max-w-xs md:text-right">
+          Each company is independently operated with shared infrastructure and a unified founding vision.
+        </p>
+      </motion.div>
+
+      <div className="space-y-5">
+        {PORTFOLIO.map((v, i) => {
+          const Icon = v.icon;
+          return (
+            <motion.div
+              key={v.name}
+              {...fade(i * 0.1)}
+              className={`group relative rounded-2xl border bg-[#0d0d12] transition-all duration-500 overflow-hidden ${v.accent}`}
+            >
+              <div className="p-8 md:p-10 grid md:grid-cols-[1fr_2fr_auto] gap-8 md:gap-12 items-start">
+                {/* Left: identity */}
+                <div className="flex items-start gap-4">
+                  <div className={`w-11 h-11 rounded-xl border flex items-center justify-center shrink-0 ${v.iconColor}`}>
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-3 mb-1.5">
+                      <h3 className="text-lg font-serif font-semibold text-white tracking-wide">{v.name}</h3>
+                      <span className={`text-[9px] font-bold tracking-[0.12em] uppercase px-2 py-0.5 rounded-full border ${v.statusColor}`}>
+                        {v.status}
+                      </span>
+                    </div>
+                    <p className="text-xs font-medium text-zinc-500 tracking-[0.06em]">{v.tagline}</p>
+                    <span className="mt-2 inline-block text-[10px] text-zinc-700 font-medium tracking-[0.12em] uppercase border border-white/6 rounded-full px-2.5 py-1">
+                      {v.model}
                     </span>
                   </div>
-                  <p className="text-xs text-violet-400/80 mt-1 tracking-widest uppercase font-medium">Hospital Management</p>
+                </div>
+
+                {/* Middle: description + features */}
+                <div>
+                  <p className="text-sm text-zinc-400 font-light leading-relaxed mb-5">{v.description}</p>
+                  <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+                    {v.features.map((f) => (
+                      <div key={f} className="flex items-center gap-2.5 text-xs text-zinc-500">
+                        <span className={`w-1 h-1 rounded-full shrink-0 ${v.dot}`} />
+                        {f}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right: link */}
+                <div className="flex md:items-start md:justify-end">
+                  <a
+                    href={v.href}
+                    target={v.href.startsWith("http") ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.08em] uppercase text-zinc-400 hover:text-white border border-white/8 hover:border-white/20 rounded-full px-4 py-2.5 transition-all group-hover:border-white/15"
+                  >
+                    {v.status === "Coming Soon" ? "Early Access" : "Visit"}
+                    <ArrowUpRight className="w-3 h-3" />
+                  </a>
                 </div>
               </div>
 
-              <h4 className="text-2xl font-serif text-white mb-4 leading-snug">
-                AI-native Hospital Management System.
-              </h4>
-              <p className="text-zinc-400 leading-relaxed mb-10 font-light">
-                Unifies patient records, clinical workflows, pharmacy, diagnostics, admin intelligence into a seamless operating layer.
-              </p>
+              {/* Bottom accent line */}
+              <div className={`h-px mx-10 bg-gradient-to-r from-transparent via-white/8 to-transparent`} />
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+);
 
-              <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6">
-                {[
-                  { icon: Cpu, title: "Clinical Workflows" },
-                  { icon: Database, title: "Patient Records" },
-                  { icon: ShieldCheck, title: "Pharmacy & Diagnostics" },
-                  { icon: BarChart3, title: "Admin Intelligence" }
-                ].map(({ icon: Icon, title }, i) => (
-                  <div key={i} className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0">
-                      <Icon className="w-4 h-4 text-violet-300" />
-                    </div>
-                    <p className="text-sm font-medium text-white">{title}</p>
-                  </div>
-                ))}
-              </div>
+// ─── About ────────────────────────────────────────────────────────────────────
+const About = () => (
+  <section id="about" className="py-28 md:py-40 bg-zinc-950 border-t border-white/5">
+    <div className="max-w-7xl mx-auto px-6 md:px-14">
+      <div className="grid lg:grid-cols-[1fr_1px_1fr] gap-16 md:gap-0 items-start">
 
-              <div className="mt-12 pt-8 border-t border-white/10">
-                <a
-                  href="mailto:hello@clavix.in?subject=Aethex OS Early Access"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-violet-300 hover:text-violet-100 transition-colors group/os"
-                >
-                  Request Early Access
-                  <ArrowRight className="w-4 h-4 group-hover/os:translate-x-1 transition-transform" />
-                </a>
-              </div>
+        {/* Left: narrative */}
+        <motion.div {...fade()} className="lg:pr-16">
+          <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-6">Who We Are</p>
+          <h2 className="text-4xl md:text-5xl font-serif text-white leading-tight mb-10">
+            A focused technology group for Indian healthcare.
+          </h2>
+          <p className="text-base text-zinc-400 font-light leading-relaxed mb-6">
+            Clavix Technologies is a privately held healthcare technology company headquartered in Delhi, India. We design, build, and operate technology products that address the most persistent inefficiencies in India's healthcare system.
+          </p>
+          <p className="text-base text-zinc-400 font-light leading-relaxed mb-6">
+            Our model is that of a focused operating company — not a passive holding group. Every venture we launch is built and run by our founding team, with shared infrastructure, a common technology core, and an unrelenting commitment to quality.
+          </p>
+          <p className="text-base text-zinc-400 font-light leading-relaxed mb-12">
+            We do not chase scale for its own sake. We pursue durable relevance in the hands of doctors who trust our software with critical decisions.
+          </p>
+          <div className="flex flex-col gap-2 text-sm text-zinc-500 font-medium">
+            <div className="flex items-center gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-white/25" />
+              Founded in Delhi · 2026
             </div>
-
-            <div className="hidden lg:flex items-center justify-center h-full">
-              <div className="relative">
-                <div className="text-[12rem] font-serif font-bold text-transparent bg-clip-text bg-gradient-to-b from-violet-400/20 to-transparent leading-none opacity-50">
-                  OS
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center flex-col gap-4">
-                  <div className="px-6 py-3 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl text-sm font-medium text-white translate-x-12 -translate-y-8 rotate-3">
-                    Intelligent Routing
-                  </div>
-                  <div className="px-6 py-3 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl text-sm font-medium text-white -translate-x-8 translate-y-4 -rotate-2">
-                    Predictive Care
-                  </div>
-                </div>
-              </div>
+            <div className="flex items-center gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-white/25" />
+              Incorporated in India
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-white/25" />
+              Focus: Medical Technology
             </div>
           </div>
         </motion.div>
-      </div>
-    </section>
-  );
-};
 
-const About = () => {
-  return (
-    <section id="about" className="py-28 md:py-40 relative bg-[#09090b]">
-      {/* Full bleed team banner */}
-      <div className="absolute top-0 inset-x-0 h-64 md:h-96 overflow-hidden border-b border-white/5">
-        <img 
-          src="/images/team-office.png" 
-          alt="Clavix Team in Delhi" 
-          className="w-full h-full object-cover opacity-30"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#09090b]/80 to-[#09090b]" />
-      </div>
+        {/* Divider */}
+        <div className="hidden lg:block w-px bg-white/6 self-stretch mx-4" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-16 relative z-10 pt-32 md:pt-48">
-        <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500 mb-6">Who We Are</h2>
-            <h3 className="text-4xl md:text-5xl font-serif text-white mb-10 leading-tight">
-              A quiet force in Indian healthcare technology.
-            </h3>
-            <p className="text-lg text-zinc-400 mb-6 font-light leading-relaxed">
-              Founded in India and for India, Clavix Technologies was built on a singular premise: Indian doctors deserve world-class software and infrastructure. We don't chase trends; we solve systemic inefficiencies in medical procurement and clinical decision-making.
-            </p>
-            <p className="text-lg text-zinc-400 mb-10 font-light leading-relaxed">
-              We operate with understated authority and precise engineering. Our products speak for themselves in the hands of the medical professionals who rely on them daily.
-            </p>
-            
-            <div className="h-px w-16 bg-white/20 mb-8" />
-            <p className="text-sm font-medium tracking-widest uppercase text-white">Founded in Delhi · 2026</p>
-          </motion.div>
+        {/* Right: values + numbers */}
+        <motion.div {...fade(0.15)} className="lg:pl-16 space-y-14">
+          <div>
+            <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-8">Operating Principles</p>
+            <div className="space-y-8">
+              {[
+                {
+                  title: "Precision over velocity",
+                  body: "We move thoughtfully. Medical software that fails a doctor fails their patient. We verify carefully before we ship.",
+                },
+                {
+                  title: "India-native, globally competitive",
+                  body: "Every product is designed for Indian healthcare realities: regulatory context, language, workflows, and economics.",
+                },
+                {
+                  title: "Ownership across the full stack",
+                  body: "We own the product, the engineering, the clinical content, and the distribution. No dependencies, no excuses.",
+                },
+              ].map(({ title, body }) => (
+                <div key={title} className="flex gap-5">
+                  <div className="w-px bg-white/8 shrink-0 mt-1" />
+                  <div>
+                    <h4 className="text-sm font-semibold text-white mb-2">{title}</h4>
+                    <p className="text-sm text-zinc-500 font-light leading-relaxed">{body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 gap-6"
-          >
+          <div className="grid grid-cols-2 gap-4">
             {[
-              { label: "Founded", value: "2026", desc: "Delhi, India" },
-              { label: "Ventures", value: "03", desc: "2 Live + 1 Coming" },
-              { label: "Focus", value: "India", desc: "First Market" },
-              { label: "Model", value: "B2B + B2C", desc: "Medical Sector" }
-            ].map((stat, i) => (
-              <div key={i} className="p-8 md:p-10 bg-[rgba(255,255,255,0.02)] border border-white/5 rounded-2xl text-center backdrop-blur-sm">
-                <div className="text-sm font-medium text-zinc-500 uppercase tracking-[0.2em] mb-4">{stat.label}</div>
-                <div className="text-4xl font-serif text-white mb-2">{stat.value}</div>
-                <div className="text-xs text-zinc-400 font-light tracking-wide">{stat.desc}</div>
+              { label: "Ventures Built", value: "3", sub: "2 live · 1 in development" },
+              { label: "Market Focus", value: "IN", sub: "India · First" },
+              { label: "Revenue Model", value: "Dual", sub: "Marketplace + SaaS" },
+              { label: "Team Model", value: "Lean", sub: "Founding team-led" },
+            ].map(({ label, value, sub }) => (
+              <div key={label} className="p-6 rounded-xl border border-white/6 bg-white/[0.015]">
+                <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-zinc-600 mb-2">{label}</p>
+                <p className="text-2xl font-serif font-bold text-white mb-1">{value}</p>
+                <p className="text-[11px] text-zinc-600 font-light">{sub}</p>
               </div>
             ))}
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Investors = () => {
-  return (
-    <section id="investors" className="py-28 md:py-40 relative bg-zinc-950 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 md:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500 mb-6">Investor Relations</h2>
-          <h3 className="text-4xl md:text-5xl font-serif text-white leading-tight mb-6">
-            Scale with us.
-          </h3>
-          <p className="text-lg text-zinc-400 font-light max-w-2xl mx-auto">
-            We are building the definitive ecosystem for Indian medical professionals. 
-            High growth, high margins, and immense systemic impact.
-          </p>
+          </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {[
-            { title: "Seed Round", value: "₹2 Cr", desc: "Seeking Investment" },
-            { title: "Valuation", value: "₹20 Cr", desc: "Pre-Money" },
-            { title: "Market", value: "1.2M+", desc: "Target Doctors in India" }
-          ].map((stat, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="p-10 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-white/5 text-center flex flex-col items-center justify-center"
-            >
-              <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-4">{stat.title}</div>
-              <div className="text-5xl font-serif text-white mb-3">{stat.value}</div>
-              <div className="text-sm text-zinc-400 font-light">{stat.desc}</div>
-            </motion.div>
-          ))}
-        </div>
+      </div>
+    </div>
+  </section>
+);
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="p-10 md:p-12 rounded-2xl bg-gradient-to-b from-blue-900/10 to-transparent border border-blue-500/10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left"
-        >
-          <div>
-            <h4 className="text-2xl font-serif text-white mb-3">Dual Revenue Architecture</h4>
-            <p className="text-zinc-400 text-sm max-w-xl font-light leading-relaxed">
-              Diversified scaling through B2B/B2C marketplace transactions via Aethex, and high-margin recurring SaaS subscriptions via CADUS AI.
+// ─── Investors ────────────────────────────────────────────────────────────────
+const Investors = () => (
+  <section id="investors" className="py-28 md:py-40 bg-[#09090b] border-t border-white/5">
+    <div className="max-w-7xl mx-auto px-6 md:px-14">
+      <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
+
+        <motion.div {...fade()}>
+          <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-6">Investor Relations</p>
+          <h2 className="text-4xl md:text-5xl font-serif text-white leading-tight mb-8">
+            Partnering with<br />the right capital.
+          </h2>
+          <p className="text-base text-zinc-400 font-light leading-relaxed mb-6">
+            We are raising a Seed round to accelerate product development, expand our clinical team, and grow distribution across India's medical community.
+          </p>
+          <p className="text-base text-zinc-400 font-light leading-relaxed mb-12">
+            We are seeking investors who understand long-horizon category creation in regulated markets, and who are aligned with building durable companies rather than optimising for near-term exit metrics.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href="mailto:investor@clavix.in?subject=Requesting Investor Deck — Clavix Technologies"
+              className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-full bg-white text-[#09090b] text-sm font-semibold tracking-[0.03em] hover:bg-zinc-100 transition-colors"
+            >
+              Request Investor Deck <ArrowUpRight className="w-4 h-4" />
+            </a>
+            <a
+              href="mailto:investor@clavix.in"
+              className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-full border border-white/12 text-white text-sm font-medium hover:border-white/25 hover:bg-white/5 transition-all"
+            >
+              Schedule a Call
+            </a>
+          </div>
+        </motion.div>
+
+        <motion.div {...fade(0.15)} className="space-y-5">
+          {[
+            { label: "Round", value: "Seed", note: "Currently open" },
+            { label: "Raise Target", value: "₹2 Cr", note: "INR" },
+            { label: "Pre-Money Valuation", value: "₹20 Cr", note: "INR" },
+            { label: "Market Opportunity", value: "1.2M+", note: "Target doctors in India" },
+          ].map(({ label, value, note }, i) => (
+            <div
+              key={label}
+              className="flex items-center justify-between py-5 border-b border-white/5"
+            >
+              <div>
+                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-zinc-600 mb-1">{label}</p>
+                <p className="text-sm text-zinc-500 font-light">{note}</p>
+              </div>
+              <p className="text-2xl md:text-3xl font-serif font-semibold text-white">{value}</p>
+            </div>
+          ))}
+
+          <div className="mt-8 p-6 rounded-xl border border-white/6 bg-white/[0.015]">
+            <p className="text-xs font-semibold text-zinc-500 uppercase tracking-[0.15em] mb-3">Revenue Architecture</p>
+            <p className="text-sm text-zinc-400 font-light leading-relaxed">
+              Dual-stream model: marketplace GMV commissions from AETHEX (B2C + B2B), and high-margin recurring SaaS subscriptions from CADUS AI — creating defensible, compounding revenue at scale.
             </p>
           </div>
-          <Button 
-            asChild
-            className="rounded-full px-8 h-12 bg-white text-black hover:bg-gray-200 w-full md:w-auto shrink-0 font-medium"
-          >
-            <a href="mailto:investor@clavix.in?subject=Requesting Investor Deck">
-              Request Investor Deck
-            </a>
-          </Button>
         </motion.div>
-      </div>
-    </section>
-  );
-};
 
-const Careers = () => {
+      </div>
+    </div>
+  </section>
+);
+
+// ─── Careers ──────────────────────────────────────────────────────────────────
+const CareersSection = () => {
   const [, navigate] = useLocation();
 
   const roles = [
-    { id: "full-stack-developer", title: "Full Stack Developer", dept: "Engineering", type: "Remote", color: "blue" },
-    { id: "ai-ml-engineer", title: "AI/ML Engineer", dept: "Engineering", type: "Remote", color: "violet" },
-    { id: "medical-content-writer", title: "Medical Content Writer", dept: "Clinical", type: "Remote", color: "cyan" },
+    { id: "full-stack-developer", title: "Full Stack Developer", dept: "Engineering", type: "Remote" },
+    { id: "ai-ml-engineer", title: "AI / ML Engineer", dept: "Engineering", type: "Remote" },
+    { id: "medical-content-writer", title: "Medical Content Writer", dept: "Clinical", type: "Remote" },
   ];
 
-  const badgeMap: Record<string, string> = {
-    blue: "bg-blue-500/10 text-blue-400 border border-blue-500/20",
-    violet: "bg-violet-500/10 text-violet-400 border border-violet-500/20",
-    cyan: "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20",
-  };
-
   return (
-    <section id="careers" className="py-28 md:py-40 relative bg-[#09090b]">
-      <div className="max-w-5xl mx-auto px-6 md:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-16"
-        >
-          <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500 mb-6">Careers</h2>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-            <div>
-              <h3 className="text-4xl md:text-5xl font-serif text-white leading-tight mb-5">
-                Join the mission.
-              </h3>
-              <p className="text-lg text-zinc-400 font-light max-w-lg">
-                Build tools used by doctors across India. Small, elite team. Real ownership. Real impact.
-              </p>
-            </div>
-            <Link href="/careers">
-              <Button variant="outline" className="shrink-0 rounded-full border-white/10 hover:bg-white/5 text-zinc-300 hover:text-white px-6 h-11 gap-2">
-                View All Openings <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
+    <section id="careers" className="py-28 md:py-40 bg-zinc-950 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-6 md:px-14">
+        <motion.div {...fade()} className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+          <div>
+            <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-5">Careers</p>
+            <h2 className="text-4xl md:text-5xl font-serif text-white leading-tight">
+              Join the team<br />building this.
+            </h2>
           </div>
+          <Link href="/careers">
+            <button className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors group">
+              View all open roles
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </Link>
         </motion.div>
 
-        <div className="space-y-3">
-          {roles.map((role, i) => (
-            <motion.div
-              key={role.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 rounded-2xl bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.035)] border border-white/5 hover:border-white/10 transition-all duration-300 gap-4 cursor-pointer"
-              onClick={() => navigate(`/careers#${role.id}`)}
-            >
-              <div className="flex items-center gap-5">
-                <div>
-                  <h4 className="text-lg font-medium text-white mb-2">{role.title}</h4>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.1em] ${badgeMap[role.color]}`}>
-                      {role.dept}
-                    </span>
-                    <span className="text-xs text-zinc-500">Remote · India</span>
+        <div className="space-y-px bg-white/5 rounded-2xl overflow-hidden border border-white/6">
+          {roles.map((r, i) => (
+            <motion.div key={r.id} {...fade(i * 0.08)}>
+              <Link href={`/careers/apply/${r.id}`}>
+                <div className="flex items-center justify-between px-8 py-6 bg-[#0d0d12] hover:bg-[#111118] transition-colors cursor-pointer group">
+                  <div>
+                    <h3 className="text-base font-serif font-semibold text-white mb-1 group-hover:text-blue-300 transition-colors">{r.title}</h3>
+                    <div className="flex items-center gap-4 text-xs text-zinc-600 font-medium">
+                      <span>{r.dept}</span>
+                      <span>·</span>
+                      <span>{r.type}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="hidden sm:block text-xs font-medium text-zinc-600 group-hover:text-zinc-400 transition-colors">Apply Now</span>
+                    <ArrowUpRight className="w-4 h-4 text-zinc-700 group-hover:text-white transition-colors" />
                   </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-zinc-400 group-hover:text-white transition-colors shrink-0">
-                View & Apply
-                <ArrowRight className="w-4 h-4 -translate-x-1 group-hover:translate-x-0 opacity-50 group-hover:opacity-100 transition-all" />
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-8 text-center"
-        >
-          <p className="text-sm text-zinc-600">
-            Don't see your role?{" "}
-            <a href="mailto:careers@clavix.in" className="text-zinc-400 hover:text-white transition-colors underline underline-offset-2">
-              Send a general application
-            </a>
-          </p>
+        <motion.div {...fade(0.3)} className="mt-10 p-8 rounded-2xl border border-white/6 bg-white/[0.015] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div>
+            <h4 className="text-base font-serif font-semibold text-white mb-1">Don't see your role?</h4>
+            <p className="text-sm text-zinc-500 font-light">
+              If you're exceptional at what you do and believe in what we're building, reach out regardless.
+            </p>
+          </div>
+          <a
+            href="mailto:careers@clavix.in?subject=General Application — Clavix Technologies"
+            className="shrink-0 inline-flex items-center gap-2 text-sm font-medium text-white border border-white/12 rounded-full px-6 py-2.5 hover:border-white/25 hover:bg-white/5 transition-all"
+          >
+            Send a General Application <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
         </motion.div>
       </div>
     </section>
   );
 };
 
+// ─── Contact ──────────────────────────────────────────────────────────────────
 const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const set = (f: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm(p => ({ ...p, [f]: e.target.value }));
+
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Message from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    const subject = encodeURIComponent(`Enquiry from ${form.name}`);
+    const body = encodeURIComponent(`From: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
     window.open(`mailto:hello@clavix.in?subject=${subject}&body=${body}`, "_blank");
     setSent(true);
-    setTimeout(() => setSent(false), 4000);
   };
 
-  return (
-    <section id="contact" className="py-28 md:py-40 relative bg-zinc-950 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 md:px-16">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500 mb-6">Contact</h2>
-            <h3 className="text-4xl md:text-5xl font-serif text-white mb-10 leading-tight">
-              Start a conversation.
-            </h3>
-            <p className="text-lg text-zinc-400 font-light mb-14 max-w-md leading-relaxed">
-              Whether you are an investor, a hospital administrator, or an engineer — we would like to hear from you.
-            </p>
+  const inputCls = "w-full h-11 bg-white/[0.03] border border-white/8 text-white text-sm rounded-xl px-4 placeholder:text-zinc-700 focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/40 transition-all";
 
-            <div className="space-y-10">
-              <div className="flex items-start gap-5">
-                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <MapPin className="w-4 h-4 text-zinc-400" />
+  return (
+    <section id="contact" className="py-28 md:py-40 bg-[#09090b] border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-6 md:px-14">
+        <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
+
+          <motion.div {...fade()}>
+            <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-600 mb-6">Get in Touch</p>
+            <h2 className="text-4xl md:text-5xl font-serif text-white leading-tight mb-8">
+              Let's talk.
+            </h2>
+            <p className="text-base text-zinc-400 font-light leading-relaxed mb-12">
+              Whether you're a prospective partner, an investor, a medical professional interested in our products, or simply curious about what we're building — we'd like to hear from you.
+            </p>
+            <div className="space-y-5">
+              {[
+                { label: "General Enquiries", value: "hello@clavix.in", href: "mailto:hello@clavix.in" },
+                { label: "Investor Relations", value: "investor@clavix.in", href: "mailto:investor@clavix.in" },
+                { label: "Careers", value: "careers@clavix.in", href: "mailto:careers@clavix.in" },
+              ].map(({ label, value, href }) => (
+                <div key={label} className="flex items-center justify-between py-4 border-b border-white/5">
+                  <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-zinc-600">{label}</p>
+                  <a href={href} className="text-sm text-white font-medium hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                    {value} <ArrowUpRight className="w-3 h-3 opacity-50" />
+                  </a>
                 </div>
-                <div>
-                  <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-1.5">Headquarters</div>
-                  <div className="text-white text-base font-medium">Delhi, India</div>
-                </div>
-              </div>
-              <div className="flex items-start gap-5">
-                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <Mail className="w-4 h-4 text-zinc-400" />
-                </div>
-                <div>
-                  <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-1.5">General Inquiries</div>
-                  <a href="mailto:hello@clavix.in" className="text-white text-base font-medium hover:text-blue-400 transition-colors">hello@clavix.in</a>
-                </div>
-              </div>
-              <div className="flex items-start gap-5">
-                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <Building2 className="w-4 h-4 text-zinc-400" />
-                </div>
-                <div>
-                  <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-1.5">Investor Relations</div>
-                  <a href="mailto:investor@clavix.in" className="text-white text-base font-medium hover:text-blue-400 transition-colors">investor@clavix.in</a>
-                </div>
-              </div>
+              ))}
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-[rgba(255,255,255,0.02)] border border-white/5 p-8 md:p-12 rounded-3xl"
-          >
-            <AnimatePresence mode="wait">
-              {sent ? (
-                <motion.div
-                  key="sent"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="flex flex-col items-center justify-center h-full min-h-[320px] text-center gap-4"
+          <motion.div {...fade(0.15)}>
+            {sent ? (
+              <div className="h-full flex flex-col items-center justify-center text-center gap-4 py-20">
+                <div className="w-14 h-14 rounded-full border border-blue-500/30 bg-blue-500/8 flex items-center justify-center mb-4">
+                  <Mail className="w-6 h-6 text-blue-400" />
+                </div>
+                <h3 className="text-xl font-serif text-white">Email client opened</h3>
+                <p className="text-sm text-zinc-500 font-light max-w-xs">
+                  Your message has been pre-filled. Send it to complete your enquiry.
+                </p>
+                <button
+                  onClick={() => setSent(false)}
+                  className="mt-4 text-xs font-medium text-zinc-600 hover:text-zinc-400 transition-colors underline underline-offset-2"
                 >
-                  <div className="w-14 h-14 rounded-full bg-blue-500/15 border border-blue-500/30 flex items-center justify-center">
-                    <CheckCircle2 className="w-6 h-6 text-blue-400" />
-                  </div>
-                  <h4 className="text-xl font-serif text-white">Message sent!</h4>
-                  <p className="text-zinc-400 text-sm max-w-xs">Your email client has opened. We look forward to speaking with you.</p>
-                </motion.div>
-              ) : (
-                <motion.form
-                  key="form"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onSubmit={handleSubmit}
-                  className="space-y-6"
-                >
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-xs font-medium text-zinc-400 uppercase tracking-wider mb-2">Name</label>
-                      <Input
-                        value={name}
-                        onChange={e => setName(e.target.value)}
-                        className="bg-black/50 border-white/10 text-white h-12 rounded-xl focus-visible:ring-blue-500 placeholder:text-zinc-600"
-                        placeholder="Dr. Arjun Sharma"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium text-zinc-400 uppercase tracking-wider mb-2">Email</label>
-                      <Input
-                        type="email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        className="bg-black/50 border-white/10 text-white h-12 rounded-xl focus-visible:ring-blue-500 placeholder:text-zinc-600"
-                        placeholder="you@hospital.com"
-                        required
-                      />
-                    </div>
+                  Send another
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={submit} className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-zinc-600 mb-1.5">Full Name</label>
+                    <Input value={form.name} onChange={set("name")} required placeholder="Dr. Arjun Sharma" className={inputCls} />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-zinc-400 uppercase tracking-wider mb-2">Message</label>
-                    <Textarea
-                      value={message}
-                      onChange={e => setMessage(e.target.value)}
-                      className="bg-black/50 border-white/10 text-white min-h-[160px] rounded-xl focus-visible:ring-blue-500 resize-none placeholder:text-zinc-600"
-                      placeholder="How can we help you?"
-                      required
-                    />
+                    <label className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-zinc-600 mb-1.5">Email Address</label>
+                    <Input type="email" value={form.email} onChange={set("email")} required placeholder="arjun@hospital.com" className={inputCls} />
                   </div>
-                  <Button type="submit" className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-all shadow-[0_0_20px_rgba(37,99,235,0.25)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]">
-                    Send Message <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                  <p className="text-center text-xs text-zinc-600">Your email client will open to complete sending.</p>
-                </motion.form>
-              )}
-            </AnimatePresence>
+                </div>
+                <div>
+                  <label className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-zinc-600 mb-1.5">Message</label>
+                  <Textarea
+                    value={form.message}
+                    onChange={set("message")}
+                    required
+                    rows={6}
+                    placeholder="Tell us what you have in mind..."
+                    className="w-full bg-white/[0.03] border border-white/8 text-white text-sm rounded-xl px-4 py-3 placeholder:text-zinc-700 focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/40 resize-none transition-all"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full h-12 rounded-xl bg-white text-[#09090b] text-sm font-semibold hover:bg-zinc-100 transition-colors"
+                >
+                  Send Message
+                </button>
+                <p className="text-center text-xs text-zinc-700">
+                  Your email client will open pre-filled. We respond within 2 business days.
+                </p>
+              </form>
+            )}
           </motion.div>
+
         </div>
       </div>
     </section>
   );
 };
 
-const Footer = () => {
-  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-
-  return (
-    <footer className="bg-[#09090b] border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 md:px-16 pt-20 pb-12">
-        <div className="grid md:grid-cols-4 gap-12 mb-16">
-          {/* Brand col */}
-          <div className="md:col-span-1">
-            <div className="text-xl font-bold tracking-[0.15em] text-white font-serif mb-4">CLAVIX</div>
-            <p className="text-sm text-zinc-500 font-light leading-relaxed mb-6 max-w-[200px]">
-              Building India's healthcare technology infrastructure.
-            </p>
-            <div className="flex items-center gap-3">
+// ─── Footer ───────────────────────────────────────────────────────────────────
+const Footer = () => (
+  <footer className="bg-zinc-950 border-t border-white/5">
+    <div className="max-w-7xl mx-auto px-6 md:px-14">
+      <div className="py-14 grid grid-cols-2 md:grid-cols-4 gap-10 border-b border-white/5">
+        {/* Brand */}
+        <div className="col-span-2 md:col-span-1">
+          <div className="text-lg font-serif font-bold tracking-[0.18em] text-white mb-4">CLAVIX</div>
+          <p className="text-xs text-zinc-600 font-light leading-relaxed mb-6 max-w-[180px]">
+            Healthcare Technology Group. Delhi, India. Est. 2026.
+          </p>
+          <div className="flex gap-4">
+            {[
+              { href: "#", Icon: Linkedin, label: "LinkedIn" },
+              { href: "#", Icon: Twitter, label: "Twitter / X" },
+              { href: "mailto:hello@clavix.in", Icon: Mail, label: "Email" },
+            ].map(({ href, Icon, label }) => (
               <a
-                href="https://linkedin.com/company/clavix"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all"
-                aria-label="LinkedIn"
+                key={label}
+                href={href}
+                aria-label={label}
+                className="w-8 h-8 rounded-full border border-white/8 flex items-center justify-center text-zinc-600 hover:text-white hover:border-white/20 transition-all"
               >
-                <Linkedin className="w-3.5 h-3.5 text-zinc-400" />
+                <Icon className="w-3.5 h-3.5" />
               </a>
-              <a
-                href="https://twitter.com/clavixin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all"
-                aria-label="Twitter / X"
-              >
-                <Twitter className="w-3.5 h-3.5 text-zinc-400" />
-              </a>
-            </div>
-          </div>
-
-          {/* Company col */}
-          <div>
-            <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-6">Company</div>
-            <ul className="space-y-4">
-              {[
-                { label: "Ventures", id: "ventures" },
-                { label: "About", id: "about" },
-                { label: "Investor Relations", id: "investors" },
-                { label: "Careers", id: "careers" },
-                { label: "Contact", id: "contact" },
-              ].map(({ label, id }) => (
-                <li key={id}>
-                  <button
-                    onClick={() => scrollTo(id)}
-                    className="text-sm text-zinc-400 hover:text-white transition-colors font-light"
-                  >
-                    {label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Ventures col */}
-          <div>
-            <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-6">Ventures</div>
-            <ul className="space-y-4">
-              {[
-                { label: "AETHEX", href: "https://aethex.in" },
-                { label: "CADUS AI", href: "https://aethex.in/ai-assistant" },
-                { label: "AETHEX OS", href: "#ventures" },
-              ].map(({ label, href }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="text-sm text-zinc-400 hover:text-white transition-colors font-light inline-flex items-center gap-1.5 group"
-                  >
-                    {label}
-                    {href.startsWith("http") && (
-                      <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    )}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact col */}
-          <div>
-            <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-6">Get In Touch</div>
-            <ul className="space-y-4">
-              <li>
-                <a href="mailto:hello@clavix.in" className="text-sm text-zinc-400 hover:text-white transition-colors font-light">
-                  hello@clavix.in
-                </a>
-              </li>
-              <li>
-                <a href="mailto:investor@clavix.in" className="text-sm text-zinc-400 hover:text-white transition-colors font-light">
-                  investor@clavix.in
-                </a>
-              </li>
-              <li className="text-sm text-zinc-500 font-light">Delhi, India</li>
-            </ul>
+            ))}
           </div>
         </div>
 
-        {/* Divider + bottom bar */}
-        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-zinc-600 tracking-wide">
-            © 2026 Clavix Technologies Pvt. Ltd. All rights reserved.
+        {/* Company */}
+        <div>
+          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-700 mb-5">Company</p>
+          <div className="space-y-3">
+            {[
+              { label: "About", id: "about" },
+              { label: "Ventures", id: "ventures" },
+              { label: "Investors", id: "investors" },
+              { label: "Careers", id: "careers" },
+            ].map(({ label, id }) => (
+              <button
+                key={id}
+                onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })}
+                className="block text-xs text-zinc-600 hover:text-white transition-colors font-medium"
+              >
+                {label}
+              </button>
+            ))}
           </div>
-          <div className="text-[10px] text-zinc-700 tracking-[0.3em] uppercase">
-            Designed for India's doctors.
+        </div>
+
+        {/* Ventures */}
+        <div>
+          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-700 mb-5">Ventures</p>
+          <div className="space-y-3">
+            {[
+              { label: "AETHEX", href: "https://aethex.in" },
+              { label: "CADUS AI", href: "https://aethex.in/ai-assistant" },
+              { label: "AETHEX OS", href: "mailto:hello@clavix.in?subject=Aethex OS Early Access" },
+            ].map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-zinc-600 hover:text-white transition-colors font-medium"
+              >
+                {label}
+                {href.startsWith("http") && <ExternalLink className="w-2.5 h-2.5 opacity-50" />}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-700 mb-5">Contact</p>
+          <div className="space-y-3">
+            {[
+              { label: "General", href: "mailto:hello@clavix.in", value: "hello@clavix.in" },
+              { label: "Investors", href: "mailto:investor@clavix.in", value: "investor@clavix.in" },
+              { label: "Careers", href: "mailto:careers@clavix.in", value: "careers@clavix.in" },
+            ].map(({ label, href, value }) => (
+              <div key={label}>
+                <p className="text-[9px] text-zinc-700 uppercase tracking-widest mb-0.5">{label}</p>
+                <a href={href} className="text-xs text-zinc-600 hover:text-white transition-colors font-medium">{value}</a>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </footer>
-  );
-};
 
+      <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p className="text-[11px] text-zinc-700 font-medium">
+          © 2026 Clavix Technologies Pvt. Ltd. All rights reserved.
+        </p>
+        <p className="text-[11px] text-zinc-700">
+          CIN · Pending · Delhi, India
+        </p>
+      </div>
+    </div>
+  </footer>
+);
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 export default function Home() {
   return (
-    <main className="bg-[#09090b] min-h-screen text-white font-sans selection:bg-blue-500/30">
+    <div className="bg-[#09090b] text-white font-sans selection:bg-blue-500/25">
       <Navbar />
       <Hero />
-      <Ticker />
+      <Philosophy />
       <Ventures />
       <About />
       <Investors />
-      <Careers />
+      <CareersSection />
       <Contact />
       <Footer />
-    </main>
+    </div>
   );
 }

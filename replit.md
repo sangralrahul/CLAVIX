@@ -91,6 +91,20 @@ Generated Zod schemas from the OpenAPI spec (e.g. `HealthCheckResponse`). Used b
 
 Generated React Query hooks and fetch client from the OpenAPI spec (e.g. `useHealthCheck`, `healthCheck`).
 
+### `artifacts/clavix` (`@workspace/clavix`)
+
+Clavix Technologies parent company website. React + Vite + TypeScript, wouter routing, framer-motion, shadcn/ui, Tailwind CSS.
+
+- Entry: `src/main.tsx` — mounts App, includes clavix.in redirect logic
+- Routing: `src/App.tsx` — `/` (Home), `/careers` (Careers listing), `/careers/apply/:jobId` (Apply page)
+- Pages: `src/pages/home.tsx`, `src/pages/careers.tsx`, `src/pages/apply.tsx`
+- Design: Dark theme (#09090b), Playfair Display serif + Plus Jakarta Sans body, accent blue #2563eb
+- Forms: All use `window.open(mailto:...)` — no backend required
+- Emails: hello@clavix.in (general), investor@clavix.in (investors), careers@clavix.in (careers)
+- Jobs: Full Stack Developer, AI/ML Engineer, Medical Content Writer — each at `/careers/apply/:id`
+- Apply page: Greenhouse-style two-column layout, phone with country flag selector (27 countries), address fields, file upload
+- Google Search Console verification: `public/google61251a2736b80ee8.html`
+
 ### `scripts` (`@workspace/scripts`)
 
 Utility scripts package. Each script is a `.ts` file in `src/` with a corresponding npm script in `package.json`. Run scripts via `pnpm --filter @workspace/scripts run <script>`. Scripts can import any workspace package (e.g., `@workspace/db`) by adding it as a dependency in `scripts/package.json`.

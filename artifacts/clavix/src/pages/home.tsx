@@ -511,6 +511,16 @@ const CareersSection = () => {
     { id: "full-stack-developer", title: "Full Stack Developer", dept: "Engineering", type: "Remote" },
     { id: "ai-ml-engineer", title: "AI / ML Engineer", dept: "Engineering", type: "Remote" },
     { id: "medical-content-writer", title: "Medical Content Writer", dept: "Clinical", type: "Remote" },
+    { id: "product-manager", title: "Product Manager", dept: "Product", type: "Remote" },
+    { id: "devops-engineer", title: "DevOps / Infrastructure Engineer", dept: "Engineering", type: "Remote" },
+    { id: "ui-ux-designer", title: "UI / UX Designer", dept: "Design", type: "Remote" },
+    { id: "data-engineer", title: "Data Engineer", dept: "Engineering", type: "Remote" },
+    { id: "clinical-advisor", title: "Clinical Advisor (MBBS)", dept: "Clinical", type: "Remote" },
+    { id: "business-development-manager", title: "Business Development Manager", dept: "Business", type: "Remote" },
+    { id: "customer-success-executive", title: "Customer Success Executive", dept: "Operations", type: "Remote" },
+    { id: "pharmacist", title: "Pharmacist / Drug Database Specialist", dept: "Clinical", type: "Remote" },
+    { id: "qa-engineer", title: "QA / Automation Engineer", dept: "Engineering", type: "Remote" },
+    { id: "growth-marketing-manager", title: "Growth & Marketing Manager", dept: "Marketing", type: "Remote" },
   ];
 
   return (

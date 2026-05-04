@@ -118,145 +118,116 @@ const Navbar = () => {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 const Hero = () => (
-  <section id="hero" className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-[#09090b]">
-    {/* Radial glow — very subtle */}
-    <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-600/5 rounded-full blur-[200px]" />
-    </div>
-
-    {/* Fine grid */}
-    <div
-      className="absolute inset-0 pointer-events-none opacity-[0.022]"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px)",
-        backgroundSize: "72px 72px",
-      }}
-    />
-
-    <div className="max-w-7xl mx-auto px-6 md:px-14 w-full relative z-10 pt-36 pb-32">
+  <section id="hero" className="relative min-h-[100dvh] flex flex-col justify-center bg-[#09090b]">
+    <div className="max-w-7xl mx-auto px-6 md:px-14 w-full pt-28 pb-24">
       <motion.div
-        initial={{ opacity: 0, y: 28 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-        {/* Category label */}
-        <div className="flex items-center gap-2.5 mb-10">
-          <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-          <span className="text-[11px] font-semibold tracking-[0.26em] uppercase text-zinc-500">
-            Healthcare Technology Group · Incorporated in India · Est. 2026
+        {/* Eyebrow rule */}
+        <div className="border-t border-white/10 pt-7 mb-14">
+          <span className="text-[10px] font-semibold tracking-[0.3em] uppercase text-zinc-500">
+            Healthcare Technology · India · Est. 2026
           </span>
         </div>
 
-        {/* Two-column layout */}
-        <div className="grid lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-14 lg:gap-20 items-start">
+        {/* Main grid */}
+        <div className="grid lg:grid-cols-[1fr_1px_320px] xl:grid-cols-[1fr_1px_360px] gap-0 items-start">
 
-          {/* Left — identity + CTAs */}
-          <div>
-            <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] lg:text-[4rem] font-serif font-bold text-white leading-[1.07] tracking-tight mb-7">
-              Building India's medical<br className="hidden sm:block" /> technology infrastructure.
+          {/* Left */}
+          <div className="lg:pr-16 xl:pr-20">
+            <h1 className="text-[2rem] sm:text-[2.4rem] md:text-[2.75rem] font-serif font-semibold text-white leading-[1.18] tracking-[-0.015em] mb-8 max-w-2xl">
+              Building India's medical<br />technology infrastructure.
             </h1>
-            <p className="text-base md:text-lg text-zinc-400 font-light leading-[1.75] mb-10 max-w-lg">
-              Clavix Technologies is a privately held healthcare technology company based in Delhi. We design, build, and operate software platforms that serve India's 1.2 million practising doctors and the institutions that employ them.
+            <p className="text-[15px] text-zinc-400 font-light leading-[1.85] mb-10 max-w-md">
+              Clavix Technologies is a privately held healthcare technology company headquartered in Delhi. We design, build, and operate software platforms that serve India's 1.2 million practising physicians and the institutions that employ them.
             </p>
-            <div className="flex flex-col sm:flex-row items-start gap-3">
+            <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
               <button
                 onClick={() => document.getElementById("ventures")?.scrollIntoView({ behavior: "smooth" })}
-                className="inline-flex items-center gap-2 h-10 px-6 rounded-sm bg-white text-[#09090b] text-[12px] font-semibold tracking-[0.06em] uppercase hover:bg-zinc-100 transition-colors"
+                className="group inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.12em] uppercase text-white pb-px border-b border-white/40 hover:border-white transition-colors"
               >
-                Our Ventures <ArrowRight className="w-3.5 h-3.5" />
+                Our Ventures <ArrowRight className="w-3 h-3" />
               </button>
               <button
                 onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-                className="inline-flex items-center gap-2 h-10 px-6 rounded-sm border border-white/12 text-zinc-300 text-[12px] font-semibold tracking-[0.06em] uppercase hover:border-white/22 hover:text-white transition-all"
+                className="text-[11px] font-semibold tracking-[0.12em] uppercase text-zinc-500 pb-px border-b border-transparent hover:text-zinc-300 hover:border-white/20 transition-colors"
               >
-                About the Company
+                About
+              </button>
+              <button
+                onClick={() => document.getElementById("investors")?.scrollIntoView({ behavior: "smooth" })}
+                className="text-[11px] font-semibold tracking-[0.12em] uppercase text-zinc-500 pb-px border-b border-transparent hover:text-zinc-300 hover:border-white/20 transition-colors"
+              >
+                Investors
+              </button>
+              <button
+                onClick={() => document.getElementById("careers")?.scrollIntoView({ behavior: "smooth" })}
+                className="text-[11px] font-semibold tracking-[0.12em] uppercase text-zinc-500 pb-px border-b border-transparent hover:text-zinc-300 hover:border-white/20 transition-colors"
+              >
+                Careers
               </button>
             </div>
           </div>
 
-          {/* Right — venture index */}
+          {/* Vertical rule */}
+          <div className="hidden lg:block w-px bg-white/8 self-stretch mx-14" />
+
+          {/* Right — clean portfolio index */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-2.5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="pt-1 mt-12 lg:mt-0"
           >
-            <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-zinc-600 mb-4">Portfolio Companies</p>
-            {[
-              {
-                name: "AETHEX",
-                desc: "India's Medical Marketplace",
-                status: "Live",
-                statusCls: "text-emerald-400",
-                dot: "bg-cyan-400",
-                href: "https://aethex.in",
-              },
-              {
-                name: "CADUS AI",
-                desc: "Clinical Intelligence Platform",
-                status: "Live",
-                statusCls: "text-emerald-400",
-                dot: "bg-blue-400",
-                href: "https://aethex.in/ai-assistant",
-              },
-              {
-                name: "AETHEX OS",
-                desc: "Hospital Management System",
-                status: "In Development",
-                statusCls: "text-violet-400",
-                dot: "bg-violet-400",
-                href: "mailto:hello@clavix.in?subject=Aethex OS Early Access",
-              },
-            ].map((v) => (
-              <a
-                key={v.name}
-                href={v.href}
-                target={v.href.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                className="flex items-center justify-between p-4 rounded-xl border border-white/6 bg-white/[0.018] hover:bg-white/[0.035] hover:border-white/12 transition-all group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`w-2 h-2 rounded-full shrink-0 ${v.dot}`} />
+            <p className="text-[9px] font-semibold tracking-[0.32em] uppercase text-zinc-600 mb-5">Portfolio</p>
+            <div>
+              {[
+                { name: "AETHEX", desc: "Medical Marketplace", status: "Live", href: "https://aethex.in" },
+                { name: "CADUS AI", desc: "Clinical Intelligence Platform", status: "Live", href: "https://aethex.in/ai-assistant" },
+                { name: "AETHEX OS", desc: "Hospital Management System", status: "In Development", href: "mailto:hello@clavix.in?subject=Aethex OS Early Access" },
+              ].map((v, i) => (
+                <a
+                  key={v.name}
+                  href={v.href}
+                  target={v.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className={`flex items-start justify-between py-4 group ${i < 2 ? "border-b border-white/6" : ""}`}
+                >
                   <div>
-                    <p className="text-sm font-semibold text-white leading-tight">{v.name}</p>
-                    <p className="text-[11px] text-zinc-500 font-light mt-0.5">{v.desc}</p>
+                    <p className="text-[13px] font-semibold text-white group-hover:text-zinc-300 transition-colors">{v.name}</p>
+                    <p className="text-[11px] text-zinc-600 font-light mt-0.5">{v.desc}</p>
                   </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className={`text-[10px] font-semibold tracking-[0.1em] uppercase ${v.statusCls}`}>{v.status}</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-600 group-hover:text-zinc-300 transition-colors" />
-                </div>
-              </a>
-            ))}
-            <button
-              onClick={() => document.getElementById("investors")?.scrollIntoView({ behavior: "smooth" })}
-              className="w-full mt-1 text-[11px] font-medium tracking-[0.06em] text-zinc-600 hover:text-zinc-400 transition-colors py-2 text-center"
-            >
-              Investor Relations →
-            </button>
+                  <div className="flex items-center gap-1.5 pt-0.5 shrink-0 ml-4">
+                    <span className="text-[10px] text-zinc-600 font-medium">{v.status}</span>
+                    <ArrowUpRight className="w-3 h-3 text-zinc-700 group-hover:text-zinc-400 transition-colors" />
+                  </div>
+                </a>
+              ))}
+            </div>
           </motion.div>
         </div>
       </motion.div>
     </div>
 
-    {/* Bottom stats strip */}
-    <div className="absolute bottom-0 inset-x-0 border-t border-white/5">
+    {/* Bottom stats bar */}
+    <div className="absolute bottom-0 inset-x-0 border-t border-white/8">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.7, duration: 0.9 }}
-        className="max-w-7xl mx-auto px-6 md:px-14 py-0 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5"
+        transition={{ delay: 0.55, duration: 0.8 }}
+        className="max-w-7xl mx-auto px-6 md:px-14 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/8"
       >
         {[
           { label: "Incorporated", value: "India" },
-          { label: "Headquarters", value: "Delhi" },
-          { label: "Addressable Market", value: "1.2M Doctors" },
-          { label: "Current Stage", value: "Seed" },
+          { label: "Headquarters", value: "New Delhi" },
+          { label: "Addressable Market", value: "1.2M+ Physicians" },
+          { label: "Stage", value: "Seed" },
         ].map(({ label, value }) => (
           <div key={label} className="px-6 py-5">
-            <p className="text-[9px] font-semibold tracking-[0.22em] uppercase text-zinc-600 mb-1.5">{label}</p>
-            <p className="text-sm font-semibold text-white tracking-[-0.01em]">{value}</p>
+            <p className="text-[9px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-1">{label}</p>
+            <p className="text-[13px] font-medium text-zinc-200">{value}</p>
           </div>
         ))}
       </motion.div>
@@ -335,56 +306,51 @@ const PORTFOLIO = [
 ];
 
 const Ventures = () => (
-  <section id="ventures" className="py-28 md:py-40 bg-[#09090b]">
+  <section id="ventures" className="py-24 md:py-36 bg-[#09090b] border-t border-white/8">
     <div className="max-w-7xl mx-auto px-6 md:px-14">
-      <motion.div {...fade()} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+      <motion.div {...fade()} className="grid md:grid-cols-[200px_1fr] gap-8 md:gap-16 items-start mb-16">
         <div>
-          <p className="text-[10px] font-semibold tracking-[0.26em] uppercase text-zinc-600 mb-4">Our Portfolio</p>
-          <h2 className="text-3xl md:text-[2.6rem] font-serif text-white leading-tight">
-            Portfolio companies
+          <p className="text-[9px] font-semibold tracking-[0.3em] uppercase text-zinc-600 mb-3">Portfolio</p>
+          <h2 className="text-xl font-serif font-semibold text-white leading-snug">
+            Our companies
           </h2>
         </div>
-        <p className="text-sm text-zinc-500 font-light leading-relaxed max-w-xs md:text-right">
-          Each company is independently operated with shared infrastructure and a unified founding vision.
+        <p className="text-sm text-zinc-500 font-light leading-relaxed max-w-lg md:pt-7">
+          Each company is independently operated with shared infrastructure, a common technology core, and a unified founding vision.
         </p>
       </motion.div>
 
-      <div className="space-y-5">
+      <div className="border-t border-white/8">
         {PORTFOLIO.map((v, i) => {
           const Icon = v.icon;
           return (
             <motion.div
               key={v.name}
-              {...fade(i * 0.1)}
-              className={`group relative rounded-2xl border bg-[#0d0d12] transition-all duration-500 overflow-hidden ${v.accent}`}
+              {...fade(i * 0.08)}
+              className="group border-b border-white/8"
             >
-              <div className="p-8 md:p-10 grid md:grid-cols-[1fr_2fr_auto] gap-8 md:gap-12 items-start">
+              <div className="py-10 grid md:grid-cols-[220px_1fr_160px] gap-6 md:gap-12 items-start">
                 {/* Left: identity */}
-                <div className="flex items-start gap-4">
-                  <div className={`w-11 h-11 rounded-xl border flex items-center justify-center shrink-0 ${v.iconColor}`}>
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-3 mb-1.5">
-                      <h3 className="text-lg font-serif font-semibold text-white tracking-wide">{v.name}</h3>
-                      <span className={`text-[9px] font-bold tracking-[0.12em] uppercase px-2 py-0.5 rounded-full border ${v.statusColor}`}>
-                        {v.status}
-                      </span>
-                    </div>
-                    <p className="text-xs font-medium text-zinc-500 tracking-[0.06em]">{v.tagline}</p>
-                    <span className="mt-2 inline-block text-[10px] text-zinc-700 font-medium tracking-[0.12em] uppercase border border-white/6 rounded-full px-2.5 py-1">
-                      {v.model}
+                <div>
+                  <div className="flex items-center gap-3 mb-1.5">
+                    <h3 className="text-base font-semibold text-white tracking-wide">{v.name}</h3>
+                    <span className={`text-[9px] font-semibold tracking-[0.1em] uppercase ${
+                      v.status === "Live" ? "text-emerald-500" : "text-zinc-500"
+                    }`}>
+                      {v.status}
                     </span>
                   </div>
+                  <p className="text-xs text-zinc-600 font-medium">{v.tagline}</p>
+                  <p className="mt-2 text-[10px] text-zinc-700 font-semibold tracking-[0.1em] uppercase">{v.model}</p>
                 </div>
 
                 {/* Middle: description + features */}
                 <div>
                   <p className="text-sm text-zinc-400 font-light leading-relaxed mb-5">{v.description}</p>
-                  <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+                  <div className="grid sm:grid-cols-2 gap-x-8 gap-y-1.5">
                     {v.features.map((f) => (
-                      <div key={f} className="flex items-center gap-2.5 text-xs text-zinc-500">
-                        <span className={`w-1 h-1 rounded-full shrink-0 ${v.dot}`} />
+                      <div key={f} className="flex items-center gap-2 text-xs text-zinc-600 font-light">
+                        <span className="w-3 h-px bg-white/20 shrink-0" />
                         {f}
                       </div>
                     ))}
@@ -392,21 +358,18 @@ const Ventures = () => (
                 </div>
 
                 {/* Right: link */}
-                <div className="flex md:items-start md:justify-end">
+                <div className="flex md:justify-end md:pt-0.5">
                   <a
                     href={v.href}
                     target={v.href.startsWith("http") ? "_blank" : undefined}
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.1em] uppercase text-zinc-500 hover:text-white border border-white/8 hover:border-white/18 rounded-sm px-4 py-2 transition-all group-hover:border-white/14"
+                    className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.12em] uppercase text-zinc-500 hover:text-white pb-px border-b border-transparent hover:border-white/30 transition-all"
                   >
                     {v.status === "Coming Soon" ? "Early Access" : "Visit"}
                     <ArrowUpRight className="w-3 h-3" />
                   </a>
                 </div>
               </div>
-
-              {/* Bottom accent line */}
-              <div className={`h-px mx-10 bg-gradient-to-r from-transparent via-white/8 to-transparent`} />
             </motion.div>
           );
         })}
@@ -485,17 +448,19 @@ const About = () => (
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="border-t border-white/8">
             {[
               { label: "Ventures Built", value: "3", sub: "2 live · 1 in development" },
-              { label: "Market Focus", value: "IN", sub: "India · First" },
-              { label: "Revenue Model", value: "Dual", sub: "Marketplace + SaaS" },
+              { label: "Market Focus", value: "India-first", sub: "Primary market" },
+              { label: "Revenue Model", value: "Dual-stream", sub: "Marketplace + SaaS" },
               { label: "Team Model", value: "Lean", sub: "Founding team-led" },
             ].map(({ label, value, sub }) => (
-              <div key={label} className="p-6 rounded-xl border border-white/6 bg-white/[0.015]">
-                <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-zinc-600 mb-2">{label}</p>
-                <p className="text-2xl font-serif font-bold text-white mb-1">{value}</p>
-                <p className="text-[11px] text-zinc-600 font-light">{sub}</p>
+              <div key={label} className="flex items-baseline justify-between py-4 border-b border-white/6">
+                <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-600">{label}</p>
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-white">{value}</p>
+                  <p className="text-[10px] text-zinc-600 font-light mt-0.5">{sub}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -559,9 +524,9 @@ const Investors = () => (
             </div>
           ))}
 
-          <div className="mt-8 p-6 rounded-xl border border-white/6 bg-white/[0.015]">
-            <p className="text-xs font-semibold text-zinc-500 uppercase tracking-[0.15em] mb-3">Revenue Architecture</p>
-            <p className="text-sm text-zinc-400 font-light leading-relaxed">
+          <div className="mt-8 pt-6 border-t border-white/6">
+            <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-600 mb-3">Revenue Architecture</p>
+            <p className="text-sm text-zinc-500 font-light leading-relaxed">
               Dual-stream model: marketplace GMV commissions from AETHEX (B2C + B2B), and high-margin recurring SaaS subscriptions from CADUS AI — creating defensible, compounding revenue at scale.
             </p>
           </div>
@@ -610,23 +575,20 @@ const CareersSection = () => {
           </Link>
         </motion.div>
 
-        <div className="space-y-px bg-white/5 rounded-2xl overflow-hidden border border-white/6">
+        <div className="border-t border-white/8">
           {roles.map((r, i) => (
-            <motion.div key={r.id} {...fade(i * 0.08)}>
+            <motion.div key={r.id} {...fade(i * 0.05)}>
               <Link href={`/careers/apply/${r.id}`}>
-                <div className="flex items-center justify-between px-8 py-6 bg-[#0d0d12] hover:bg-[#111118] transition-colors cursor-pointer group">
-                  <div>
-                    <h3 className="text-base font-serif font-semibold text-white mb-1 group-hover:text-blue-300 transition-colors">{r.title}</h3>
-                    <div className="flex items-center gap-4 text-xs text-zinc-600 font-medium">
+                <div className="flex items-center justify-between py-5 border-b border-white/6 cursor-pointer group">
+                  <div className="flex items-center gap-8">
+                    <h3 className="text-sm font-medium text-white group-hover:text-zinc-300 transition-colors">{r.title}</h3>
+                    <div className="hidden sm:flex items-center gap-4 text-[11px] text-zinc-600 font-medium tracking-[0.04em]">
                       <span>{r.dept}</span>
-                      <span>·</span>
+                      <span className="text-zinc-700">·</span>
                       <span>{r.type}</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="hidden sm:block text-xs font-medium text-zinc-600 group-hover:text-zinc-400 transition-colors">Apply Now</span>
-                    <ArrowUpRight className="w-4 h-4 text-zinc-700 group-hover:text-white transition-colors" />
-                  </div>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-700 group-hover:text-zinc-400 transition-colors shrink-0" />
                 </div>
               </Link>
             </motion.div>
@@ -668,7 +630,7 @@ const Contact = () => {
     setSent(true);
   };
 
-  const inputCls = "w-full h-11 bg-white/[0.03] border border-white/8 text-white text-sm rounded-xl px-4 placeholder:text-zinc-700 focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/40 transition-all";
+  const inputCls = "w-full h-10 bg-transparent border-0 border-b border-white/12 text-white text-sm px-0 placeholder:text-zinc-700 focus:outline-none focus:border-white/30 transition-colors rounded-none";
 
   return (
     <section id="contact" className="py-28 md:py-40 bg-[#09090b] border-t border-white/5">
@@ -736,7 +698,7 @@ const Contact = () => {
                     required
                     rows={6}
                     placeholder="Tell us what you have in mind..."
-                    className="w-full bg-white/[0.03] border border-white/8 text-white text-sm rounded-xl px-4 py-3 placeholder:text-zinc-700 focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/40 resize-none transition-all"
+                    className="w-full bg-transparent border-0 border-b border-white/12 text-white text-sm px-0 py-2 placeholder:text-zinc-700 focus:outline-none focus:border-white/30 resize-none transition-colors rounded-none"
                   />
                 </div>
                 <button

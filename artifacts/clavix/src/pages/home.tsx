@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, Menu, X, CheckCircle2, ChevronDown, Stethoscope, BrainCircuit, ExternalLink, Database, Cpu, ShieldCheck, BarChart3, ShoppingBag } from "lucide-react";
+import { ArrowRight, Menu, X, CheckCircle2, ChevronDown, BrainCircuit, ExternalLink, Database, Cpu, ShieldCheck, BarChart3, ShoppingBag, Linkedin, Twitter, Mail, MapPin, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,11 +25,13 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 border-b border-transparent ${
-        scrolled ? "bg-[#09090b]/80 backdrop-blur-xl border-white/5 py-4" : "bg-transparent py-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-[#09090b]/90 backdrop-blur-xl border-b border-white/5 py-4 shadow-[0_1px_30px_rgba(0,0,0,0.5)]"
+          : "bg-gradient-to-b from-black/60 to-transparent border-b border-transparent py-6"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-16 flex items-center justify-between">
@@ -195,7 +197,42 @@ const Hero = () => {
         </motion.div>
 
       </div>
+
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+        onClick={() => document.getElementById("ticker")?.scrollIntoView({ behavior: "smooth" })}
+      >
+        <span className="text-[10px] uppercase tracking-[0.25em] text-zinc-600">Scroll</span>
+        <ChevronDown className="w-4 h-4 text-zinc-600" />
+      </motion.div>
     </section>
+  );
+};
+
+const Ticker = () => {
+  const items = [
+    "AETHEX · India's Medical Marketplace",
+    "CADUS AI · Clinical Intelligence Platform",
+    "AETHEX OS · Coming 2025",
+    "Delhi, India · Est. 2026",
+    "1.2M+ Target Doctors",
+    "₹20 Cr Pre-Money Valuation",
+    "Seed Round Open",
+  ];
+
+  return (
+    <div id="ticker" className="border-y border-white/5 bg-white/[0.015] overflow-hidden py-4 relative">
+      <div className="flex animate-marquee whitespace-nowrap">
+        {[...items, ...items].map((item, i) => (
+          <span key={i} className="inline-flex items-center gap-4 mx-8 text-xs font-medium text-zinc-500 tracking-[0.15em] uppercase">
+            <span className="w-1 h-1 rounded-full bg-zinc-600 inline-block"></span>
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -590,6 +627,20 @@ const Careers = () => {
 };
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Message from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    window.open(`mailto:hello@clavix.in?subject=${subject}&body=${body}`, "_blank");
+    setSent(true);
+    setTimeout(() => setSent(false), 4000);
+  };
+
   return (
     <section id="contact" className="py-28 md:py-40 relative bg-zinc-950 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 md:px-16">
@@ -600,25 +651,41 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-serif text-white mb-10 leading-tight">
+            <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-zinc-500 mb-6">Contact</h2>
+            <h3 className="text-4xl md:text-5xl font-serif text-white mb-10 leading-tight">
               Start a conversation.
-            </h2>
-            <p className="text-lg text-zinc-400 font-light mb-12 max-w-md">
+            </h3>
+            <p className="text-lg text-zinc-400 font-light mb-14 max-w-md leading-relaxed">
               Whether you are an investor, a hospital administrator, or an engineer — we would like to hear from you.
             </p>
 
-            <div className="space-y-8">
-              <div>
-                <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-2">Headquarters</div>
-                <div className="text-white text-lg font-serif">Delhi, India</div>
+            <div className="space-y-10">
+              <div className="flex items-start gap-5">
+                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <MapPin className="w-4 h-4 text-zinc-400" />
+                </div>
+                <div>
+                  <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-1.5">Headquarters</div>
+                  <div className="text-white text-base font-medium">Delhi, India</div>
+                </div>
               </div>
-              <div>
-                <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-2">General Inquiries</div>
-                <a href="mailto:email@aethex.in" className="text-white text-lg font-serif hover:text-blue-400 transition-colors">email@aethex.in</a>
+              <div className="flex items-start gap-5">
+                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <Mail className="w-4 h-4 text-zinc-400" />
+                </div>
+                <div>
+                  <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-1.5">General Inquiries</div>
+                  <a href="mailto:hello@clavix.in" className="text-white text-base font-medium hover:text-blue-400 transition-colors">hello@clavix.in</a>
+                </div>
               </div>
-              <div>
-                <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-2">Investor Relations</div>
-                <a href="mailto:investor@clavix.in" className="text-white text-lg font-serif hover:text-blue-400 transition-colors">investor@clavix.in</a>
+              <div className="flex items-start gap-5">
+                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <Building2 className="w-4 h-4 text-zinc-400" />
+                </div>
+                <div>
+                  <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-1.5">Investor Relations</div>
+                  <a href="mailto:investor@clavix.in" className="text-white text-base font-medium hover:text-blue-400 transition-colors">investor@clavix.in</a>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -630,34 +697,70 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="bg-[rgba(255,255,255,0.02)] border border-white/5 p-8 md:p-12 rounded-3xl"
           >
-            <form 
-              action="mailto:email@aethex.in" 
-              method="GET" 
-              encType="text/plain"
-              className="space-y-6"
-            >
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 uppercase tracking-wider mb-2">Name</label>
-                <Input 
-                  name="subject"
-                  className="bg-black/50 border-white/10 text-white h-12 rounded-xl focus-visible:ring-blue-500" 
-                  placeholder="John Doe"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 uppercase tracking-wider mb-2">Message</label>
-                <Textarea 
-                  name="body"
-                  className="bg-black/50 border-white/10 text-white min-h-[150px] rounded-xl focus-visible:ring-blue-500 resize-none" 
-                  placeholder="How can we help you?"
-                  required
-                />
-              </div>
-              <Button type="submit" className="w-full h-12 bg-white text-black hover:bg-gray-200 rounded-xl font-medium">
-                Send Message
-              </Button>
-            </form>
+            <AnimatePresence mode="wait">
+              {sent ? (
+                <motion.div
+                  key="sent"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="flex flex-col items-center justify-center h-full min-h-[320px] text-center gap-4"
+                >
+                  <div className="w-14 h-14 rounded-full bg-blue-500/15 border border-blue-500/30 flex items-center justify-center">
+                    <CheckCircle2 className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <h4 className="text-xl font-serif text-white">Message sent!</h4>
+                  <p className="text-zinc-400 text-sm max-w-xs">Your email client has opened. We look forward to speaking with you.</p>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={handleSubmit}
+                  className="space-y-6"
+                >
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-medium text-zinc-400 uppercase tracking-wider mb-2">Name</label>
+                      <Input
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        className="bg-black/50 border-white/10 text-white h-12 rounded-xl focus-visible:ring-blue-500 placeholder:text-zinc-600"
+                        placeholder="Dr. Arjun Sharma"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-zinc-400 uppercase tracking-wider mb-2">Email</label>
+                      <Input
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        className="bg-black/50 border-white/10 text-white h-12 rounded-xl focus-visible:ring-blue-500 placeholder:text-zinc-600"
+                        placeholder="you@hospital.com"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-zinc-400 uppercase tracking-wider mb-2">Message</label>
+                    <Textarea
+                      value={message}
+                      onChange={e => setMessage(e.target.value)}
+                      className="bg-black/50 border-white/10 text-white min-h-[160px] rounded-xl focus-visible:ring-blue-500 resize-none placeholder:text-zinc-600"
+                      placeholder="How can we help you?"
+                      required
+                    />
+                  </div>
+                  <Button type="submit" className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-all shadow-[0_0_20px_rgba(37,99,235,0.25)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]">
+                    Send Message <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                  <p className="text-center text-xs text-zinc-600">Your email client will open to complete sending.</p>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </div>
@@ -666,18 +769,117 @@ const Contact = () => {
 };
 
 const Footer = () => {
+  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
   return (
-    <footer className="bg-[#09090b] py-12 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="text-xl font-bold tracking-[0.15em] text-white font-serif relative">
-          CLAVIX
+    <footer className="bg-[#09090b] border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-6 md:px-16 pt-20 pb-12">
+        <div className="grid md:grid-cols-4 gap-12 mb-16">
+          {/* Brand col */}
+          <div className="md:col-span-1">
+            <div className="text-xl font-bold tracking-[0.15em] text-white font-serif mb-4">CLAVIX</div>
+            <p className="text-sm text-zinc-500 font-light leading-relaxed mb-6 max-w-[200px]">
+              Building India's healthcare technology infrastructure.
+            </p>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://linkedin.com/company/clavix"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-3.5 h-3.5 text-zinc-400" />
+              </a>
+              <a
+                href="https://twitter.com/clavixin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all"
+                aria-label="Twitter / X"
+              >
+                <Twitter className="w-3.5 h-3.5 text-zinc-400" />
+              </a>
+            </div>
+          </div>
+
+          {/* Company col */}
+          <div>
+            <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-6">Company</div>
+            <ul className="space-y-4">
+              {[
+                { label: "Ventures", id: "ventures" },
+                { label: "About", id: "about" },
+                { label: "Investor Relations", id: "investors" },
+                { label: "Careers", id: "careers" },
+                { label: "Contact", id: "contact" },
+              ].map(({ label, id }) => (
+                <li key={id}>
+                  <button
+                    onClick={() => scrollTo(id)}
+                    className="text-sm text-zinc-400 hover:text-white transition-colors font-light"
+                  >
+                    {label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Ventures col */}
+          <div>
+            <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-6">Ventures</div>
+            <ul className="space-y-4">
+              {[
+                { label: "AETHEX", href: "https://aethex.in" },
+                { label: "CADUS AI", href: "https://aethex.in/ai-assistant" },
+                { label: "AETHEX OS", href: "#ventures" },
+              ].map(({ label, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="text-sm text-zinc-400 hover:text-white transition-colors font-light inline-flex items-center gap-1.5 group"
+                  >
+                    {label}
+                    {href.startsWith("http") && (
+                      <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact col */}
+          <div>
+            <div className="text-xs font-medium text-zinc-500 uppercase tracking-[0.2em] mb-6">Get In Touch</div>
+            <ul className="space-y-4">
+              <li>
+                <a href="mailto:hello@clavix.in" className="text-sm text-zinc-400 hover:text-white transition-colors font-light">
+                  hello@clavix.in
+                </a>
+              </li>
+              <li>
+                <a href="mailto:investor@clavix.in" className="text-sm text-zinc-400 hover:text-white transition-colors font-light">
+                  investor@clavix.in
+                </a>
+              </li>
+              <li className="text-sm text-zinc-500 font-light">Delhi, India</li>
+            </ul>
+          </div>
         </div>
-        <div className="text-xs text-zinc-500 text-center md:text-right">
-          © 2026 Clavix Technologies Private Limited. All rights reserved.
+
+        {/* Divider + bottom bar */}
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-xs text-zinc-600 tracking-wide">
+            © 2026 Clavix Technologies Pvt. Ltd. All rights reserved.
+          </div>
+          <div className="text-[10px] text-zinc-700 tracking-[0.3em] uppercase">
+            Designed for India's doctors.
+          </div>
         </div>
-      </div>
-      <div className="mt-12 text-center text-[10px] text-zinc-600 tracking-[0.3em] uppercase">
-        Designed for India's doctors.
       </div>
     </footer>
   );
@@ -688,6 +890,7 @@ export default function Home() {
     <main className="bg-[#09090b] min-h-screen text-white font-sans selection:bg-blue-500/30">
       <Navbar />
       <Hero />
+      <Ticker />
       <Ventures />
       <About />
       <Investors />

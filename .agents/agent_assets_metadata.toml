@@ -126,6 +126,18 @@ uri = "file://artifacts/mockup-sandbox/public/images/bold-team-3.png"
 type = "image"
 title = "B&W professional headshot man"
 
+[[generated]]
+id = "8YKDghgb2rOtGDkg-7MyM"
+uri = "file://artifacts/clavix/public/images/hero-doctor.png"
+type = "image"
+title = "Doctor using AI tablet"
+
+[[generated]]
+id = "GuZPsrZ9f08CXhwBXBDyd"
+uri = "file://artifacts/clavix/public/images/team-office.png"
+type = "image"
+title = "Team working in modern office"
+
 [[outputs]]
 id = "THl6Z-mwTlKSjuKPDfBvL"
 uri = "file://artifacts/mockup-sandbox/public/images/hero-lab.jpg"
